@@ -20,6 +20,7 @@ include $_ind . 'PHP/Inc/db.php';
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/list.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/Style.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/Style.products.css">
+    <link rel="stylesheet" href="<?php echo $_ind; ?>Css/Style.sales.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,400,900" rel="stylesheet">
   </head>
   <body>
