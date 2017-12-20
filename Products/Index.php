@@ -178,12 +178,13 @@ include '../PHP/Inc/head.php';
         <h2 class="text-uppercase m-0">Produits <br/>
           <small class="text-muted text-capitalize">Afficher: <i>20 Articles</i> </small>
         </h2>
-        <div class="">
+        <button type="button" class="btn btn-primary"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Produit</button>
+        <!-- <div class="">
           <div class="input-group search-products">
             <input class="search form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Rechercher un produits" />
             <span class="input-group-addon bg-primary text-white rounded-0 border-0"><i class="flaticon-magnifying-glass-1"></i></span>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

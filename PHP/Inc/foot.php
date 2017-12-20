@@ -15,12 +15,17 @@
     <script src="<?php echo $_ind; ?>Js/slick.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/perfect-scrollbar.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/Chart.min.js"></script>
+    <script src="<?php echo $_ind; ?>Js/JsBarcode.all.min.js"></script>
     <script type="text/javascript">
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     });
     </script>
     <script type="text/javascript">
+      // barcode orders
+      JsBarcode(".barcode").init();
+
+      // table display
       var options = {
       valueNames: [ 'fname', 'lname', 'email' ]
       };
@@ -93,6 +98,8 @@
           }
         }
     });
+
+
     </script>
   </body>
 </html>

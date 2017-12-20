@@ -27,7 +27,7 @@ body{
   font-family: 'Poppins', sans-serif;
 }
 .bg-none{
-  background: transparent;
+  background: transparent !important;
 }
 .logo-img-wrapper{
   width: 120px;
@@ -124,18 +124,38 @@ body{
 #addStuff .btn.btn-primary [class*="flaticon-"]:before{
   font-size: 16px;
 }
+
 .bg-primary, .badge-primary{
-  background-color: #7F2AFF;
+  background-color: #7F2AFF !important;
 }
+
 .bg-info, .badge-info{
   background-color: #4786FF;
 }
-.text-primary{
-  color: #7F2AFF;
-}
 
+.text-primary{
+  color: #7F2AFF !important;
+}
+.opacity-full{
+  opacity: 1;
+}
+.opacity-d-tier{
+  opacity: .66;
+}
+.opacity-half{
+  opacity: .5;
+}
+.opacity-tier{
+  opacity: .33;
+}
+.opacity-quarter{
+  opacity: .25;
+}
 .text-info{
   color: #4786FF;
+}
+.barcode{
+  color: black;
 }
 .text-small{
   font-size: .9em;

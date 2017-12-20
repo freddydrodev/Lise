@@ -56,12 +56,6 @@ include '../PHP/Inc/head.php';
         <h2 class="text-uppercase m-0">Listes des Ventes<br/>
           <small class="text-muted text-capitalize">Afficher: <i>20 Ventes</i> </small>
         </h2>
-        <div class="">
-          <div class="input-group search-products">
-            <input class="search form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Rechercher un produits" />
-            <span class="input-group-addon bg-primary text-white rounded-0 border-0"><i class="flaticon-magnifying-glass-1"></i></span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
