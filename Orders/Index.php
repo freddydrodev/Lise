@@ -4,11 +4,14 @@ $ind = true;
 include '../PHP/Inc/head.php';
 ?>
 
-<nav aria-label="breadcrumb" role="navigation">
-  <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active" aria-current="page">Commandes</li>
-  </ol>
-</nav>
+<div class="row title">
+  <div class="col">
+    <div class="d-flex justify-content-between p-3 align-items-center rounded-3 mb-4">
+      <h2 class="text-uppercase m-0">Commandes <br/><small class="text-muted">Total: 20 Commandes</small></h2>
+      <button type="button" class="btn btn-primary"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Commande</button>
+    </div>
+  </div>
+</div>
 
 <!-- commande list -->
 <div class="row">
