@@ -7,6 +7,32 @@
   </p>
   </div>
 
+<div class="fixed-top w-100 h-100 bg-default-9 d-none">
+  <p class="h4 py-4 text-center m-0">Recherche</p>
+  <div class="container-fluid">
+    <p>
+      <input type="text" name="" value="" class="form-control p-0 font-weight-light w-75 mx-auto bigsearch bg-none rounded-0 border-0 text-center" autofocus="disabled">
+    </p>
+    <p class="text-center text-muted">Aucun resultat pour </b>Fredius Tout Court </b></p>
+
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">1</div>
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">2</div>
+      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">3</div>
+    </div>
+    <ul class="nav nav-pills nav-justified fixed-bottom" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+      </li>
+    </ul>
+      </div>
+</div>
     <script src="<?php echo $_ind; ?>Js/jQuery.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/jquery-migrate-1.2.1.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/popper.js"></script>

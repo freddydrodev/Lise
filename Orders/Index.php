@@ -94,7 +94,6 @@ include '../PHP/Inc/head.php';
       <div class="bg-white p-3 order-serial rounded">
         <div class="d-flex justify-content-center align-items-center">
           <svg class="barcode"
-            jsbarcode-format="CODE39"
             jsbarcode-value="FB0506"
             jsbarcode-height="30"
             jsbarcode-displayValue="false"
@@ -183,7 +182,6 @@ include '../PHP/Inc/head.php';
       <div class="bg-white p-3 order-serial rounded">
         <div class="d-flex justify-content-center align-items-center">
           <svg class="barcode"
-            jsbarcode-format="CODE39"
             jsbarcode-value="FB0506"
             jsbarcode-height="30"
             jsbarcode-displayValue="false"
@@ -272,7 +270,6 @@ include '../PHP/Inc/head.php';
       <div class="bg-white p-3 order-serial rounded">
         <div class="d-flex justify-content-center align-items-center">
           <svg class="barcode"
-            jsbarcode-format="CODE39"
             jsbarcode-value="FB0506"
             jsbarcode-height="30"
             jsbarcode-displayValue="false"
