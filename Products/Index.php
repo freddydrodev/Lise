@@ -65,7 +65,38 @@ include '../PHP/Inc/head.php';
   <div class="col">
     <div class="d-flex justify-content-between p-3 align-items-center rounded-3">
       <h2 class="text-uppercase m-0">Categories <br/><small class="text-muted">Afficher: 10 sur 20</small></h2>
-      <button type="button" class="btn btn-primary"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Categorie</button>
+      <!-- insert category modal start -->
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategoryModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Categorie</button>
+      <?php include $_ind . 'PHP/Script/addCategory.php'; ?>
+      <div class="modal fade" tabindex="-1" role="dialog" id="addCategoryModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content rounded-0 border-0">
+            <div class="modal-header border-0 py-2">
+              <h5 class="modal-title position-relative legend px-3"><span class="legend-text">Ajouter Categorie</span></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="" action="./" method="post">
+                <fieldset class="form-group px-3 material-input mb-1">
+                  <label class="small">Nom de la Categorie</label>
+                  <input type="text" name="category" placeholder="EX: Etagere, Electronique, Ordinateur, Vetement,..." class="form-control border-0 rounded-0 px-0" required>
+                  <span class="under w-100 d-block position-relative"></span>
+                </fieldset>
+                <div class="modal-footer border-0">
+                  <button type="submit" name="addCategory" class="btn btn-primary">Ajouter</button>
+                  <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- end insert category modal -->
     </div>
   </div>
 </div>

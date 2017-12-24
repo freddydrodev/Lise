@@ -229,3 +229,27 @@ button:hover{
   padding-left: 80px;
   padding-right: 80px;
 }
+.material-input .under:before, .material-input .under:after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  transition: all linear .25s;
+  background-color: #ddd;
+}
+.material-input .under:before, .material-input .form-control:focus ~ .under:after{
+  width: 100%;
+  left: 0;
+  opacity: 1;
+}
+.material-input .form-control:focus{
+  box-shadow: none;
+}
+.material-input .form-control:focus ~ .under:after{
+  background-color: #7F2AFF;
+}
+.material-input .under:after{
+  width: 0%;
+  left: 50%;
+  opacity: 0;
+}
