@@ -13,15 +13,18 @@ include 'PHP/Inc/head.php';
           <h1 class="intro text-center font-weight-light">Welcome to BelliseStyle</h1>
           <h2 class="text-muted text-center font-weight-light">Admin session</h2>
         </div>
-        <form class="log-form pb-3  bg-white" action="index.html" method="post">
+        <form class="log-form pb-3  bg-white" action="./" method="post">
           <h3 class="mb-3 p-3">Connexion</h3>
+          <div class="msg">
+            <?php include $_ind . 'PHP/Script/Login.php'; ?>
+          </div>
           <fieldset class="form-group px-3">
-            <label for="username">UserName</label>
-            <input type="text" id="username" class="rounded-0 form-control">
+            <label for="username">Pseudo</label>
+            <input type="text" id="username" name="username" class="rounded-0 form-control">
           </fieldset>
           <fieldset class="form-group px-3">
-            <label for="password">Password</label>
-            <input type="password" id="password" class="rounded-0 form-control">
+            <label for="password">Mot de Pass</label>
+            <input type="password" id="password" name="password" class="rounded-0 form-control">
           </fieldset>
           <fieldset class="form-group px-3">
             <button type="submit" name="login" class="btn btn-primary btn-block border-none rounded-0">Connexion</button>

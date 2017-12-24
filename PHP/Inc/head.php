@@ -2,9 +2,7 @@
 $_ind = isset($ind) ? $ind ? '../' : './' : './';
 
 include $_ind . 'PHP/Inc/db.php';
-if (!isset($log) && !isset($_SESSION['id'])) {
-  header('location: ../');
-}
+
 ?>
 
 <!DOCTYPE html>
