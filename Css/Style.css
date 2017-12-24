@@ -174,11 +174,19 @@ body{
 button:hover{
   cursor: pointer;
 }
+.alert{
+  color: white;
+}
 .btn{
   border: none;
 }
+.progress{
+  height: 2px;
+  border-radius: 0;
+  margin-top: 16px;
+}
 /* btn info */
-.btn.btn-info{
+.btn.btn-info, .alert.alert-info{
   background-color: #4786FF;
   box-shadow: 0 5px 15px rgba(71, 134, 255, .3);
 }
@@ -187,7 +195,7 @@ button:hover{
   border-color: #4786FF;
 }
 /* btn primary */
-.btn.btn-primary, .btn-outline-primary:not([disabled]):not(.disabled).active{
+.btn.btn-primary, .btn-outline-primary:not([disabled]):not(.disabled).active, .alert.alert-primary{
   background-color: #7F2AFF;
   box-shadow: 0 5px 15px rgba(127, 42, 255, .3);
 }
@@ -196,7 +204,7 @@ button:hover{
   border-color: #7F2AFF;
 }
 /* btn success */
-.btn.btn-success, .btn-outline-success:not([disabled]):not(.disabled).active{
+.btn.btn-success, .btn-outline-success:not([disabled]):not(.disabled).active, .alert.alert-success{
   background-color: #0DE391;
   border-color: #0DE391;
   box-shadow: 0 5px 15px rgba(13, 227, 145, .3);
@@ -206,7 +214,7 @@ button:hover{
   border-color: #0DE391;
 }
 /* btn danger */
-.btn.btn-danger, .btn-outline-danger:not([disabled]):not(.disabled).active{
+.btn.btn-danger, .btn-outline-danger:not([disabled]):not(.disabled).active, .alert.alert-danger{
   background-color: #FF2A55;
   box-shadow: 0 5px 15px rgba(255, 42, 85, .3);
   border-color: #FF2A55;

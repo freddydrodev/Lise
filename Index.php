@@ -1,4 +1,8 @@
-<?php include 'PHP/Inc/head.php'; ?>
+<?php
+$log = true;
+$page = 'Connexion';
+include 'PHP/Inc/head.php';
+?>
 
     <div class="fixed-top w-100 h-100">
       <div class="d-flex w-100 h-100 justify-content-center align-items-center">

@@ -2,17 +2,21 @@
 $_ind = isset($ind) ? $ind ? '../' : './' : './';
 
 include $_ind . 'PHP/Inc/db.php';
+if (!isset($log) && !isset($_SESSION['id'])) {
+  header('location: ../');
+}
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Connexion</title>
+    <title><?php echo $page ?></title>
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/loaders.min.css">
     <!-- script for preload screen here -->
+    <link rel="stylesheet" href="<?php echo $_ind; ?>Css/animate.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/Icon/flaticon.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/Fonts/Logo/logo.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/bootstrap.min.css">
@@ -23,9 +27,16 @@ include $_ind . 'PHP/Inc/db.php';
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/Style.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/Style.products.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/Style.sales.css">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:200,400,900" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,400,900" rel="stylesheet">
+
+    <script src="<?php echo $_ind; ?>Js/jQuery.min.js"></script>
+    <script type="text/javascript" src="<?php echo $_ind; ?>Js/bootstrap-notify.min.js"></script>
   </head>
   <body>
     <div class="page-wrapper">
-      <?php include $_ind . 'PHP/Inc/header.php'; ?>
+      <?php
+      if(!isset($log)){
+        include $_ind . 'PHP/Inc/header.php';
+      }
+      ?>
       <div class="container-fluid" id="page-content">

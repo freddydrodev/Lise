@@ -1,5 +1,4 @@
 <?php
 session_start();
-session_end();
 session_destroy();
-header('loaction: ../');
+header('location: ../');

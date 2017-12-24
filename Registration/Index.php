@@ -1,4 +1,5 @@
 <?php
+$log = true;
 $page = 'Inscription';
 $ind = true;
 include '../PHP/Inc/head.php'; ?>
@@ -11,30 +12,29 @@ include '../PHP/Inc/head.php'; ?>
         <h1 class="intro text-center font-weight-light">Welcome to BelliseStyle</h1>
         <h2 class="text-muted text-center font-weight-light">Admin session</h2>
       </div>
-      <form class="log-form pb-3  bg-white" action="index.html" method="post">
+      <form class="log-form pb-3  bg-white" action="./" method="post">
         <h3 class="mb-3 p-3">Inscription</h3>
+        <div class="msg">
+          <?php include $_ind . 'PHP/Script/registration.php'; ?>
+        </div>
         <fieldset class="form-group px-3">
-          <label for="username">UserName</label>
-          <input type="text" id="username" class="rounded-0 form-control">
+          <label for="fullname">Votre Nom Complet</label>
+          <input type="text" id="fullname" name="fullname" required class="rounded-0 form-control">
         </fieldset>
         <fieldset class="form-group px-3">
-          <label for="username">FullName</label>
-          <input type="text" id="username" class="rounded-0 form-control">
+          <label for="username">Votre Pseudo</label>
+          <input type="username" id="username" name="username" required class="rounded-0 form-control">
         </fieldset>
         <fieldset class="form-group px-3">
-          <label for="username">Email</label>
-          <input type="text" id="username" class="rounded-0 form-control">
+          <label for="password">Votre Mot De Pass</label>
+          <input type="password" id="password" name="password" required class="rounded-0 form-control">
         </fieldset>
         <fieldset class="form-group px-3">
-          <label for="password">Password</label>
-          <input type="password" id="password" class="rounded-0 form-control">
+          <label for="r-password">Confirmez Votre Mot De Pass</label>
+          <input type="password" id="r-password" name="r-password" required class="rounded-0 form-control">
         </fieldset>
         <fieldset class="form-group px-3">
-          <label for="password">Retype Password</label>
-          <input type="password" id="password" class="rounded-0 form-control">
-        </fieldset>
-        <fieldset class="form-group px-3">
-          <button type="submit" name="login" class="btn btn-primary btn-block border-none rounded-0">Inscription</button>
+          <button type="submit" name="register" class="btn btn-primary btn-block border-none rounded-0">Inscription</button>
         </fieldset>
       </form>
     </div>
