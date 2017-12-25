@@ -2,6 +2,11 @@
 $page = 'Products';
 $ind = true;
 include '../PHP/Inc/head.php';
+include $_ind . 'PHP/Script/addCategory.php';
+
+// show categories list
+$showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
+
 ?>
 
 <nav aria-label="breadcrumb" role="navigation">
@@ -64,11 +69,11 @@ include '../PHP/Inc/head.php';
 <div class="row title">
   <div class="col">
     <div class="d-flex justify-content-between p-3 align-items-center rounded-3">
-      <h2 class="text-uppercase m-0">Categories <br/><small class="text-muted">Afficher: 10 sur 20</small></h2>
+      <h2 class="text-uppercase m-0">Categories</h2>
       <!-- insert category modal start -->
 
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategoryModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Categorie</button>
-      <?php include $_ind . 'PHP/Script/addCategory.php'; ?>
+
       <div class="modal fade" tabindex="-1" role="dialog" id="addCategoryModal">
         <div class="modal-dialog" role="document">
           <div class="modal-content rounded-0 border-0">
@@ -82,7 +87,7 @@ include '../PHP/Inc/head.php';
               <form class="" action="./" method="post">
                 <fieldset class="form-group px-3 material-input mb-1">
                   <label class="small">Nom de la Categorie</label>
-                  <input type="text" name="category" placeholder="EX: Etagere, Electronique, Ordinateur, Vetement,..." class="form-control border-0 rounded-0 px-0" required>
+                  <input type="text" name="category" placeholder="EX: Etagere, Electronique, Ordinateur, Vetement, ..." class="form-control border-0 rounded-0 px-0" required>
                   <span class="under w-100 d-block position-relative"></span>
                 </fieldset>
                 <div class="modal-footer border-0">
@@ -102,103 +107,41 @@ include '../PHP/Inc/head.php';
 </div>
 <!-- Categories list -->
 <div class="row mb-0" id="categories-list">
-  <div class="col-4 py-5">
-    <div class="card border-0 light-shadow">
-      <div class="card-body">
-        <h4 class="card-title">Etagere</h4>
-        <h6 class="card-subtitle mb-2 text-muted">20 Articles</h6>
-        <div class="card-text mb-3 position-relative">
-          <div class="media">
-            <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P50.jpeg" alt="Image de l'article">
-            <div class="media-body">
-              <h5 class="mt-0 mb-0">12 Paires</h5>
-              <p class="text-muted">10.000Fr <span class="badge badge-primary badge-pill font-weight-normal float-right">12 Disponible</span></p>
-            </div>
+  <!-- start category items -->
+  <?php while ($showCategory = $showCategories->fetch()) { ?>
+    <div class="col-4 py-5">
+      <div class="card border-0 light-shadow">
+        <div class="card-body">
+          <h4 class="card-title"><?php echo $showCategory['name'] ?></h4>
+          <!-- items in category count -->
+          <?php
+          $countItemsInCategory = $db->prepare('SELECT COUNT(*) AS nbr FROM items_in_category WHERE categoryID = ?');
+          $countItemsInCategory->execute(array($showCategory['ID']));
+          $_countItemsInCategory = $countItemsInCategory->fetch();
+           ?>
+          <h6 class="card-subtitle mb-2 text-muted"><?php echo $_countItemsInCategory['nbr'] > 1 ?  $_countItemsInCategory['nbr'] . ' Articles' : $_countItemsInCategory['nbr'] . ' Article' ?></h6>
+          <div class="card-text mb-3 position-relative">
+            <!-- begining items in category list -->
+            <?php if ($_countItemsInCategory['nbr'] > 0): ?>
+              <div class="media">
+                <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P50.jpeg" alt="Image de l'article">
+                <div class="media-body">
+                  <h5 class="mt-0 mb-0">12 Paires</h5>
+                  <p class="text-muted">10.000Fr <span class="badge badge-primary badge-pill font-weight-normal float-right">12 Disponible</span></p>
+                </div>
+              </div>
+            <?php else: ?>
+              <p>Aucun Produit.</p>
+            <?php endif; ?>
+            <!-- end items in category list -->
           </div>
+          <a href="#" class="card-link btn btn-primary"><span class="flaticon-edit-1"></span></a>
+          <a href="#" class="card-link btn btn-danger ml-2"><span class="flaticon-delete"></span></a>
         </div>
-        <a href="#" class="card-link btn btn-primary"><span class="flaticon-edit-1"></span></a>
-        <a href="#" class="card-link btn btn-danger ml-2"><span class="flaticon-delete"></span></a>
       </div>
     </div>
-  </div>
-  <div class="col-4 py-5">
-    <div class="card border-0 light-shadow">
-      <div class="card-body">
-        <h4 class="card-title">Etagere</h4>
-        <h6 class="card-subtitle mb-2 text-muted">20 Articles</h6>
-        <div class="card-text mb-3 position-relative">
-          <div class="media">
-            <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P50.jpeg" alt="Image de l'article">
-            <div class="media-body">
-              <h5 class="mt-0 mb-0">12 Paires</h5>
-              <p class="text-muted">10.000Fr <span class="badge badge-primary badge-pill font-weight-normal float-right">12 Disponible</span></p>
-            </div>
-          </div>
-          <div class="media">
-            <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P30.jpeg" alt="Image de l'article">
-            <div class="media-body">
-              <h5 class="mt-0 mb-0">12 Paires</h5>
-              <p class="text-muted">10.000Fr <span class="badge badge-primary badge-pill font-weight-normal float-right">12 Disponible</span></p>
-            </div>
-          </div>
-        </div>
-        <a href="#" class="card-link btn btn-primary"><span class="flaticon-edit-1"></span></a>
-        <a href="#" class="card-link btn btn-danger ml-2"><span class="flaticon-delete"></span></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-4 py-5">
-    <div class="card border-0 light-shadow">
-      <div class="card-body">
-        <h4 class="card-title">Etagere</h4>
-        <h6 class="card-subtitle mb-2 text-muted">20 Articles</h6>
-        <div class="card-text mb-3 position-relative">
-          <div class="media">
-            <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P20.jpeg" alt="Image de l'article">
-            <div class="media-body">
-              <h5 class="mt-0 mb-0">12 Paires</h5>
-              <p class="text-muted">10.000Fr <span class="badge badge-primary badge-pill font-weight-normal float-right">12 Disponible</span></p>
-            </div>
-          </div>
-        </div>
-        <a href="#" class="card-link btn btn-primary"><span class="flaticon-edit-1"></span></a>
-        <a href="#" class="card-link btn btn-danger ml-2"><span class="flaticon-delete"></span></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-4 py-5">
-    <div class="card border-0 light-shadow">
-      <div class="card-body">
-        <h4 class="card-title">Etagere</h4>
-        <h6 class="card-subtitle mb-2 text-muted">20 Articles</h6>
-        <div class="card-text mb-3 position-relative">
-          <div class="media">
-            <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P50.jpeg" alt="Image de l'article">
-            <div class="media-body">
-              <h5 class="mt-0 mb-0">12 Paires</h5>
-              <p class="text-muted">10.000Fr <span class="badge badge-primary badge-pill font-weight-normal float-right">12 Disponible</span></p>
-            </div>
-          </div>
-          <div class="media">
-            <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P40.jpeg" alt="Image de l'article">
-            <div class="media-body">
-              <h5 class="mt-0 mb-0">12 Paires</h5>
-              <p class="text-muted">10.000Fr <span class="badge badge-primary badge-pill font-weight-normal float-right">12 Disponible</span></p>
-            </div>
-          </div>
-          <div class="media">
-            <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P30.jpeg" alt="Image de l'article">
-            <div class="media-body">
-              <h5 class="mt-0 mb-0">12 Paires</h5>
-              <p class="text-muted">10.000Fr <span class="badge badge-primary badge-pill font-weight-normal float-right">12 Disponible</span></p>
-            </div>
-          </div>
-        </div>
-        <a href="#" class="card-link btn btn-primary"><span class="flaticon-edit-1"></span></a>
-        <a href="#" class="card-link btn btn-danger ml-2"><span class="flaticon-delete"></span></a>
-      </div>
-    </div>
-  </div>
+  <?php } ?>
+  <!-- end category items -->
 </div>
 
 <!-- Produits title -->
@@ -209,7 +152,67 @@ include '../PHP/Inc/head.php';
         <h2 class="text-uppercase m-0">Produits <br/>
           <small class="text-muted text-capitalize">Afficher: <i>20 Articles</i> </small>
         </h2>
-        <button type="button" class="btn btn-primary"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Produit</button>
+        <!-- start add product modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Produit</button>
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="addProductModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-0 border-0">
+              <div class="modal-header border-0 py-2">
+                <h5 class="modal-title position-relative legend px-3"><span class="legend-text">Ajouter Produit</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="" action="./" method="post">
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Nom</label>
+                    <input type="text" name="name" placeholder="EX:  T-shirt Nike, Chaussure AD, ..." class="form-control border-0 rounded-0 px-0" required>
+                    <span class="under w-100 d-block position-relative"></span>
+                  </fieldset>
+                  <div class="row px-3">
+                    <fieldset class="form-group px-3 material-input mb-1 col">
+                      <label class="small">Prix</label>
+                      <input type="text" name="price" placeholder="EX: 10000, 500000, ..." class="form-control border-0 rounded-0 px-0" required>
+                      <span class="under w-100 d-block position-relative"></span>
+                    </fieldset>
+                    <fieldset class="form-group px-3 material-input mb-1 col">
+                      <label class="small">Decrementation</label>
+                      <input type="text" name="decrem" placeholder="EX: 1, 1.5, ..." class="form-control border-0 rounded-0 px-0" required>
+                      <span class="under w-100 d-block position-relative"></span>
+                    </fieldset>
+                  </div>
+                  <div class="row px-3">
+                    <fieldset class="form-group px-3 material-input mb-1 col">
+                      <label class="small">Couleur</label>
+                      <input type="text" name="color" placeholder="EX: Rouge, Bleu, Vert, ..." class="form-control border-0 rounded-0 px-0" required>
+                      <span class="under w-100 d-block position-relative"></span>
+                    </fieldset>
+                    <fieldset class="form-group px-3 material-input mb-1 col">
+                      <label class="small">Quantite</label>
+                      <input type="text" name="quantity" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0" required>
+                      <span class="under w-100 d-block position-relative"></span>
+                    </fieldset>
+                  </div>
+                  <fieldset class="form-group p-3 material-input mb-1 col">
+                    <button type="button" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="bottom" title="Ajouter Nouvelle Couleur et Quantite"><span class="flaticon-mathematical-addition-sign"></span></button>
+                  </fieldset>
+                  <fieldset class="form-group px-3 material-input mb-1 col">
+                    <label class="small">Categorie</label>
+                    <input type="text" name="category" placeholder="EX: Etagere, electronic, ..." class="form-control border-0 rounded-0 px-0" required>
+                    <span class="under w-100 d-block position-relative"></span>
+                  </fieldset>
+                  <div class="modal-footer border-0">
+                    <button type="submit" name="addProduct" class="btn btn-primary">Ajouter</button>
+                    <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end add Product modal -->
         <!-- <div class="">
           <div class="input-group search-products">
             <input class="search form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Rechercher un produits" />
@@ -273,6 +276,7 @@ include '../PHP/Inc/head.php';
           </tr>
         </thead>
         <tbody class="list text-center light-shadow">
+          <!-- start item list -->
           <tr class="mb-3 bg-white border-bottom-1">
             <td class="border-top-0 articleImg align-middle"><img src="../Media/Images/Articles/P50.jpeg" alt="Article Img" class="w-100"></td>
             <th scope="row" class="ID border-top-0 align-middle">#FB03H</th>
@@ -291,60 +295,7 @@ include '../PHP/Inc/head.php';
               </a>
             </td>
           </tr>
-          <tr class="mb-3 bg-white border-bottom-1">
-            <td class="border-top-0 articleImg align-middle"><img src="../Media/Images/Articles/P30.jpeg" alt="Article Img" class="w-100"></td>
-            <th scope="row" class="ID border-top-0 align-middle">#FB03H</th>
-            <td class="name border-top-0 align-middle">12 paires</td>
-            <td class="category border-top-0 align-middle">Etagere</td>
-            <td class="price border-top-0 align-middle">10.000</td>
-            <td class="quantity border-top-0 align-middle">100</td>
-            <td class="decrement border-top-0 align-middle">1.5</td>
-            <td class="color border-top-0 align-middle">Rouge</td>
-            <td class="border-top-0 align-middle">
-              <a href="#" class="btn btn-primary">
-                <span class="flaticon-edit-1"></span>
-              </a>
-              <a href="#" class="btn btn-danger ml-2">
-                <span class="flaticon-delete"></span>
-              </a>
-            </td>
-          </tr>
-          <tr class="mb-3 bg-white border-bottom-1">
-            <td class="border-top-0 articleImg align-middle"><img src="../Media/Images/Articles/P20.jpeg" alt="Article Img" class="w-100"></td>
-            <th scope="row" class="ID border-top-0 align-middle">#FB03H</th>
-            <td class="name border-top-0 align-middle">12 paires</td>
-            <td class="category border-top-0 align-middle">Etagere</td>
-            <td class="price border-top-0 align-middle">10.000</td>
-            <td class="quantity border-top-0 align-middle">100</td>
-            <td class="decrement border-top-0 align-middle">1.5</td>
-            <td class="color border-top-0 align-middle">Rouge</td>
-            <td class="border-top-0 align-middle">
-              <a href="#" class="btn btn-primary">
-                <span class="flaticon-edit-1"></span>
-              </a>
-              <a href="#" class="btn btn-danger ml-2">
-                <span class="flaticon-delete"></span>
-              </a>
-            </td>
-          </tr>
-          <tr class="mb-3 bg-white border-bottom-1">
-            <td class="border-top-0 articleImg align-middle"><img src="../Media/Images/Articles/P40.jpeg" alt="Article Img" class="w-100"></td>
-            <th scope="row" class="ID border-top-0 align-middle">#FB03H</th>
-            <td class="name border-top-0 align-middle">12 paires</td>
-            <td class="category border-top-0 align-middle">Etagere</td>
-            <td class="price border-top-0 align-middle">10.000</td>
-            <td class="quantity border-top-0 align-middle">100</td>
-            <td class="decrement border-top-0 align-middle">1.5</td>
-            <td class="color border-top-0 align-middle">Rouge</td>
-            <td class="border-top-0 align-middle">
-              <a href="#" class="btn btn-primary">
-                <span class="flaticon-edit-1"></span>
-              </a>
-              <a href="#" class="btn btn-danger ml-2">
-                <span class="flaticon-delete"></span>
-              </a>
-            </td>
-          </tr>
+          <!-- end item list -->
         </tbody>
       </table>
     </div>

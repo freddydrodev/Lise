@@ -1,5 +1,5 @@
 <?php
-$page = 'Products';
+$page = 'Sales';
 $ind = true;
 include '../PHP/Inc/head.php';
 ?>
