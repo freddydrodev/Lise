@@ -1,4 +1,5 @@
 <?php
+$page = 'Clients';
 $ind = true;
 include '../PHP/Inc/head.php';
 ?>
@@ -15,7 +16,7 @@ include '../PHP/Inc/head.php';
     <table class="table">
       <thead>
         <tr>
-          
+
           <th scope="col" class="border-top-0 border-bottom-0 text-center">
             <button class="sort bg-none border-0 rounded-30 btn btn-block" data-sort="ID">
               ID

@@ -1,4 +1,5 @@
 <?php
+$page = 'Employees';
 $ind = true;
 include '../PHP/Inc/head.php';
 ?>

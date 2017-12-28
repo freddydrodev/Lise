@@ -5,7 +5,7 @@ if(isset($_POST['addCategory'])){
   $cat = htmlspecialchars(trim($_POST['category']));
   $correct = true;
 
-  if(!preg_match('/^[a-z0-9àâçéèêëîïôûùüÿñæœ -]*$/i', $cat)) {
+  if(!preg_match('/^[a-z0-9àâçéèêëîïôûùüÿñæœ \-]*$/i', $cat)) {
       $correct = false;
       bootstrapNotify('Erreur: Seul les lettres, tirets et les espaces sont autorise');
   }

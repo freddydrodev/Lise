@@ -1,5 +1,5 @@
 <?php
-$page = 'Products';
+$page = 'Produits';
 $ind = true;
 include '../PHP/Inc/head.php';
 include $_ind . 'PHP/Script/addCategory.php';
@@ -116,7 +116,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
           <h4 class="card-title"><?php echo $showCategory['name'] ?></h4>
           <!-- items in category count -->
           <?php
-          $countItemsInCategory = $db->prepare('SELECT COUNT(*) AS nbr FROM items_in_category WHERE categoryID = ?');
+          $countItemsInCategory = $db->prepare('SELECT COUNT(*) AS nbr FROM products WHERE category = ?');
           $countItemsInCategory->execute(array($showCategory['ID']));
           $_countItemsInCategory = $countItemsInCategory->fetch();
            ?>
@@ -124,13 +124,26 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
           <div class="card-text mb-3 position-relative">
             <!-- begining items in category list -->
             <?php if ($_countItemsInCategory['nbr'] > 0): ?>
-              <div class="media">
-                <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P50.jpeg" alt="Image de l'article">
-                <div class="media-body">
-                  <h5 class="mt-0 mb-0">12 Paires</h5>
-                  <p class="text-muted">10.000Fr <span class="badge badge-primary badge-pill font-weight-normal float-right">12 Disponible</span></p>
+
+              <!-- //display category element -->
+              <?php
+              $ItemsInCategory = $db->prepare('SELECT ID, name, price FROM products WHERE category = ? ORDER BY name');
+              $ItemsInCategory->execute(array($showCategory['ID']));
+              while ($_ItemsInCategory = $ItemsInCategory->fetch()) {
+                $qtyPdctTop = $db->prepare('SELECT SUM(quantity) AS qty FROM quantity WHERE productID = ?');
+                $qtyPdctTop->execute(array($_ItemsInCategory['ID']));
+                $_qtyPdctTop = $qtyPdctTop->fetch();
+                ?>
+                <div class="media">
+                  <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P50.jpeg" alt="Image de l'article">
+                  <div class="media-body">
+                    <h5 class="mt-0 mb-0"><?php echo $_ItemsInCategory['name'] ?></h5>
+                    <p class="text-muted"><?php echo $_ItemsInCategory['price'] ?>Fr <span class="badge badge-primary badge-pill font-weight-normal float-right"><?php echo $_qtyPdctTop['qty'] ?> Disponible</span></p>
+                  </div>
                 </div>
-              </div>
+              <?php } ?>
+
+              <!-- end category item list -->
             <?php else: ?>
               <p>Aucun Produit.</p>
             <?php endif; ?>
@@ -168,7 +181,18 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                 </button>
               </div>
               <div class="modal-body">
-                <form class="" action="./" method="post">
+                <form class="" action="./" method="post" enctype="multipart/form-data">
+                  <!-- <fieldset class="form-group px-3  mb-1">
+                    label class="small">Image</label>
+                    <label class="custom-file">
+                      <input type="file" name="name" placeholder="EX:  T-shirt Nike, Chaussure AD, ..." class="custom-file-input" required>
+                      <span class="custom-file-control"></span>
+                    </label>
+                    <label class="custom-file">
+                      <input type="file" id="file2" class="custom-file-input">
+                      <span class="custom-file-control"></span>
+                    </label>
+                  </fieldset> -->
                   <fieldset class="form-group px-3 material-input mb-1">
                     <label class="small">Nom</label>
                     <input type="text" name="name" placeholder="EX:  T-shirt Nike, Chaussure AD, ..." class="form-control border-0 rounded-0 px-0" required>
@@ -176,18 +200,18 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                   </fieldset>
                   <fieldset class="form-group px-3 material-input mb-1">
                     <label class="small">Prix</label>
-                    <input type="text" name="price" placeholder="EX: 10000, 500000, ..." class="form-control border-0 rounded-0 px-0" required>
+                    <input type="number" name="price" min="0" placeholder="EX: 10000, 500000, ..." class="form-control border-0 rounded-0 px-0" required>
                     <span class="under w-100 d-block position-relative"></span>
                   </fieldset>
                   <div class="row px-3">
                     <fieldset class="form-group px-3 material-input mb-1 col">
                       <label class="small">Couleur</label>
-                      <input type="text" name="color-1" placeholder="EX: Rouge, Bleu, Vert, ..." class="form-control border-0 rounded-0 px-0" required>
+                      <input type="text" name="color-1" placeholder="EX: Rouge, Bleu, Vert, ..." class="form-control border-0 rounded-0 px-0">
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1 col">
                       <label class="small">Quantite</label>
-                      <input type="text" name="quantity-1" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0" required>
+                      <input type="number" name="quantity-1" min="0" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0" required>
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                   </div>
@@ -204,7 +228,6 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                       while($selectCategory = $selectCategories->fetch()){ ?>
                         <option value="<?php echo $selectCategory['ID'] ?>"<?php if ($selectCategory['name'] == 'Uncategorized'): ?> selected <?php endif; ?>><?php echo $selectCategory['name'] ?></option>
                       <?php } ?>
-                      <option value="2">laba</option>
                     </select>
                   </fieldset>
                   <!-- list of alternatif product -->
@@ -220,14 +243,17 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                       <div class="row">
                         <fieldset class="form-group px-3 material-input mb-1 col">
                           <label class="small">Product</label>
-                          <select class="form-control custom-select" name="">
-                            <option value="1">ixi</option>
-                            <option value="2">laba</option>
+                          <select class="form-control custom-select alt-inp" name="alt-product">
+                            <?php
+                            $productAlt = $db->query('SELECT ID, name FROM products ORDER BY name');
+                            while($_productAlt = $productAlt->fetch()){ ?>
+                              <option value="<?php echo $_productAlt['ID'] ?>"><?php echo $_productAlt['name'] ?></option>
+                            <?php } ?>
                           </select>
                         </fieldset>
                         <fieldset class="form-group px-3 material-input mb-1 col">
                           <label class="small">Quantite</label>
-                          <input type="text" name="quantity" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0" required>
+                          <input type="text" name="alt-quantity" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0 alt-inp">
                           <span class="under w-100 d-block position-relative"></span>
                         </fieldset>
                       </div>

@@ -70,14 +70,13 @@
       });
 
 
-      <?php if ($page === 'Products'): ?>
+      <?php if ($page === 'Produits'): ?>
       //perfectscroll
       var ps = new PerfectScrollbar('#categories-list .card-text');
 
-
       <?php endif; ?>
 
-      <?php if ($page === 'Sales'): ?>
+      <?php if ($page === 'Ventes'): ?>
       //chartjs sales
       Chart.defaults.global.legend.display = false;
       Chart.defaults.global.defaultFontFamily = "'Poppins', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
