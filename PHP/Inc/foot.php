@@ -73,6 +73,8 @@
       <?php if ($page === 'Products'): ?>
       //perfectscroll
       var ps = new PerfectScrollbar('#categories-list .card-text');
+
+
       <?php endif; ?>
 
       <?php if ($page === 'Sales'): ?>
@@ -127,6 +129,9 @@
           }
       });
     <?php endif; ?>
+    </script>
+    <script src="<?php echo $_ind; ?>Js/Templatize.js">
+
     </script>
   </body>
 </html>

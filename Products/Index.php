@@ -3,6 +3,7 @@ $page = 'Products';
 $ind = true;
 include '../PHP/Inc/head.php';
 include $_ind . 'PHP/Script/addCategory.php';
+include $_ind . 'PHP/Script/addProduct.php';
 
 // show categories list
 $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
@@ -109,7 +110,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
 <div class="row mb-0" id="categories-list">
   <!-- start category items -->
   <?php while ($showCategory = $showCategories->fetch()) { ?>
-    <div class="col-4 py-5">
+    <div class="col py-5">
       <div class="card border-0 light-shadow">
         <div class="card-body">
           <h4 class="card-title"><?php echo $showCategory['name'] ?></h4>
@@ -135,8 +136,10 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             <?php endif; ?>
             <!-- end items in category list -->
           </div>
-          <a href="#" class="card-link btn btn-primary"><span class="flaticon-edit-1"></span></a>
-          <a href="#" class="card-link btn btn-danger ml-2"><span class="flaticon-delete"></span></a>
+          <?php if ($showCategory['ID'] != 1): ?>
+            <a href="#" class="card-link btn btn-primary"><span class="flaticon-edit-1"></span></a>
+            <a href="<?php echo $_ind ?>PHP/Script/removeCategory.php?catID=<?php echo $showCategory['ID'] ?>" class="card-link btn btn-danger ml-2"><span class="flaticon-delete"></span></a>
+          <?php endif; ?>
         </div>
       </div>
     </div>
@@ -171,38 +174,66 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                     <input type="text" name="name" placeholder="EX:  T-shirt Nike, Chaussure AD, ..." class="form-control border-0 rounded-0 px-0" required>
                     <span class="under w-100 d-block position-relative"></span>
                   </fieldset>
-                  <div class="row px-3">
-                    <fieldset class="form-group px-3 material-input mb-1 col">
-                      <label class="small">Prix</label>
-                      <input type="text" name="price" placeholder="EX: 10000, 500000, ..." class="form-control border-0 rounded-0 px-0" required>
-                      <span class="under w-100 d-block position-relative"></span>
-                    </fieldset>
-                    <fieldset class="form-group px-3 material-input mb-1 col">
-                      <label class="small">Decrementation</label>
-                      <input type="text" name="decrem" placeholder="EX: 1, 1.5, ..." class="form-control border-0 rounded-0 px-0" required>
-                      <span class="under w-100 d-block position-relative"></span>
-                    </fieldset>
-                  </div>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Prix</label>
+                    <input type="text" name="price" placeholder="EX: 10000, 500000, ..." class="form-control border-0 rounded-0 px-0" required>
+                    <span class="under w-100 d-block position-relative"></span>
+                  </fieldset>
                   <div class="row px-3">
                     <fieldset class="form-group px-3 material-input mb-1 col">
                       <label class="small">Couleur</label>
-                      <input type="text" name="color" placeholder="EX: Rouge, Bleu, Vert, ..." class="form-control border-0 rounded-0 px-0" required>
+                      <input type="text" name="color-1" placeholder="EX: Rouge, Bleu, Vert, ..." class="form-control border-0 rounded-0 px-0" required>
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1 col">
                       <label class="small">Quantite</label>
-                      <input type="text" name="quantity" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0" required>
+                      <input type="text" name="quantity-1" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0" required>
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                   </div>
-                  <fieldset class="form-group p-3 material-input mb-1 col">
-                    <button type="button" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="bottom" title="Ajouter Nouvelle Couleur et Quantite"><span class="flaticon-mathematical-addition-sign"></span></button>
+                  <fieldset class="form-group px-3 pt-3 material-input mb-1 col">
+                    <button type="button" class="btn btn-success btn-block addMoreQuantity" data-toggle="tooltip" data-placement="bottom" title="Ajouter Nouvelle Couleur et Quantite">
+                      <span class="flaticon-cross small-icon"></span>
+                    </button>
                   </fieldset>
                   <fieldset class="form-group px-3 material-input mb-1 col">
                     <label class="small">Categorie</label>
-                    <input type="text" name="category" placeholder="EX: Etagere, electronic, ..." class="form-control border-0 rounded-0 px-0" required>
-                    <span class="under w-100 d-block position-relative"></span>
+                    <select class="form-control custom-select" name="category" required>
+                      <?php
+                      $selectCategories = $db->query('SELECT * FROM Categories ORDER BY name');
+                      while($selectCategory = $selectCategories->fetch()){ ?>
+                        <option value="<?php echo $selectCategory['ID'] ?>"<?php if ($selectCategory['name'] == 'Uncategorized'): ?> selected <?php endif; ?>><?php echo $selectCategory['name'] ?></option>
+                      <?php } ?>
+                      <option value="2">laba</option>
+                    </select>
                   </fieldset>
+                  <!-- list of alternatif product -->
+                  <?php
+                  $countProducts = $db->query('SELECT COUNT(*) AS nbr FROM products');
+                  $countProduct = $countProducts->fetch();
+                  if($countProduct['nbr'] > 0){
+                   ?>
+                  <fieldset class="form-group px-3 material-input mb-1 col">
+                    <input type="checkbox" name="addProductAlt" id="addProductAlt" class="d-none">
+                    <label for="addProductAlt" class="position-relative">Alternative</label>
+                    <div class="alternative">
+                      <div class="row">
+                        <fieldset class="form-group px-3 material-input mb-1 col">
+                          <label class="small">Product</label>
+                          <select class="form-control custom-select" name="">
+                            <option value="1">ixi</option>
+                            <option value="2">laba</option>
+                          </select>
+                        </fieldset>
+                        <fieldset class="form-group px-3 material-input mb-1 col">
+                          <label class="small">Quantite</label>
+                          <input type="text" name="quantity" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0" required>
+                          <span class="under w-100 d-block position-relative"></span>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <?php } ?>
                   <div class="modal-footer border-0">
                     <button type="submit" name="addProduct" class="btn btn-primary">Ajouter</button>
                     <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -259,16 +290,6 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
               </button>
             </th>
             <th scope="col" class="border-top-0 border-bottom-0 text-center">
-              <button class="sort bg-none border-0 rounded-30 btn btn-block" data-sort="decrement">
-                RDS
-              </button>
-            </th>
-            <th scope="col" class="border-top-0 border-bottom-0 text-center">
-              <button class="sort bg-none border-0 rounded-30 btn btn-block" data-sort="color">
-                Couleur
-              </button>
-            </th>
-            <th scope="col" class="border-top-0 border-bottom-0 text-center">
               <button class="bg-none border-0 rounded-30 btn btn-block">
                 Options
               </button>
@@ -284,8 +305,6 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             <td class="category border-top-0 align-middle">Etagere</td>
             <td class="price border-top-0 align-middle">10.000</td>
             <td class="quantity border-top-0 align-middle">100</td>
-            <td class="decrement border-top-0 align-middle">1.5</td>
-            <td class="color border-top-0 align-middle">Rouge</td>
             <td class="border-top-0 align-middle">
               <a href="#" class="btn btn-primary">
                 <span class="flaticon-edit-1"></span>

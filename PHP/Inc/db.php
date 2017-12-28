@@ -22,20 +22,22 @@ else {
   $_SESSION['created'] = false;
 }
 
-if($_SESSION['created'] && $page == 'Inscription'){
-  header('location: ../');
-}
+if(isset($page)){
+  if($_SESSION['created'] && $page == 'Inscription'){
+    header('location: ../');
+  }
 
-if($page === 'Connexion'){
-  if(!$_SESSION['created']){
-    $users = $db->prepare('SELECT COUNT(id) AS nbr FROM users');
-    $users->execute();
-    $user = $users->fetch();
-    if($user['nbr'] == 0){
-      header('location: Registration/');
-    }
-    else {
-      $_SESSION['created'] = true;
+  if($page === 'Connexion'){
+    if(!$_SESSION['created']){
+      $users = $db->prepare('SELECT COUNT(id) AS nbr FROM users');
+      $users->execute();
+      $user = $users->fetch();
+      if($user['nbr'] == 0){
+        header('location: Registration/');
+      }
+      else {
+        $_SESSION['created'] = true;
+      }
     }
   }
 }

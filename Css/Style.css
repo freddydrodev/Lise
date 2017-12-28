@@ -253,3 +253,40 @@ button:hover{
   left: 50%;
   opacity: 0;
 }
+.material-input input[type="checkbox"] + label{
+  margin-left: 30px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0;
+}
+.material-input input[type="checkbox"] + label:before, .material-input input[type="checkbox"] + label:after{
+  content: '';
+  position: absolute;
+  left: -30px;
+  width: 20px;
+  height: 20px;
+  background-color: #ddd;
+  top: calc(50% - 10px);
+  border-radius: 2px;
+  transition: all linear .25s;
+  font-size: 20px;
+}
+.material-input input[type="checkbox"]:checked + label:after{
+  background-color: #7F2AFF;
+  color: #FFF;
+  font-family: "Flaticon";
+  content: "\f141";
+  line-height: 20px;
+  font-size: 10px;
+  text-align: center;
+  transition: all linear .25s;
+}
+.alternative{
+  display: none;
+}
+.material-input input[type="checkbox"]:checked + label + .alternative{
+  display: block;
+}
+.deleter:hover{
+  color: #222;
+}

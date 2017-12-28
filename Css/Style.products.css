@@ -80,6 +80,7 @@ h2{
   background-color: #7F2AFF;
   box-shadow: 0 10px 20px rgba(127, 42, 255, .5);
   color: white;
+  height: 315px;
 }
 .slick-current .card-body .text-muted{
   color: #C9CAFD !important;

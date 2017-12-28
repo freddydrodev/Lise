@@ -3,7 +3,6 @@ $page = 'Sales';
 $ind = true;
 include '../PHP/Inc/head.php';
 ?>
-
 <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active" aria-current="page">Ventes</li>
