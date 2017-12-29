@@ -125,7 +125,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             <!-- begining items in category list -->
             <?php if ($_countItemsInCategory['nbr'] > 0): ?>
 
-              <!-- //display category element -->
+              <!-- display category element -->
               <?php
               $ItemsInCategory = $db->prepare('SELECT ID, name, price FROM products WHERE category = ? ORDER BY name');
               $ItemsInCategory->execute(array($showCategory['ID']));
@@ -206,12 +206,12 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                   <div class="row px-3">
                     <fieldset class="form-group px-3 material-input mb-1 col">
                       <label class="small">Couleur</label>
-                      <input type="text" name="color-1" placeholder="EX: Rouge, Bleu, Vert, ..." class="form-control border-0 rounded-0 px-0">
+                      <input type="text" name="defaultColor" placeholder="EX: Rouge, Bleu, Vert, ..." class="form-control border-0 rounded-0 px-0">
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1 col">
                       <label class="small">Quantite</label>
-                      <input type="number" name="quantity-1" min="0" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0" required>
+                      <input type="number" name="defaultQty" min="0" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0" required>
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                   </div>
@@ -252,7 +252,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                           </select>
                         </fieldset>
                         <fieldset class="form-group px-3 material-input mb-1 col">
-                          <label class="small">Quantite</label>
+                          <label class="small">Quantite pour un</label>
                           <input type="text" name="alt-quantity" placeholder="EX: 100, 10, ..." class="form-control border-0 rounded-0 px-0 alt-inp">
                           <span class="under w-100 d-block position-relative"></span>
                         </fieldset>

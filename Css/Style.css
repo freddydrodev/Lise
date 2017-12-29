@@ -27,7 +27,7 @@ html, body{
 body{
   background-color: #F5F7FA;
   font-size: 15px;
-  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Poppins', sans-serif;
 }
 .bg-none{
   background: transparent !important;
