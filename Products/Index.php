@@ -182,17 +182,15 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
               </div>
               <div class="modal-body">
                 <form class="" action="./" method="post" enctype="multipart/form-data">
-                  <!-- <fieldset class="form-group px-3  mb-1">
-                    label class="small">Image</label>
-                    <label class="custom-file">
-                      <input type="file" name="name" placeholder="EX:  T-shirt Nike, Chaussure AD, ..." class="custom-file-input" required>
-                      <span class="custom-file-control"></span>
-                    </label>
-                    <label class="custom-file">
-                      <input type="file" id="file2" class="custom-file-input">
-                      <span class="custom-file-control"></span>
-                    </label>
-                  </fieldset> -->
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Image</label>
+                    <div class="input-group">
+                      <label class="input-group-addon bg-primary text-white" for="imgProd">
+                        <span class="flaticon-box"></span>
+                      </label>
+                      <input type="file" name="pic" class="form-control" id="imgProd" accept="image/*" required>
+                    </div>
+                  </fieldset>
                   <fieldset class="form-group px-3 material-input mb-1">
                     <label class="small">Nom</label>
                     <input type="text" name="name" placeholder="EX:  T-shirt Nike, Chaussure AD, ..." class="form-control border-0 rounded-0 px-0" required>

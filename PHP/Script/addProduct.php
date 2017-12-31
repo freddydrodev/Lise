@@ -1,8 +1,6 @@
 <?php
 if(isset($_POST['addProduct'])){
   include $_ind . 'PHP/Inc/func.php';
-  $keys = array_keys($_POST);
-  print_r($keys);
   $ID = '';
   $name = htmlspecialchars(trim($_POST['name']));
   $price = htmlspecialchars(trim($_POST['price']));
@@ -63,6 +61,38 @@ if(isset($_POST['addProduct'])){
       bootstrapNotify('Quantity Alternatif: mauvais format! Ne pe contenir que des nombre et virgule');
     }
     $altQty = str_replace(',', '.', $altQty); // change quantity to double
+  }
+
+  if(isset($_FILES)){
+
+    // file check
+    $target_dir = "../Media/Images/Articles/";
+    $target_file = $target_dir . basename($_FILES["pic"]["name"]);
+    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+    // Check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["pic"]["tmp_name"]);
+    if($check == false) {
+        $correct = false;
+        bootstrapNotify('Fichier n\'est pas une image - ' . $check["mime"] . '.');
+    }
+    // Check if file already exists
+    // if (file_exists($target_file)) {
+    //     // $correct = false;
+    //     echo "Sorry, file already exists.";
+    // }
+    // Check file size
+    if ($_FILES["pic"]["size"] > 4194304) {
+        $correct = false;
+        bootstrapNotify('Desole l\'image est trop lourde elle doit etre moins de 4Mo');
+    }
+    // Allow certain file formats
+    if(strtolower($imageFileType) != "jpg" && strtolower($imageFileType) != "png" && strtolower($imageFileType) != "jpeg" ) {
+        $correct = false;
+        bootstrapNotify('Desole le fichier n\'est pas une image (JPG, JPEG, PNG)');
+    }
+  }
+  else {
+    bootstrapNotify('Image: Aucune Image Ajoutee');
   }
 
   if($correct){
@@ -143,6 +173,13 @@ if(isset($_POST['addProduct'])){
             $addAlt = $db->prepare('INSERT INTO product_alt(productID, altID, qty) VALUES(?,?,?)');
             if($addAlt->execute(array($ID, $altProd, $altQty))){
             }
+          }
+
+          $n = 'article_' . $ID . '.jpg';
+          if (move_uploaded_file($_FILES["pic"]["tmp_name"], $target_dir . $n)) {
+          }
+          else {
+            bootstrapNotify('erreur: Image ajoute!');
           }
           bootstrapNotify('Success: Produit ajoute!', 'success');
         }
