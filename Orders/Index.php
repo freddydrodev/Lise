@@ -49,17 +49,9 @@ include '../PHP/Inc/head.php';
                   <div class="first-step current-step position-absolute order-form-step w-100">
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Search</label>
-                      <input type="text" name="name-client" placeholder="Ecris le nom ou l'ID du produit" class="form-control border-0 rounded-0 px-0" required>
+                      <input type="text" name="name-product" placeholder="Ecris le nom ou l'ID du produit" class="form-control border-0 rounded-0 px-0 getProduct" required>
                       <span class="under w-100 d-block position-relative"></span>
-                      <div class="sugestion-wrapper position-relative">
-                        <div class="sugestion bg-white light-shadow w-100 mt-2 p-2 rounded-5 position-absolute">
-                          <h4>#FB0506</h4>
-                          <div class="d-flex justify-content-between">
-                            <p class="mb-0">12Paire (Etagere)</p>
-                            <p class="mb-0 text-primary">5000Fr</p>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="sugestion-wrapper position-relative"></div>
                     </fieldset>
                     <p class="small px-3 pt-2">List Article</p>
                     <div class="order-form-product-added">

@@ -69,6 +69,7 @@
         new PerfectScrollbar(el);
       });
 
+
       // slick carousel
       $(document).ready(function(){
         $('#list-order').slick({
@@ -118,7 +119,29 @@
         }
       });
 
+      // ajax request
+
+      // search product autocomplete
+      $('.getProduct').keyup(function(){
+        var s = $(this).val();
+        $('.sugestion-wrapper').empty();
+
+        $.ajax({
+          type: "POST",
+          url: "../PHP/Script/_orderCheckProduct.php",
+          data: {s:s},
+          success: function (data) {
+            if(data){
+              $('.sugestion-wrapper').append('<div class="sugestion bg-white light-shadow-primary w-100 mt-2 p-2 rounded-5 position-absolute"><h4>#' + data.ID + '</h4><div class="d-flex justify-content-between"><p class="mb-0">' + data.name + ' (Etagere)</p><p class="mb-0 text-primary">' + data.price +'Fr</p></div></div>');
+            }
+          },
+          dataType : 'json'
+        });
+      });
+
       $('#addCommandeModal').modal('show');
+
+
       <?php endif; ?>
 
 
