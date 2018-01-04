@@ -7,11 +7,11 @@
   </p>
   </div>
 
-<div class="fixed-top w-100 h-100 bg-default-9 d-none">
+<div class="fixed-top w-100 h-100 bg-default-9 d-none" id="searchBox">
   <p class="h4 py-4 text-center m-0">Recherche</p>
   <div class="container-fluid">
     <p>
-      <input type="text" name="" value="" class="form-control p-0 font-weight-light w-75 mx-auto bigsearch bg-none rounded-0 border-0 text-center" autofocus="disabled">
+      <input type="text" name="search" class="form-control p-0 font-weight-light w-75 mx-auto bigsearch bg-none rounded-0 border-0 text-center">
     </p>
     <p class="text-center text-muted">Aucun resultat pour </b>Fredius Tout Court </b></p>
 
@@ -47,8 +47,7 @@
     });
     </script>
     <script type="text/javascript">
-      // barcode orders
-      JsBarcode(".barcode").init();
+
 
       // table display
       var options = {
@@ -56,6 +55,80 @@
       };
 
       var userList = new List('productsList', options);
+
+
+      <?php if ($page === 'Commandes'): ?>
+
+      // barcode orders
+      JsBarcode(".barcode").init();
+
+      //perfectscroll
+      var scrollEl = document.querySelectorAll('.product-ordered-list');
+
+      scrollEl.forEach(function(el){
+        new PerfectScrollbar(el);
+      });
+
+      // slick carousel
+      $(document).ready(function(){
+        $('#list-order').slick({
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          dots: true,
+          adaptiveHeight: true,
+          centerMode: true,
+          centerPadding: '0'
+        });
+      });
+
+      //change step
+      $('.change-step').click(function(){
+        if($(this).hasClass('prev')){
+          $('.order-form-step').removeClass('current-step');
+          $('.first-step').addClass('current-step');
+          $(this).next().addClass('d-none');
+          $(this).text('Suivant');
+          $(this).removeClass('prev');
+          $(this).addClass('next');
+        }
+        else if ($(this).hasClass('next')) {
+          $('.order-form-step').removeClass('current-step');
+          $('.second-step').addClass('current-step');
+          $(this).next().removeClass('d-none');
+          $(this).text('Precedant');
+          $(this).addClass('prev');
+          $(this).removeClass('next');
+        }
+      });
+
+      $('.input-group-number button').click(function(){
+        var $inp = $(this).parent().find('input');
+        var val = $inp.val();
+        var max = $inp.attr('max');
+        var min = $inp.attr('min');
+        if($(this).hasClass('remto')){
+          $inp.val(function(){
+            return (parseInt(val) - 1) > min ? (parseInt(val) - 1) : min;
+          });
+        }
+        if($(this).hasClass('addto')){
+          $inp.val(function(){
+            return (parseInt(val) + 1) < max ? (parseInt(val) + 1) : max;
+          });
+        }
+      });
+
+      $('#addCommandeModal').modal('show');
+      <?php endif; ?>
+
+
+      <?php if ($page === 'Produits'): ?>
+      //perfectscroll
+      var scrollEl = document.querySelectorAll('#categories-list .card-text');
+
+      scrollEl.forEach(function(el){
+        new PerfectScrollbar(el);
+      });
 
       // slick carousel
       $(document).ready(function(){
@@ -68,12 +141,6 @@
           centerPadding: '60px'
         });
       });
-
-
-      <?php if ($page === 'Produits'): ?>
-      //perfectscroll
-      var ps = new PerfectScrollbar('#categories-list .card-text');
-
       <?php endif; ?>
 
       <?php if ($page === 'Ventes'): ?>
@@ -128,9 +195,13 @@
           }
       });
     <?php endif; ?>
-    </script>
-    <script src="<?php echo $_ind; ?>Js/Templatize.js">
 
+    $('.toogle-search').click(function(){
+      $('#searchBox').toggleClass('d-none');
+      $('.bigsearch').focus();
+      return false;
+    })
     </script>
+    <script src="<?php echo $_ind; ?>Js/Templatize.js"></script>
   </body>
 </html>

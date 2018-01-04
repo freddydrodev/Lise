@@ -11,8 +11,8 @@ if(isset($_GET['catID'])){
       Die('Erreur: Impossible de supprimer la categorie par defaut');
   }
 
-  $checker = $db->prepare('DELETE FROM categories WHERE id = ?');
-  if($checker->execute(array($id))){
+  // $checker = $db->prepare('DELETE FROM categories WHERE id = ?');
+  // if($checker->execute(array($id))){
     header('location: ../../Products/');
-  }
+  // }
 }

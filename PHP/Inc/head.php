@@ -2,6 +2,7 @@
 $_ind = isset($ind) ? $ind ? '../' : './' : './';
 
 include $_ind . 'PHP/Inc/db.php';
+// include $_ind . 'PHP/Inc/func.php';
 
 ?>
 

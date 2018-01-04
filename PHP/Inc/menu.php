@@ -18,7 +18,7 @@
     <a href="<?php echo $_ind ?>Account" class="nav-link"><span class="flaticon-options"></span></a>
   </li>
   <li class="nav-item mr-4" data-toggle="tooltip" data-placement="bottom" title="Recherche">
-    <a href="#" class="nav-link"><span class="flaticon-magnifying-glass-1"></span></a>
+    <a href="#" class="nav-link toogle-search"><span class="flaticon-magnifying-glass-1"></span></a>
   </li>
   <li class="nav-item">
     <a href="<?php echo $_ind ?>Logout/" class="nav-link" data-toggle="tooltip" data-placement="left" title="Deconnexion"><span class="flaticon-logout-1"></span></a>

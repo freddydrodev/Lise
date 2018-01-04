@@ -121,7 +121,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
           $_countItemsInCategory = $countItemsInCategory->fetch();
            ?>
           <h6 class="card-subtitle mb-2 text-muted"><?php echo $_countItemsInCategory['nbr'] > 1 ?  $_countItemsInCategory['nbr'] . ' Articles' : $_countItemsInCategory['nbr'] . ' Article' ?></h6>
-          <div class="card-text mb-3 position-relative">
+          <div class="card-text mb-2 position-relative">
             <!-- begining items in category list -->
             <?php if ($_countItemsInCategory['nbr'] > 0): ?>
 
@@ -134,8 +134,9 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                 $qtyPdctTop->execute(array($_ItemsInCategory['ID']));
                 $_qtyPdctTop = $qtyPdctTop->fetch();
                 ?>
-                <div class="media">
-                  <img class="mr-3 img-prev-media" src="../Media/Images/Articles/P50.jpeg" alt="Image de l'article">
+
+                <div class="media mb-1">
+                  <img class="mr-3 img-prev-media" src="../Media/Images/Articles/Article_<?php echo $_ItemsInCategory['ID'] ?>.jpg" alt="Image de l'article">
                   <div class="media-body">
                     <h5 class="mt-0 mb-0"><?php echo $_ItemsInCategory['name'] ?></h5>
                     <p class="text-muted"><?php echo $_ItemsInCategory['price'] ?>Fr <span class="badge badge-primary badge-pill font-weight-normal float-right"><?php echo $_qtyPdctTop['qty'] ?> Disponible</span></p>
@@ -166,7 +167,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
     <div class="col">
       <div class="d-flex justify-content-between p-3 align-items-center rounded-3">
         <h2 class="text-uppercase m-0">Produits <br/>
-          <small class="text-muted text-capitalize">Afficher: <i>20 Articles</i> </small>
+          <!-- <small class="text-muted text-capitalize">Afficher: <i>20 Articles</i> </small> -->
         </h2>
         <!-- start add product modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Produit</button>
@@ -257,7 +258,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                       </div>
                     </div>
                   </fieldset>
-                  <?php } ?>
+                <?php } ?>
                   <div class="modal-footer border-0">
                     <button type="submit" name="addProduct" class="btn btn-primary">Ajouter</button>
                     <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -322,12 +323,24 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
         </thead>
         <tbody class="list text-center light-shadow">
           <!-- start item list -->
+          <?php //get the products
+          $getProducts = $db->prepare('SELECT * FROM products ORDER BY createdAt DESC');
+          $getProducts->execute();
+          while ($getProduct = $getProducts->fetch()) { ?>
           <tr class="mb-3 bg-white border-bottom-1">
-            <td class="border-top-0 articleImg align-middle"><img src="../Media/Images/Articles/P50.jpeg" alt="Article Img" class="w-100"></td>
-            <th scope="row" class="ID border-top-0 align-middle">#FB03H</th>
-            <td class="name border-top-0 align-middle">12 paires</td>
-            <td class="category border-top-0 align-middle">Etagere</td>
-            <td class="price border-top-0 align-middle">10.000</td>
+            <td class="border-top-0 articleImg align-middle"><img src="../Media/Images/Articles/Article_<?php echo $getProduct['ID'] ?>.jpg" alt="Article Img" class="w-100"></td>
+            <th scope="row" class="ID border-top-0 align-middle">#<?php echo $getProduct['ID'] ?></th>
+            <td class="name border-top-0 align-middle"><?php echo $getProduct['name'] ?></td>
+            <?php
+            $catSel = $db->prepare('SELECT name FROM categories WHERE ID = ?');
+            $catSel->execute(array($getProduct['category']));
+            $catGet = $catSel->fetch();
+            ?>
+            <td class="category border-top-0 align-middle"><?php echo $catGet['name'] ?></td>
+            <td class="price border-top-0 align-middle"><?php echo $getProduct['price'] ?>fr</td>
+            <?php
+
+            ?>
             <td class="quantity border-top-0 align-middle">100</td>
             <td class="border-top-0 align-middle">
               <a href="#" class="btn btn-primary">
@@ -338,6 +351,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
               </a>
             </td>
           </tr>
+        <?php } ?>
           <!-- end item list -->
         </tbody>
       </table>
