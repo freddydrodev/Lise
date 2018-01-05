@@ -3,17 +3,14 @@ $page = 'Commandes';
 $ind = true;
 include '../PHP/Inc/head.php';
 ?>
-
 <div class="row title">
   <div class="col">
     <div class="d-flex justify-content-between p-3 align-items-center rounded-3 mb-4">
       <h2 class="text-uppercase m-0">Commandes <br/><small class="text-muted">Total: 20 Commandes</small></h2>
-
       <!-- start commande Modal -->
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCommandeModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Commande</button>
-
       <div class="modal fade" tabindex="-1" role="dialog" id="addCommandeModal">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content rounded-0 border-0">
             <div class="modal-header border-0 py-2">
               <h5 class="modal-title position-relative legend px-3"><span class="legend-text">Ajouter Produit</span></h5>
@@ -49,17 +46,22 @@ include '../PHP/Inc/head.php';
                   <div class="first-step current-step position-absolute order-form-step w-100">
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Search</label>
-                      <input type="text" name="name-product" placeholder="Ecris le nom ou l'ID du produit" class="form-control border-0 rounded-0 px-0 getProduct" required>
+                      <input type="text" name="name-product" placeholder="Ecris le nom ou l'ID du produit" class="form-control border-0 rounded-0 px-0 getProduct">
                       <span class="under w-100 d-block position-relative"></span>
                       <div class="sugestion-wrapper position-relative"></div>
                     </fieldset>
                     <p class="small px-3 pt-2">List Article</p>
                     <div class="order-form-product-added">
                       <fieldset class="form-group px-3 material-input mb-1 row">
-                        <div class="col-5">
+                        <div class="col-3">
                           <input type="text" name="id-facebook" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-2" value="12 Paire (Etagere)" disabled required>
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
+                          <select class="custom-select w-100" name="color">
+                            <option value="">Red</option>
+                          </select>
+                        </div>
+                        <div class="col-3">
                           <div class="input-group input-group-number">
                             <button type="button" class="remto input-group-addon btn rounded-0 btn-danger text-white">-</button>
                             <input type="number" name="id-facebook" min="0" max="15" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-2" value="10" disabled required>
@@ -85,7 +87,6 @@ include '../PHP/Inc/head.php';
           </div>
         </div>
       </div>
-
       <!-- end modal order -->
       <!-- <button type="button" class="btn btn-primary"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Commande</button> -->
     </div>
@@ -132,7 +133,6 @@ include '../PHP/Inc/head.php';
           </div>
         </div>
         <!-- end title product order -->
-
         <!-- product order list  -->
         <div class="product-ordered-list">
           <div class="row">
@@ -174,12 +174,7 @@ include '../PHP/Inc/head.php';
       </div>
       <div class="bg-white p-3 order-serial rounded">
         <div class="d-flex justify-content-center align-items-center">
-          <svg class="barcode"
-            jsbarcode-value="FB0506"
-            jsbarcode-height="30"
-            jsbarcode-displayValue="false"
-            >
-          </svg>
+          <svg class="barcode" jsbarcode-value="FB0506" jsbarcode-height="30" jsbarcode-displayValue="false"></svg>
         </div>
       </div>
     </div>

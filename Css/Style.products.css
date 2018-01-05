@@ -135,3 +135,6 @@ h2{
 .sugestion{
   z-index: 100;
 }
+#addCommandeModal .modal-dialog{
+  width: 600px;
+}
