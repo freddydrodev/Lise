@@ -101,6 +101,18 @@
           $(this).removeClass('next');
         }
       });
+      function colorOrder(){
+          $('.color-order').change(function(){
+
+            var qty = $(this).find('option:selected').attr('data-qty');
+            console.log(qty, $(this).parents('fieldset.form-group').find('.qty-order').val());
+            if(parseInt($(this).parents('fieldset.form-group').find('.qty-order').val()) > parseInt(qty)){
+              $(this).parents('fieldset.form-group').find('.qty-order').val(qty);
+            }
+
+            $(this).parents('fieldset.form-group').find('.qty-order').attr('max', qty);
+          });
+      }
 
       function increaseInpNum(){
         $('.input-group-number button').click(function(){
@@ -159,12 +171,13 @@
                 var opts = '';
 
                 for (var i = 0; i < data.colors.length; i++) {
-                  opts += '<option value="' + data.colors[i].colorID + '">' + data.colors[i].colorName + '</option>';
+                  opts += '<option value="' + data.colors[i].colorID + '" data-qty="' + data.colors[i].colorQty + '">' + data.colors[i].colorName + '</option>';
                 };
 
-                $('.order-form-product-added').append('<fieldset class="form-group px-3 material-input mb-1 row"><div class="col-3"><input type="text" name="article-' + data.prodID + '-name" class="form-control border-0 rounded-0 px-2" value="' + data.prodName + ' (' + data.catName + ')" disabled required title="' + data.prodName + ' (' + data.catName + ')"></div><div class="col-3"><select class="custom-select w-100" name="article-' + data.prodID + '-name">' + opts + '</select></div><div class="col-3"><div class="input-group input-group-number"><button type="button" class="remto input-group-addon btn rounded-0 btn-danger text-white">-</button><input type="number" name="article-' + data.prodID + '-qty" min="1" max="' + data.available + '" class="form-control border-0 rounded-0 px-2" value="1" disabled required><button type="button" class="addto input-group-addon btn rounded-0 btn-primary text-white">+</button></div></div><div class="col-3"><input type="text" name="article-' + data.prodID + '-price" class="form-control border-0 rounded-0 px-2" value="' + data.prodPrice + '" disabled required></div></fieldset>');
+                $('.order-form-product-added').append('<fieldset class="form-group px-3 material-input mb-1 row"><div class="col-3"><input type="text" name="article-' + data.prodID + '-name" class="form-control border-0 rounded-0 px-2" value="' + data.prodName + ' (' + data.catName + ')" disabled required title="' + data.prodName + ' (' + data.catName + ')"></div><div class="col-3"><select class="custom-select w-100 color-order" name="article-' + data.prodID + '-name">' + opts + '</select></div><div class="col-3"><div class="input-group input-group-number"><button type="button" class="remto input-group-addon btn rounded-0 btn-danger text-white">-</button><input type="number" name="article-' + data.prodID + '-qty" min="1" max="' + data.colors[0].colorQty + '" class="qty-order form-control border-0 rounded-0 px-2" value="1" disabled required><button type="button" class="addto input-group-addon btn rounded-0 btn-primary text-white">+</button></div></div><div class="col-3"><input type="text" name="article-' + data.prodID + '-price" class="form-control border-0 rounded-0 px-2" value="' + data.prodPrice + '" disabled required></div></fieldset>');
                 console.log(data);
                 increaseInpNum();
+                colorOrder();
               }
             },
             error : function(err){

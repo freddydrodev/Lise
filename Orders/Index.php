@@ -52,7 +52,7 @@ include '../PHP/Inc/head.php';
                     </fieldset>
                     <p class="small px-3 pt-2">List Article</p>
                     <div class="order-form-product-added">
-                      <fieldset class="form-group px-3 material-input mb-1 row">
+                      <!-- <fieldset class="form-group px-3 material-input mb-1 row">
                         <div class="col-3">
                           <input type="text" name="id-facebook" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-2" value="12 Paire (Etagere)" disabled required>
                         </div>
@@ -71,7 +71,7 @@ include '../PHP/Inc/head.php';
                         <div class="col-3">
                           <input type="text" name="id-facebook" min="0" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-2" value="10000" disabled required>
                         </div>
-                      </fieldset>
+                      </fieldset> -->
                     </div>
                   </div>
                 </div>
