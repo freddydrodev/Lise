@@ -51,7 +51,7 @@ include '../PHP/Inc/head.php';
                       <div class="sugestion-wrapper position-relative"></div>
                     </fieldset>
                     <p class="small px-3 pt-2">List Article</p>
-                    <div class="order-form-product-added">
+                    <div class="order-form-product-added position-relative">
                       <!-- <fieldset class="form-group px-3 material-input mb-1 row">
                         <div class="col-3">
                           <input type="text" name="id-facebook" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-2" value="12 Paire (Etagere)" disabled required>

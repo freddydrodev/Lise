@@ -138,3 +138,6 @@ h2{
 #addCommandeModal .modal-dialog{
   width: 600px;
 }
+.order-form-product-added{
+  height: 170px;
+}
