@@ -35,12 +35,12 @@ include '../PHP/Inc/head.php';
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Address Electronic</label>
-                      <input type="email" name="email" min="0" placeholder="EX: belisestyle@yahoo.fr" class="form-control border-0 rounded-0 px-0">
+                      <input type="email" name="email" placeholder="EX: belisestyle@yahoo.fr" class="form-control border-0 rounded-0 px-0">
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Numero</label>
-                      <input type="text" name="phone" min="0" placeholder="EX: +22501234567" class="form-control border-0 rounded-0 px-0" required>
+                      <input type="text" name="phone" placeholder="EX: +22501234567" class="form-control border-0 rounded-0 px-0" required>
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
@@ -51,7 +51,11 @@ include '../PHP/Inc/head.php';
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Livreur</label>
                       <select class="form-control custom-select" name="livreur" required>
-                        <option value="s">AJJ</option>
+                        <?php
+                        $liv = $db->query('SELECT fullname, id FROM users WHERE usertype = 3 ORDER BY fullname');
+                        while ($l = $liv->fetch()) { ?>
+                          <option value="<?php echo $l['id'] ?>"><?php echo $l['fullname'] ?></option>
+                        <?php } ?>
                       </select>
                     </fieldset>
                   </div>
@@ -90,7 +94,7 @@ include '../PHP/Inc/head.php';
                 <div class="modal-footer border-0 justify-content-between">
                   <button type="button" name="addProduct" class="btn btn-info change-step next">Suivant</button>
                   <div class="d-none">
-                    <button type="submit" name="addProduct" class="btn btn-success mr-1 ">Ajouter</button>
+                    <button type="submit" name="makeOrder" class="btn btn-success mr-1 ">Ajouter</button>
                     <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                   </div>
                 </div>
