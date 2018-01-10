@@ -19,6 +19,7 @@ include '../PHP/Inc/head.php';
               </button>
             </div>
             <div class="modal-body">
+              <?php include '../PHP/Script/makeOrder.php'; ?>
               <form class="form-order" action="./" method="post">
                 <div class="position-relative step-wrapper">
                   <div class="second-step position-absolute order-form-step w-100">
@@ -34,13 +35,24 @@ include '../PHP/Inc/head.php';
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Address Electronic</label>
-                      <input type="email" name="email" min="0" placeholder="EX: belisestyle@yahoo.fr" class="form-control border-0 rounded-0 px-0" required>
+                      <input type="email" name="email" min="0" placeholder="EX: belisestyle@yahoo.fr" class="form-control border-0 rounded-0 px-0">
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Numero</label>
-                      <input type="phone" name="phone" min="0" placeholder="EX: +22501234567" class="form-control border-0 rounded-0 px-0" required>
+                      <input type="text" name="phone" min="0" placeholder="EX: +22501234567" class="form-control border-0 rounded-0 px-0" required>
                       <span class="under w-100 d-block position-relative"></span>
+                    </fieldset>
+                    <fieldset class="form-group px-3 material-input mb-1">
+                      <label class="small">Lieu De Livraison</label>
+                      <input type="text" name="location" placeholder="EX: Riviera Faya" class="form-control border-0 rounded-0 px-0" required>
+                      <span class="under w-100 d-block position-relative"></span>
+                    </fieldset>
+                    <fieldset class="form-group px-3 material-input mb-1">
+                      <label class="small">Livreur</label>
+                      <select class="form-control custom-select" name="livreur" required>
+                        <option value="s">AJJ</option>
+                      </select>
                     </fieldset>
                   </div>
                   <div class="first-step current-step position-absolute order-form-step w-100">

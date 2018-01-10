@@ -12,15 +12,16 @@ function bootstrapNotify($msg = 'Erreur Inconnue', $type = 'danger'){
     $.notify({
     // options
     icon: 'flaticon-question',
-    message: '<?php echo $msg ?>'
+    message: "<?php echo $msg ?>"
     },{
       // settings
-      type: '<?php echo $type ?>',
+      type: "<?php echo $type ?>",
       showProgressbar: true,
       placement: {
     		from: "bottom",
     		align: "left"
     	},
+      z_index: 1110,
       mouse_over: 'pause',
       animate: {
     		enter: 'animated bounceIn',

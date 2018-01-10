@@ -114,12 +114,11 @@ h2{
   opacity: 1;
 }
 .step-wrapper {
-  height: 280px;
+  height: 420px;
   overflow: hidden;
 }
 .order-form-step{
   /* left: 100%; */
-  opacity: 0;
   transition: all linear .3s;
 }
 .first-step {
@@ -130,7 +129,6 @@ h2{
 }
 .current-step {
   left: 0;
-  opacity: 1;
 }
 .sugestion{
   z-index: 100;
