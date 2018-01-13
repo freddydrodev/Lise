@@ -20,6 +20,7 @@ include $_ind . 'PHP/Inc/db.php';
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/Fonts/Logo/logo.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/slick.css">
+    <link rel="stylesheet" href="<?php echo $_ind; ?>Css/print.min.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/slick-theme.min.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/perfect-scrollbar.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/list.css">
@@ -29,6 +30,11 @@ include $_ind . 'PHP/Inc/db.php';
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,400,900" rel="stylesheet">
 
     <script src="<?php echo $_ind; ?>Js/jQuery.min.js"></script>
+    <script src="<?php echo $_ind; ?>Js/moment.js"></script>
+    <script src="<?php echo $_ind; ?>Js/fr.js"></script>
+    <script type="text/javascript">
+      moment.locale('fr');
+    </script>
     <script type="text/javascript" src="<?php echo $_ind; ?>Js/bootstrap-notify.min.js"></script>
   </head>
   <body>

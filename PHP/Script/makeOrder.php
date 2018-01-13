@@ -28,10 +28,10 @@ if(isset($_POST['makeOrder'])){
 
   if(!preg_match("/^[a-z0-9àâçéèêëîïôûùüÿñæœ \-\']{5,100}$/i", $location)) {
       $correct = false;
-      bootstrapNotify('Erreur Facebook: Seul les lettres, tirets, apostrof et les espaces sont autorises (entre 5 et 100 charcateres)');
+      bootstrapNotify('Erreur Location: Seul les lettres, nombres, tirets, apostrof et les espaces sont autorises (entre 5 et 100 charcateres)');
   }
 
-  if(isset($_POST['email'])){
+  if(isset($_POST['email']) && !empty($_POST['email'])){
     $email = trim(htmlspecialchars($_POST['email']));
     if(!preg_match("/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/i", $email)) {
         $correct = false;
@@ -45,14 +45,14 @@ if(isset($_POST['makeOrder'])){
   }
 
   if($correct){
-    $add = $db->prepare('INSERT INTO users(fullname, facebookID, email, phone, usertype, createdAt) VALUES(?,?,?,?,4,NOW())');
-    if($add->execute(array(ucwords($client), $facebook, $email, $phone))){
+    $add = $db->prepare('INSERT INTO users(fullname, facebookID, email, phone, location, usertype, createdAt) VALUES(?,?,?,?,?,4,NOW())');
+    if($add->execute(array(ucwords($client), $facebook, $email, $phone, $location))){
       $ID = $db->lastInsertId();
 
       //create order
       $OID = generateRandomString(6);
-      $mkOrder = $db->prepare('INSERT INTO orders(ID, createdAt, customerID, employeeID) VALUES(?,NOW(),?,?)');
-      if($mkOrder->execute(array($OID, $ID, $_SESSION['id']))){
+      $mkOrder = $db->prepare('INSERT INTO orders(ID, createdAt, customerID, employeeID, livreurID) VALUES(?,NOW(),?,?,?)');
+      if($mkOrder->execute(array($OID, $ID, $_SESSION['id'], $livreur))){
         //insert product in order list
         $ok = true;
         foreach ($_POST['article-id'] as $key => $value) {

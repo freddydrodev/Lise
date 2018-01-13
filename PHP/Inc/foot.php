@@ -41,6 +41,7 @@
     <script src="<?php echo $_ind; ?>Js/perfect-scrollbar.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/Chart.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/JsBarcode.all.min.js"></script>
+    <script src="<?php echo $_ind; ?>Js/print.min.js"></script>
     <script type="text/javascript">
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
@@ -57,6 +58,14 @@
       var userList = new List('productsList', options);
 
 
+      <?php if ($page === 'Livreur'): ?>
+
+      // barcode orders
+      JsBarcode(".barcode").init();
+
+      <?php endif; ?>
+
+
       <?php if ($page === 'Commandes'): ?>
 
       // barcode orders
@@ -66,7 +75,7 @@
       var scrollEl = document.querySelectorAll('.product-ordered-list');
 
       scrollEl.forEach(function(el){
-        new PerfectScrollbar(el);
+        new PerfectScrollbar(el, {suppressScrollX: true});
       });
 
       var ps = new PerfectScrollbar('.order-form-product-added', {
@@ -153,7 +162,15 @@
           success: function (data) {
             if(data){
               if(selected.indexOf(data.ID) == -1 ){
-                $('.sugestion-wrapper').append('<div class="sugestion bg-white light-shadow-primary w-100 mt-2 p-2 rounded-5 position-absolute" data-ID="' + data.ID + '"><h4>#' + data.ID + '</h4><div class="d-flex justify-content-between"><p class="mb-0">' + data.name + ' (Etagere)</p><p class="mb-0 text-primary">' + data.price +'Fr</p></div></div>');
+                $('.sugestion-wrapper').append(
+                  '<div class="sugestion bg-white light-shadow-primary w-100 mt-2 p-2 rounded-5 position-absolute" data-ID="' + data.ID + '">'+
+                    '<h4>#' + data.ID + '</h4>'+
+                    '<div class="d-flex justify-content-between">'+
+                      '<p class="mb-0">' + data.name + ' (Etagere)</p>'+
+                      '<p class="mb-0 text-primary">' + data.price +'Fr</p>'+
+                    '</div>'+
+                  '</div>');
+
                 appendProduct();
               }
             }
@@ -182,7 +199,27 @@
                   opts += '<option value="' + data.colors[i].colorID + '" data-qty="' + data.colors[i].colorQty + '">' + data.colors[i].colorName + '</option>';
                 };
 
-                $('.order-form-product-added').append('<fieldset class="form-group px-3 material-input mb-1 row"><div class="col-3"><input type="text" name="article-id[]" class="form-control border-0 rounded-0 px-2 selected-article" value="' + data.prodID + ' (' + data.catName + ')" required title="' + data.prodName + ' (' + data.catName + ')"></div><div class="col-3"><select class="custom-select w-100 color-order" name="article-color[]">' + opts + '</select></div><div class="col-3"><div class="input-group input-group-number"><button type="button" class="remto input-group-addon btn rounded-0 btn-danger text-white">-</button><input type="number" name="article-qty[]" min="1" max="' + data.colors[0].colorQty + '" class="qty-order form-control border-0 rounded-0 px-2" value="1" required><button type="button" class="addto input-group-addon btn rounded-0 btn-primary text-white">+</button></div></div><div class="col-3"><input type="text" name="article-paid[]" class="form-control px-2" value="' + data.prodPrice + '" max="' + data.prodPrice + '" required></div></fieldset>');
+                $('.order-form-product-added').append(
+                  '<fieldset class="form-group px-3 material-input mb-1 row">'+
+                    '<div class="col-3">'+
+                      '<input type="text" name="article-id[]" class="form-control border-0 rounded-0 px-2 selected-article" value="' + data.prodID + ' (' + data.catName + ')" required title="' + data.prodName + ' (' + data.catName + ')">'+
+                    '</div>'+
+                    '<div class="col-3">'+
+                      '<select class="custom-select w-100 color-order" name="article-color[]">' + opts +
+                      '</select>'+
+                    '</div>'+
+                    '<div class="col-3">'+
+                      '<div class="input-group input-group-number">'+
+                        '<button type="button" class="remto input-group-addon btn rounded-0 btn-danger text-white">-</button>'+
+                        '<input type="number" name="article-qty[]" min="1" max="' + data.colors[0].colorQty + '" class="qty-order form-control border-0 rounded-0 px-2" value="1" required>'+
+                        '<button type="button" class="addto input-group-addon btn rounded-0 btn-primary text-white">+</button>'+
+                      '</div>'+
+                    '</div>'+
+                    '<div class="col-3">'+
+                      '<input type="text" name="article-paid[]" class="form-control px-2" value="' + data.prodPrice + '" max="' + data.prodPrice + '" required>'+
+                    '</div>'+
+                  '</fieldset>');
+
                 selected.push(data.prodID);
                 console.log(selected);
                 colorOrder();
@@ -224,7 +261,7 @@
 
       });
 
-      $('#addCommandeModal').modal('show');
+      // $('#addCommandeModal').modal('show');
 
       <?php endif; ?>
 
