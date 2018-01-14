@@ -212,4 +212,127 @@ include '../PHP/Inc/head.php';
   <button type="button" class="order-opt done btn btn-success rounded-30 mx-2 px-4 py-2"><span class="flaticon-checked"></span></button>
 </div>
 
+<table class="table table-bordered light-shadow table-sm" id="printable" style="width:1210px">
+  <thead class="bg-white">
+    <tr>
+      <th scope="col" class="text-center">
+        <button class="sort bg-transparent rounded-30 btn btn-block" data-sort="name">
+          Reference
+        </button>
+      </th>
+      <th scope="col" class="text-center">
+        <button class="sort bg-transparent rounded-30 btn btn-block" data-sort="name">
+          Client
+        </button>
+      </th>
+      <th scope="col" class="text-center">
+        <button class="sort bg-transparent rounded-30 btn btn-block" data-sort="name">
+          Articles
+        </button>
+      </th>
+      <th scope="col" class="text-center">
+        <button class="sort bg-transparent rounded-30 btn btn-block" data-sort="category">
+          Lieu
+        </button>
+      </th>
+      <th scope="col" class="text-center">
+        <button class="sort bg-transparent rounded-30 btn btn-block" data-sort="category">
+          Date
+        </button>
+      </th>
+      <th scope="col" class="text-center">
+        <button class="bg-transparent rounded-30 btn btn-block">
+          Faite Par
+        </button>
+      </th>
+      <th scope="col" class="text-center">
+        <button class="bg-transparent rounded-30 btn btn-block">
+          Livreur
+        </button>
+      </th>
+      <th scope="col" class="text-center">
+        <button class="bg-transparent rounded-30 btn btn-block">
+          Options
+        </button>
+      </th>
+    </tr>
+  </thead>
+  <tbody class="list text-center">
+    <?php $livraisons = $db->prepare('
+    SELECT orders.ID, orders.createdAt, cust.fullname AS custName, cust.phone, cust.location, emp.fullname AS empName, livr.fullname AS livrName, livr.ID as livrID FROM orders INNER JOIN users AS cust ON cust.ID = orders.customerID INNER JOIN users AS emp ON emp.ID = orders.employeeID INNER JOIN users AS livr ON livr.ID = orders.livreurID ORDER BY orders.createdAt DESC ');
+    $livraisons->execute();
+
+    while ($livraison = $livraisons->fetch()) { ?>
+      <tr class="mb-3 bg-white border-bottom-1">
+        <td class="align-middle">
+          <svg class="barcode" jsbarcode-value="<?php echo $livraison['ID'] ?>" jsbarcode-height="20" jsbarcode-displayValue="false" jsbarcode-width="1"></svg>
+          <p><strong>#<?php echo $livraison['ID'] ?></strong></p>
+        </td>
+        <td class="align-middle"><?php echo $livraison['custName'] ?>
+          <br>
+          <strong class="text-muted small">(<?php echo $livraison['phone'] ?>)</strong></td>
+        <td class="align-middle bg-light">
+          <?php
+          $ordersArticles = $db->prepare('
+            SELECT products.name,products.ID, categories.name AS cat, product_ordered.paid, product_ordered.quantity, color.color
+            FROM product_ordered
+            INNER JOIN color ON color.ID = product_ordered.colorID
+            INNER JOIN products ON products.ID = product_ordered.productID
+            LEFT JOIN categories ON categories.ID = products.category
+            WHERE product_ordered.orderID = ? ORDER BY products.name');
+          $ordersArticles->execute(array($livraison['ID']));
+          $total = 0;
+          while ($article = $ordersArticles->fetch()) {
+            $total += (double)$article['quantity'] * (double)$article['paid'];
+            ?>
+            <div class="row small text-left">
+              <div class="col-6">
+                <p class="mb-1"><strong>#<?php echo $article['ID'] ?></strong></p>
+                <p class="mb-1"><?php echo $article['name'] ?> <?php echo $article['cat'] ?> <?php echo $article['color'] == 'pas de couleur' ? '' : '('.$article['color'].')' ?></p>
+              </div>
+              <div class="col">
+                <p class="mb-1"><small>x</small><?php echo $article['quantity'] ?></p>
+              </div>
+              <div class="col">
+                <p class="mb-1"> <strong class=""><?php echo $article['paid'] ?> Fr</strong></p>
+              </div>
+            </div>
+          <?php } ?>
+          <div class="row small text-left bg-white text-primary">
+            <div class="col-6">
+              <p class="mb-1 py-2"><strong>Total</strong></p>
+            </div>
+            <div class="col">
+              <p class="mb-1 py-2"></p>
+            </div>
+            <div class="col">
+              <p class="mb-1 py-2"><strong><?php echo $total ?> Fr</strong></p>
+            </div>
+          </div>
+        </td>
+        <td class="align-middle"><?php echo $livraison['location'] ?></td>
+        <td class="align-middle date-order-<?php echo $livraison['ID'] ?>">21 Dec 2017
+        </td>
+        <script type="text/javascript">
+          $(".date-order-<?php echo $livraison['ID'] ?>").text(moment("<?php echo $livraison['createdAt'] ?>").format("ddd Do MMM YYYY"));
+        </script>
+        <td class="align-middle"><?php echo $livraison['empName'] ?></td>
+        <td class="align-middle">
+          <a href="../Livreur?id=<?php echo $livraison['livrID'] ?>" class="text-dark">
+            <?php echo $livraison['livrName'] ?>
+          </a>
+        </td>
+        <td class="border-top-0 align-middle">
+          <div class="btn-group-vertical">
+            <button type="button" class="order-opt delete btn btn-danger py-2"><span class="flaticon-delete"></span></button>
+            <button type="button" class="order-opt edit btn btn-info py-2"><span class="flaticon-edit-1"></span></button>
+            <button type="button" class="order-opt done btn btn-success py-2"><span class="flaticon-checked"></span></button>
+          </div>
+        </td>
+      </tr>
+    <?php } ?>
+
+  </tbody>
+</table>
+
 <?php include '../PHP/Inc/foot.php'; ?>

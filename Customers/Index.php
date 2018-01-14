@@ -10,7 +10,7 @@ $_sex = array('' => '<small class="text-muted ">(Non Defini)</small>', 'H' => 'H
     <div class="col position-relative">
       <div class="d-flex justify-content-between p-3 align-items-center rounded-3">
         <h2 class="text-uppercase m-0">Clients</h2>
-        <button type="button" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch" class="search-toogle btn btn-primary rounded-30"><span class="flaticon-magnifying-glass-1"></span></button>
+        <button type="button" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch" class="search-toogle btn btn-info"><span class="flaticon-magnifying-glass-1"></span></button>
       </div>
       <div class="collapse position-absolute h-100 light-shadow" id="search">
         <div class="input-group h-100">

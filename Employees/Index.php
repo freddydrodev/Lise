@@ -13,11 +13,11 @@ $_ut = array(2 => 'Caissiere', 3 => 'Livreur');
         <!-- insert category modal start -->
 
         <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-primary rounded-30" data-toggle="modal" data-target="#addCategoryModal">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategoryModal">
             <span class="flaticon-mathematical-addition-sign small-icon"></span>
             Ajouter Employee
           </button>
-          <button type="button" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch" class="search-toogle btn btn-info rounded-30">
+          <button type="button" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch" class="search-toogle btn btn-info">
             <span class="flaticon-magnifying-glass-1"></span>
           </button>
         </div>
