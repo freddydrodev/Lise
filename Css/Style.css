@@ -294,3 +294,8 @@ button:hover{
 .deleter:hover{
   color: #222;
 }
+#search{
+  z-index: 100;
+  width: calc(100% - 30px);
+  top: 0;
+}
