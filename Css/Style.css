@@ -298,4 +298,5 @@ button:hover{
   z-index: 100;
   width: calc(100% - 30px);
   top: 0;
+  left: 15px;
 }

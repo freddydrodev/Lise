@@ -15,7 +15,9 @@ $_sex = array('' => '<small class="text-muted ">(Non Defini)</small>', 'H' => 'H
       <div class="collapse position-absolute h-100 light-shadow" id="search">
         <div class="input-group h-100">
           <input type="search" name="search" placeholder="Recherchez dans clients..." class="search border-0 form-control px-4">
-          <button class="input-group-addon bg-white border-0 text-muted px-4" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch"><span class="flaticon-cancel"></span></button>
+          <button type="reset" class="input-group-addon bg-white border-0 text-muted px-4" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch">
+            <span class="flaticon-cancel"></span>
+          </button>
         </div>
       </div>
     </div>

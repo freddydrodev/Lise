@@ -52,6 +52,10 @@
     <script src="<?php echo $_ind; ?>Js/clients.js"></script>
     <?php endif; ?>
 
+    <?php if ($page === 'Employees'): ?>
+    <script src="<?php echo $_ind; ?>Js/employees.js"></script>
+    <?php endif; ?>
+
     <?php if ($page === 'Livreur'): ?>
     <script src="<?php echo $_ind; ?>Js/delivrer.js"></script>
     <?php endif; ?>
@@ -79,7 +83,7 @@
 
       var userList = new List('productsList', options);
 
-      
+
 
     $('.toogle-search').click(function(){
       $('#searchBox').toggleClass('d-none');
