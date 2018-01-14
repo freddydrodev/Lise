@@ -162,7 +162,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
 </div>
 
 <!-- Produits title -->
-<div  id="productsList">
+<div class="mt-5" id="productsList">
   <div class="row mb-4 title">
     <div class="col">
       <div class="d-flex justify-content-between p-3 align-items-center rounded-3">

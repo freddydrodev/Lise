@@ -29,7 +29,7 @@ include '../PHP/Inc/head.php';
     </ul>
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-new" role="tabpanel" aria-labelledby="pills-new-tab">
-        <table class="table table-bordered table-border-dark" id="printable" style="width:1210px">
+        <table class="table table-bordered light-shadow" id="printable" style="width:1210px">
           <thead class="bg-white">
             <tr>
               <th scope="col" class="text-center">
@@ -69,7 +69,7 @@ include '../PHP/Inc/head.php';
               </th>
             </tr>
           </thead>
-          <tbody class="list text-center light-shadow">
+          <tbody class="list text-center">
             <?php $livraisons = $db->prepare('
             SELECT orders.ID, cust.phone, cust.fullname AS custName, cust.location, livr.ID as livrID
             FROM orders
