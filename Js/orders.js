@@ -1,6 +1,11 @@
 // barcode orders
 JsBarcode(".barcode").init();
 
+//orders search
+var options = { valueNames: ['ref', 'client', 'article', 'location', 'date', 'madeBy', 'delivrer'] };
+
+var userList = new List('orders-list', options);
+
 //perfectscroll
 var scrollEl = document.querySelectorAll('.product-ordered-list');
 

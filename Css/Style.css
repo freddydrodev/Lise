@@ -120,21 +120,10 @@ body{
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(71, 134, 255, .25);
 }
-#addStuff{
-  left: auto;
-  padding: 10px;
-}
-#addStuff .btn {
-  margin: 7.5px;
-  width:40px;
-  height: 40px;
-  transition: all linear .15s;
-}
-#addStuff .btn:hover {
- transform: scale(.9);
-}
-#addStuff .btn.btn-primary [class*="flaticon-"]:before{
-  font-size: 16px;
+.createEventBtn{
+  left:10px;
+  bottom: 10px;
+  width: calc(100% - 20px);
 }
 
 .bg-primary, .badge-primary{
@@ -174,6 +163,18 @@ body{
 }
 .light-shadow-primary{
   box-shadow: 0 5px 20px rgba(127, 42, 255, .3);
+}
+.light-shadow-info{
+  box-shadow: 0 5px 15px rgba(71, 134, 255, .3);
+}
+.light-shadow-danger{
+  box-shadow: 0 5px 15px rgba(255, 42, 85, .3);
+}
+.light-shadow-warning{
+  box-shadow: 0 5px 20px rgba(127, 42, 255, .3);
+}
+.light-shadow-success{
+  box-shadow: 0 5px 15px rgba(13, 227, 145, .3);
 }
 button:hover{
   cursor: pointer;

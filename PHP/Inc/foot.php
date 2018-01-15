@@ -1,6 +1,6 @@
   </div>
 
-  <p class="fixed-bottom m-0 d-none" id="addStuff">
+  <p class="fixed-bottom m-0 d-none">
     <button type="button" name="addStuff" class="btn btn-primary rounded-circle p-0">
       <span class="flaticon-cross-1"></span>
     </button>
