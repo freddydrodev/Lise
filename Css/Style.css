@@ -29,6 +29,7 @@ body{
   font-size: 15px;
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
+  color:
 }
 .modal{
   /* z-index: 1010; */
@@ -300,4 +301,14 @@ button:hover{
   width: calc(100% - 30px);
   top: 0;
   left: 15px;
+}
+.sugestion-wrapper .scroller {
+  height: 300px;
+}
+.sugestion-wrapper > div {
+  z-index: 200;
+}
+.alt{
+  border-left: 10px solid #7F2AFF;
+  background-color: #353C45;
 }

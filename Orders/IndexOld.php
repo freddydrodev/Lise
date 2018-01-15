@@ -25,8 +25,57 @@ include '../PHP/Inc/head.php';
                   <div class="second-step position-absolute order-form-step w-100">
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Nom Client</label>
+
                       <input type="text" name="name-client" placeholder="EX: Lise Belle Kuame" class="form-control border-0 rounded-0 px-0" required>
                       <span class="under w-100 d-block position-relative"></span>
+                      <div class="sugestion-wrapper client position-relative">
+                        <div class="position-absolute w-100">
+                          <div class="position-relative w-100 px-3 scroller">
+
+                            <div class="bg-white light-shadow rounded my-3 p-2 w-100 suggestion">
+                              <div class="d-flex justify-content-between">
+                                <h4>#FFFFFF</h4>
+                                <p class="small mb-0">10 Available(s)</p>
+                              </div>
+                              <div class="d-flex justify-content-between">
+                                <h5 class="text-muted mb-0">PB50 - Placar</h5>
+                                <p class="text-primary mb-0">10000 FR</p>
+                              </div>
+                              <div class="alt px-2 py-1 small my-3 text-white rounded">
+                                <h6 class="my-1 p-0 text-primary">Alternative</h6>
+                                <div class="d-flex justify-content-between">
+                                  <p class="mb-1">#BBBBBB</p>
+                                  <p class="mb-1">10 Available(s)</p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                  <p class="mb-0">Tshirt - VETEMENT</p>
+                                  <p class="mb-0">(4 pour 1)</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="bg-white light-shadow rounded my-3 p-2 w-100 suggestion">
+                              <div class="d-flex justify-content-between">
+                                <h4>#FFFFFF</h4>
+                                <p class="small mb-0">10 Available(s)</p>
+                              </div>
+                              <div class="d-flex justify-content-between">
+                                <h5 class="text-muted mb-0">PB50 - Placar</h5>
+                                <p class="text-primary mb-0">10000 FR</p>
+                              </div>
+                            </div>
+                            <div class="bg-white light-shadow rounded my-3 p-2 w-100 suggestion">
+                              <div class="d-flex justify-content-between">
+                                <h4>#FFFFFF</h4>
+                                <p class="small mb-0">10 Available(s)</p>
+                              </div>
+                              <div class="d-flex justify-content-between">
+                                <h5 class="text-muted mb-0">PB50 - Placar</h5>
+                                <p class="text-primary mb-0">10000 FR</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Identifiant Facebook</label>
@@ -64,7 +113,54 @@ include '../PHP/Inc/head.php';
                       <label class="small">Search</label>
                       <input type="text" name="name-product" placeholder="Ecris le nom ou l'ID du produit" class="form-control border-0 rounded-0 px-0 getProduct">
                       <span class="under w-100 d-block position-relative"></span>
-                      <div class="sugestion-wrapper position-relative"></div>
+                      <div class="sugestion-wrapper articles position-relative">
+                        <div class="position-absolute w-100">
+                          <div class="position-relative w-100 px-3 scroller">
+
+                            <div class="bg-white light-shadow rounded my-3 p-2 w-100 suggestion">
+                              <div class="d-flex justify-content-between">
+                                <h4>#FFFFFF</h4>
+                                <p class="small mb-0">10 Available(s)</p>
+                              </div>
+                              <div class="d-flex justify-content-between">
+                                <h5 class="text-muted mb-0">PB50 - Placar</h5>
+                                <p class="text-primary mb-0">10000 FR</p>
+                              </div>
+                              <div class="alt px-2 py-1 small my-3 text-white rounded">
+                                <h6 class="my-1 p-0 text-primary">Alternative</h6>
+                                <div class="d-flex justify-content-between">
+                                  <p class="mb-1">#BBBBBB</p>
+                                  <p class="mb-1">10 Available(s)</p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                  <p class="mb-0">Tshirt - VETEMENT</p>
+                                  <p class="mb-0">(4 pour 1)</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="bg-white light-shadow rounded my-3 p-2 w-100 suggestion">
+                              <div class="d-flex justify-content-between">
+                                <h4>#FFFFFF</h4>
+                                <p class="small mb-0">10 Available(s)</p>
+                              </div>
+                              <div class="d-flex justify-content-between">
+                                <h5 class="text-muted mb-0">PB50 - Placar</h5>
+                                <p class="text-primary mb-0">10000 FR</p>
+                              </div>
+                            </div>
+                            <div class="bg-white light-shadow rounded my-3 p-2 w-100 suggestion">
+                              <div class="d-flex justify-content-between">
+                                <h4>#FFFFFF</h4>
+                                <p class="small mb-0">10 Available(s)</p>
+                              </div>
+                              <div class="d-flex justify-content-between">
+                                <h5 class="text-muted mb-0">PB50 - Placar</h5>
+                                <p class="text-primary mb-0">10000 FR</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </fieldset>
                     <p class="small px-3 pt-2">List Article</p>
                     <div class="order-form-product-added position-relative">
