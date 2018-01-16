@@ -303,6 +303,9 @@ button:hover{
   left: 15px;
 }
 .sugestion-wrapper .scroller {
+  height: 0;
+}
+.sugestion-wrapper .scroller.active {
   height: 300px;
 }
 .sugestion-wrapper > div {

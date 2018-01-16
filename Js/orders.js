@@ -18,6 +18,9 @@ var ps = new PerfectScrollbar('.order-form-product-added', { suppressScrollX: tr
 var ps2 = new PerfectScrollbar('.sugestion-wrapper .scroller', { suppressScrollX: true });
 
 //form order popup
+var unAvailable = [];
+var currentElement = null;
+
 //change step
 $('.change-step').click(function () {
 
@@ -36,21 +39,55 @@ $(document).on('change', '.color-order', function () {
     $qtyOrder.val(qty);
   }
 
+  var currentID = $(this).attr('data-ID');
+
+  $('.color-order').each(function () {
+    console.log($(this).attr('data-ID'), currentID);
+  });
+
   $qtyOrder.attr('max', qty);
 });
 
+function addInProcess(_qty, _color, _id) {
+  $.ajax({
+    type: 'POST',
+
+    url: '../PHP/Script/_inProcess.php',
+
+    data: { qty: _qty, color: _color, id: _id },
+
+    success: function (data) {
+      console.log(data);
+    },
+
+    error: function (error) {
+      console.log(error);
+    },
+
+  });
+}
+
 //increase or decrease input number
 $(document).on('click', '.input-group-number button', function () {
-  var $inp = $(this).parent().find('input');
-  var val = $inp.val();
-  var max = $inp.attr('max');
-  var min = $inp.attr('min');
+  var $par = $(this).parents('.material-input.row');
+  var $qty = $par.find('.qty-order');
+  var _color = $par.find('.color-order').val();
+  var _id = $par.find('.selected-article').attr('data-ID');
+  var val = $qty.val();
+  var max = $qty.attr('max');
+  var min = $qty.attr('min');
 
-  $inp.val(function () {
+  // console.log($par, _color, _id);
+  function change() {
     return $(this).hasClass('remto') ?
     ((parseInt(val) - 1) > min ? (parseInt(val) - 1) : min) :
     ((parseInt(val) + 1) < max ? (parseInt(val) + 1) : max);
-  });
+  }
+
+  $qty.val(change.bind(this));
+
+  addInProcess($qty.val(), _color, _id);
+
 });
 
 // ajax request
@@ -60,6 +97,7 @@ var $getProd = $('.getProduct');
 // search product autocomplete
 $getProd.keyup(function () {
   var s = $(this).val();
+  $scroler.addClass('.active');
   $scroler.empty();
 
   $.ajax({
@@ -98,6 +136,7 @@ $getProd.keyup(function () {
 $(document).on('click', '.suggestion', function () {
   var ID = $(this).attr('data-ID');
   $scroler.empty();
+  $scroler.removeClass('.active');
   $getProd.val('');
 
   $.ajax({
@@ -118,10 +157,10 @@ $(document).on('click', '.suggestion', function () {
         $('.order-form-product-added').append(
           '<fieldset class="form-group px-3 material-input mb-1 row">'+
             '<div class="col-3">'+
-              '<input type="text" name="article-id[]" class="form-control border-0 rounded-0 px-2 selected-article" value="' + data.prodID + ' (' + data.catName + ')" required title="' + data.prodName + ' (' + data.catName + ')">'+
+              '<input type="text" name="article-id[]" class="form-control border-0 rounded-0 px-2 selected-article" data-ID="' + data.prodID + '" value="#' + data.prodID + ' - ' + data.prodName + ' (' + data.catName + ')" required title="' + data.prodName + ' (' + data.catName + ')">'+
             '</div>'+
             '<div class="col-3">'+
-              '<select class="custom-select w-100 color-order" name="article-color[]">' + opts +
+              '<select class="custom-select w-100 color-order" name="article-color[]" data-ID="' + data.prodID + '">' + opts +
               '</select>'+
             '</div>'+
             '<div class="col-3">'+
@@ -135,6 +174,8 @@ $(document).on('click', '.suggestion', function () {
               '<input type="text" name="article-paid[]" class="form-control px-2" value="' + data.prodPrice + '" max="' + data.prodPrice + '" required>'+
             '</div>'+
           '</fieldset>');
+
+        addInProcess(1, data.colors[0].colorID, data.prodID);
       }
     },
 
