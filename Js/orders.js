@@ -17,84 +17,14 @@ var ps = new PerfectScrollbar('.order-form-product-added', { suppressScrollX: tr
 
 var ps2 = new PerfectScrollbar('.sugestion-wrapper .scroller', { suppressScrollX: true });
 
-//form order popup
+// AJAX POP EVOLUTION
 var unAvailable = [];
 var currentElement = null;
-
-//change step
-$('.change-step').click(function () {
-
-  $('.order-form-step').toggleClass('current-step');
-  $(this).text($(this).text() == 'Suivant' ? 'Precedant' : 'Suivant');
-
-});
-
-//change color
-$(document).on('change', '.color-order', function () {
-  var qty = $(this).find('option:selected').attr('data-qty');
-  var $qtyOrder = $(this).parents('.form-group').find('.qty-order');
-  var val = $qtyOrder.val();
-
-  if (parseInt(val) > parseInt(qty)) {
-    $qtyOrder.val(qty);
-  }
-
-  var currentID = $(this).attr('data-ID');
-
-  $('.color-order').each(function () {
-    console.log($(this).attr('data-ID'), currentID);
-  });
-
-  $qtyOrder.attr('max', qty);
-});
-
-function addInProcess(_qty, _color, _id) {
-  $.ajax({
-    type: 'POST',
-
-    url: '../PHP/Script/_inProcess.php',
-
-    data: { qty: _qty, color: _color, id: _id },
-
-    success: function (data) {
-      console.log(data);
-    },
-
-    error: function (error) {
-      console.log(error);
-    },
-
-  });
-}
-
-//increase or decrease input number
-$(document).on('click', '.input-group-number button', function () {
-  var $par = $(this).parents('.material-input.row');
-  var $qty = $par.find('.qty-order');
-  var _color = $par.find('.color-order').val();
-  var _id = $par.find('.selected-article').attr('data-ID');
-  var val = $qty.val();
-  var max = $qty.attr('max');
-  var min = $qty.attr('min');
-
-  // console.log($par, _color, _id);
-  function change() {
-    return $(this).hasClass('remto') ?
-    ((parseInt(val) - 1) > min ? (parseInt(val) - 1) : min) :
-    ((parseInt(val) + 1) < max ? (parseInt(val) + 1) : max);
-  }
-
-  $qty.val(change.bind(this));
-
-  addInProcess($qty.val(), _color, _id);
-
-});
-
-// ajax request
+var selectOpt = [];
 var $scroler = $('.sugestion-wrapper .scroller');
 var $getProd = $('.getProduct');
 
-// search product autocomplete
+// autocomple ajax products
 $getProd.keyup(function () {
   var s = $(this).val();
   $scroler.addClass('.active');
@@ -122,6 +52,7 @@ $getProd.keyup(function () {
               '</div>' +
             '</div>');
           } else {
+            // has to be done
             $scroler.append('<p>' + data[i].prodName + ' is not available</p>');
           }
         }
@@ -132,7 +63,7 @@ $getProd.keyup(function () {
   });
 });
 
-//APPEND THE ELEMENT ON CLICK
+//make suggestion append on click
 $(document).on('click', '.suggestion', function () {
   var ID = $(this).attr('data-ID');
   $scroler.empty();
@@ -146,10 +77,13 @@ $(document).on('click', '.suggestion', function () {
     success: function (data) {
       if (data) {
         var opts = '';
+        var newList = { element: data.prodID, children: [] };
 
         for (var i = 0; i < data.colors.length; i++) {
+          var isSel = i === 0 ? 'isSelected' : '';
           opts += '<option value="' + data.colors[i].colorID +
-          '" data-qty="' + data.colors[i].colorQty + '">' +
+          '" data-qty="' + data.colors[i].colorQty +
+          '" class="' + isSel + '">' +
           data.colors[i].colorName +
           '</option>';
         }
@@ -175,7 +109,23 @@ $(document).on('click', '.suggestion', function () {
             '</div>'+
           '</fieldset>');
 
-        addInProcess(1, data.colors[0].colorID, data.prodID);
+        addInProcess(1, data.colors[0].colorID, data.colors[0].colorID, data.prodID);
+
+        // var $sameDataID = $('select[data-id="' + data.prod
+        //  + '"] option:selected');
+
+        // $('.order-form-product-added > fieldset:last-child option').each(function (index) {
+        //   // selectOption($sameDataID, $selectedOpt);
+        //
+        //  newList.children.push({
+        //    $el: $(this),
+        //    txt: $(this).text(),
+        //    selected: index === 0 ? true : false,
+        //  });
+        // });
+
+
+        // selectOpt.push(newList);
       }
     },
 
@@ -186,6 +136,127 @@ $(document).on('click', '.suggestion', function () {
     dataType: 'json',
   });
 });
+
+function selectOption($sameDataID, $selectedOpt) {
+  var met = false;
+  console.log();
+  console.log('--------------------------');
+  for (var i = 0; i < $sameDataID.length; i++) {
+
+    // if the select tag (element) is different
+    if ($selectedOpt[0] != $sameDataID[i]) {
+      console.log($sameDataID[i]);
+
+      if ($($sameDataID[i]).text() === $selectedOpt.text()) {
+        met = true;
+      }
+    }
+  }
+
+  // we compare the text display into the option selectedOpt
+  // and we decide to switch or not based on the value
+  if (!met) {
+    $selectedOpt.parent().find('.isSelected').removeClass('isSelected');
+    $selectedOpt.addClass('isSelected');
+  } else {
+    $selectedOpt.parent().find('.isSelected').prop('selected', true);
+  }
+}
+
+//change selected product's color
+$(document).on('change', '.color-order', function (e) {
+
+  // the current select tag
+  var $this = $(this);
+
+  var $old = $(this).find('.isSelected');
+
+  // the actual selected option
+  var $selectedOpt = $this.find('option:selected');
+
+  // the id of the product
+  var dataID = $this.attr('data-id');
+
+  // select all the selected option of the same product
+  var $sameDataID = $('select[data-id="' + dataID + '"] option:selected');
+
+  // get the quantity of the product
+  var qty = $selectedOpt.attr('data-qty');
+
+  // get the input number to manage the quantity value
+  var $qtyOrder = $this.parents('.form-group').find('.qty-order');
+
+  // get the actual value display on the input number
+  var val = $qtyOrder.val();
+
+  // we now check if we can change the color or not
+  selectOption($sameDataID, $selectedOpt);
+
+  // update the value base on the max quantity available
+  if (parseInt(val) > parseInt(qty)) {
+    $qtyOrder.val(qty);
+  }
+
+  $qtyOrder.attr('max', qty);
+  $this.find('option:selected').addClass('isSelected');
+  // console.log($this.find('option:selected')[0]);
+
+  console.log($old.val(), $old.attr('value'), $this.find('option:selected')[0]);
+  if($old[0] != $this.find('option:selected')[0]){
+    addInProcess(qty, $this.val(), $old.val(), dataID);
+  }
+});
+
+//increase or decrease input number
+$(document).on('click', '.input-group-number button', function () {
+  var $par = $(this).parents('.material-input.row');
+  var $qty = $par.find('.qty-order');
+  var _color = $par.find('.color-order').val();
+  var _id = $par.find('.selected-article').attr('data-ID');
+  var val = $qty.val();
+  var max = $qty.attr('max');
+  var min = $qty.attr('min');
+
+  // console.log($par, _color, _id);
+  function change() {
+    return $(this).hasClass('remto') ?
+    ((parseInt(val) - 1) > min ? (parseInt(val) - 1) : min) :
+    ((parseInt(val) + 1) < max ? (parseInt(val) + 1) : max);
+  }
+
+  $qty.val(change.bind(this));
+
+  addInProcess($qty.val(), _color, _color, _id);
+
+});
+
+//change step
+$('.change-step').click(function () {
+
+  $('.order-form-step').toggleClass('current-step');
+  $(this).text($(this).text() == 'Suivant' ? 'Precedant' : 'Suivant');
+
+});
+
+function addInProcess(_qty, _color, _oldColor, _id) {
+
+  $.ajax({
+    type: 'POST',
+
+    url: '../PHP/Script/_inProcess.php',
+
+    data: { qty: _qty, color: _color, id: _id, old: _oldColor },
+
+    success: function (data) {
+      console.log(data);
+    },
+
+    error: function (error) {
+      console.log(error);
+    },
+  });
+
+}
 
 $('.form-order').submit(function (e) {
   e.preventDefault();

@@ -20,6 +20,7 @@ include $_ind . 'PHP/Inc/db.php';
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/Fonts/Logo/logo.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/slick.css">
+    <link rel="stylesheet" href="<?php echo $_ind; ?>Css/alertify.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/print.min.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/slick-theme.min.css">
     <link rel="stylesheet" href="<?php echo $_ind; ?>Css/perfect-scrollbar.css">
@@ -35,7 +36,7 @@ include $_ind . 'PHP/Inc/db.php';
     <script type="text/javascript">
       moment.locale('fr');
     </script>
-    <script type="text/javascript" src="<?php echo $_ind; ?>Js/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="<?php echo $_ind; ?>Js/bootstrap-notify.min.js"></script> 
   </head>
   <body>
     <div class="page-wrapper">

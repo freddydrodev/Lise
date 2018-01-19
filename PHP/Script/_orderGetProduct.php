@@ -29,12 +29,18 @@ if(isset($_POST['s'])){
 
     $c = 0;
     while ($color = $checkColor->fetch()) {
-      $newAr = array(
-        'colorID' => $color['colorID'],
-        'colorName' => $color['color'],
-        'colorQty' => $color['quantity']
-      );
-      array_push($colors, $newAr);
+      $destroy = $db->prepare('SELECT COUNT(*) AS nbr FROM in_process WHERE productID = ? AND colorID = ?');
+      $destroy->execute(array($prod['ID'], $color['colorID']));
+      $canDestroy = $destroy->fetch();
+      
+      if($canDestroy['nbr'] <= 0){
+        $newAr = array(
+          'colorID' => $color['colorID'],
+          'colorName' => $color['color'],
+          'colorQty' => $color['quantity']
+        );
+        array_push($colors, $newAr);
+      }
     }
 
     $ar = array(

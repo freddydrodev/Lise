@@ -34,14 +34,16 @@ if(isset($_POST['s'])){
       $inList->execute();
       $_inList = $inList->fetch();
       if($_inList['exist'] > $_inList['selected']){
-        
+
         // push data into the new array
         array_push($ar, array(
           'available' => $_qty['available'],
           'prodName' => $get['prodName'],
           'catName' => $get['catName'],
           'ID' => $get['ID'],
-          'price' => $get['price']
+          'price' => $get['price'],
+          'exist' => $_inList['exist'],
+          'inList' => $_inList['selected']
         ));
       }
     }

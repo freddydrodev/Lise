@@ -76,12 +76,12 @@ $_sex = array('' => '<small class="text-muted ">(Non Defini)</small>', 'H' => 'H
               <td class="sex border-top-0 align-middle"><?php echo $_sex[$cust['sex']] ?></td>
               <td class="location border-top-0 align-middle"><?php echo strlen($cust['location']) > 0 ? $cust['location'] : '<small class="text-muted ">(Non Defini)</small>' ?></td>
               <td class="border-top-0 align-middle">
-                <a href="#" class="btn btn-primary">
+                <button class="btn btn-primary">
                   <span class="flaticon-edit-1"></span>
-                </a>
-                <a href="#" class="btn btn-danger ml-2">
+                </button>
+                <button name="deluser" value="<?php echo $cust['id'] ?>" class="btn btn-danger ml-2">
                   <span class="flaticon-delete"></span>
-                </a>
+                </button>
               </td>
             </tr>
           <?php } ?>

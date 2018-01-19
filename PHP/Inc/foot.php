@@ -33,11 +33,12 @@
     </ul>
   </div>
 </div>
-    <script src="<?php echo $_ind; ?>Js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="<?php echo $_ind; ?>Js/jquery-3.2.1.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/popper.js"></script>
     <script src="<?php echo $_ind; ?>Js/bootstrap.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/list.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/slick.min.js"></script>
+    <script src="<?php echo $_ind; ?>Js/alertify.js"></script>
     <script src="<?php echo $_ind; ?>Js/perfect-scrollbar.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/Chart.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/JsBarcode.all.min.js"></script>
@@ -73,24 +74,7 @@
     <?php endif; ?>
 
 
-    <script type="text/javascript">
-
-
-      // table display
-      var options = {
-      valueNames: [ 'fname', 'lname', 'email' ]
-      };
-
-      var userList = new List('productsList', options);
-
-
-
-    $('.toogle-search').click(function(){
-      $('#searchBox').toggleClass('d-none');
-      $('.bigsearch').focus();
-      return false;
-    })
-    </script>
+    <script src="<?php echo $_ind; ?>Js/main.js"></script>
     <script src="<?php echo $_ind; ?>Js/Templatize.js"></script>
   </body>
 </html>
