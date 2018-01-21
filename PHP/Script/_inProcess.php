@@ -1,36 +1,44 @@
 <?php
-if(isset($_POST['qty']) && !empty($_POST['qty']) && isset($_POST['color']) && !empty($_POST['color']) && isset($_POST['id']) && !empty($_POST['id'])
-&& isset($_POST['old']) && !empty($_POST['old'])){
+if(isset($_POST['ID']) && !empty($_POST['ID'])
+&& isset($_POST['type']) && !empty($_POST['type'])){
   require '../Inc/_db.php';
 
-  $qty = htmlspecialchars(trim($_POST['qty']));
-  $color = htmlspecialchars(trim($_POST['color']));
-  $id = htmlspecialchars(trim($_POST['id']));
-  $old = htmlspecialchars(trim($_POST['old']));
+  $type = htmlspecialchars(trim($_POST['type']));
+  $id = htmlspecialchars(trim($_POST['ID']));
 
-  // check if the data exist to send
-  $checkInProcess = $db->prepare('SELECT COUNT(*) AS nbr FROM in_process WHERE productID = ? AND colorID = ?');
-  $checkInProcess->execute(array($id, $old));
-  $exist = $checkInProcess->fetch();
-
-  if($exist['nbr'] > 0){
-    // update the value
-    echo "update";
-    $up = $db->prepare('UPDATE in_process SET quantity = ? WHERE productID = ? AND colorID = ?');
-
-    if($up->execute(array($qty, $id, $color))){
-      echo "updated";
+  if($type == 'add'){
+    $add = $db->prepare('INSERT INTO in_process(productID) VALUES(?)');
+    if($add->execute(array($id))){
+      echo json_encode(array('txt' => 'Success: Produit ajoute a la liste', 'type' => 'success'));
+    }
+    else {
+      echo json_encode(array('txt' => 'Erreur: Erreur Lors de lajoue du produit', 'type' => 'danger'));
     }
   }
-  else {
-    // insert the value
-    $up = $db->prepare('INSERT INTO in_process (quantity, productID, colorID) VALUES(?, ?, ?)');
-
-    if($up->execute(array($qty, $id, $color))){
-      echo "inserted";
+  elseif ($type == 'delete') {
+    $add = $db->prepare('DELETE FROM in_process WHERE productID = ?');
+    if($add->execute(array($id))){
+      echo json_encode(array('txt' => 'Success: Produit supprimer de la liste', 'type' => 'success'));
     }
+    else {
+      echo json_encode(array('txt' => 'Erreur: Erreur Lors de la suppression du produit', 'type' => 'danger'));
+    }
+  }
+  elseif ($type == 'get') {
+    $get = $db->prepare('SELECT * FROM in_process WHERE productID = ?');
+    $get->execute(array($id));
+    $_get = $get->fetch();
+    if(empty($_get)){
+      echo json_encode(array('exist' => false));
+    }
+    else {
+      echo json_encode(array('exist' => true));
+    }
+
+
+    // echo json_encode(array('found' => $_POST['ID']));
   }
 }
 else {
-  echo "err";
+  echo json_encode(array('txt' => 'Erreur: Information manquante', 'type' => 'danger'));
 }

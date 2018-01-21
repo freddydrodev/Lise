@@ -41,7 +41,7 @@ body{
   width: 120px;
   height: 120px;
   background-color: white;
-  box-shadow: 0 0 30px rgba(0,0,0,.1);
+  box-shadow: 0 0 15px rgba(0,0,0,.1);
   overflow: hidden;
 }
 
@@ -54,11 +54,11 @@ body{
   font-size: 2.5em;
 }
 .light-shadow{
-  box-shadow: 0 0 30px rgba(0,0,0,.1);
+  box-shadow: 0 0 25px rgba(0,0,0,.1);
 }
 .log-form{
   width: 350px;
-  box-shadow: 0 0 30px rgba(0,0,0,.1);
+  box-shadow: 0 0 25px rgba(0,0,0,.1);
 }
 .log-form h3 {
   background-color: #7F2AFF;
@@ -163,19 +163,19 @@ body{
   font-size: .9em;
 }
 .light-shadow-primary{
-  box-shadow: 0 5px 20px rgba(127, 42, 255, .3);
+  box-shadow: 0 5px 25px rgba(127, 42, 255, .3);
 }
 .light-shadow-info{
-  box-shadow: 0 5px 15px rgba(71, 134, 255, .3);
+  box-shadow: 0 5px 25px rgba(71, 134, 255, .3);
 }
 .light-shadow-danger{
-  box-shadow: 0 5px 15px rgba(255, 42, 85, .3);
+  box-shadow: 0 5px 25px rgba(255, 42, 85, .3);
 }
 .light-shadow-warning{
-  box-shadow: 0 5px 20px rgba(127, 42, 255, .3);
+  box-shadow: 0 5px 25px rgba(127, 42, 255, .3);
 }
 .light-shadow-success{
-  box-shadow: 0 5px 15px rgba(13, 227, 145, .3);
+  box-shadow: 0 5px 25px rgba(13, 227, 145, .3);
 }
 button:hover{
   cursor: pointer;

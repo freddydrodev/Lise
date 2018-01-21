@@ -39,16 +39,20 @@
     <script src="<?php echo $_ind; ?>Js/list.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/slick.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/alertify.js"></script>
+    <script src="<?php echo $_ind; ?>Js/bootstrap-notify.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/perfect-scrollbar.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/Chart.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/JsBarcode.all.min.js"></script>
     <script src="<?php echo $_ind; ?>Js/print.min.js"></script>
     <script type="text/javascript">
     $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
+      $('[data-toggle="tooltip"]').tooltip();
     });
     </script>
 
+    <script src="<?php echo $_ind; ?>Js/main.js"></script>
+    <script src="<?php echo $_ind; ?>Js/Templatize.js"></script>
+    
     <?php if ($page === 'Clients'): ?>
     <script src="<?php echo $_ind; ?>Js/clients.js"></script>
     <?php endif; ?>
@@ -74,7 +78,6 @@
     <?php endif; ?>
 
 
-    <script src="<?php echo $_ind; ?>Js/main.js"></script>
-    <script src="<?php echo $_ind; ?>Js/Templatize.js"></script>
+
   </body>
 </html>

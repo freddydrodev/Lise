@@ -137,7 +137,10 @@ h2{
   width: 600px;
 }
 .order-form-product-added{
-  height: 170px;
+
+}
+.order-form-product-added{
+  height: 320px;
 }
 .product-ordered-list{
   height: 150px;

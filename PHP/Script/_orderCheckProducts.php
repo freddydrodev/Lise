@@ -28,24 +28,13 @@ if(isset($_POST['s'])){
       $qty->execute();
       $_qty = $qty->fetch();
 
-      //check the existing element in the list before push
-      $inList = $db->prepare('select (SELECT COUNT(*) FROM quantity WHERE productID = :id) as exist, (SELECT COUNT(*) FROM in_process WHERE productID = :id) as selected');
-      $inList->bindValue(':id', $get['ID'], PDO::PARAM_STR);
-      $inList->execute();
-      $_inList = $inList->fetch();
-      if($_inList['exist'] > $_inList['selected']){
-
-        // push data into the new array
-        array_push($ar, array(
-          'available' => $_qty['available'],
-          'prodName' => $get['prodName'],
-          'catName' => $get['catName'],
-          'ID' => $get['ID'],
-          'price' => $get['price'],
-          'exist' => $_inList['exist'],
-          'inList' => $_inList['selected']
-        ));
-      }
+      array_push($ar, array(
+        'available' => $_qty['available'],
+        'prodName' => $get['prodName'],
+        'catName' => $get['catName'],
+        'ID' => $get['ID'],
+        'price' => $get['price']
+      ));
     }
 
     echo json_encode($ar);

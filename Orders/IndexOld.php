@@ -20,7 +20,7 @@ include '../PHP/Inc/head.php';
             </div>
             <div class="modal-body">
               <?php include '../PHP/Script/makeOrder.php'; ?>
-              <form class="form-order" action="./" method="post">
+              <form class="form-order" action="./indexOld.php" method="post">
                 <div class="position-relative step-wrapper">
                   <div class="second-step position-absolute order-form-step w-100">
                     <fieldset class="form-group px-3 material-input mb-1">
@@ -41,6 +41,7 @@ include '../PHP/Inc/head.php';
                                 <h5 class="text-muted mb-0">PB50 - Placar</h5>
                                 <p class="text-primary mb-0">10000 FR</p>
                               </div>
+
                               <div class="alt px-2 py-1 small my-3 text-white rounded">
                                 <h6 class="my-1 p-0 text-primary">Alternative</h6>
                                 <div class="d-flex justify-content-between">
@@ -117,7 +118,7 @@ include '../PHP/Inc/head.php';
                         <div class="position-absolute w-100">
                           <div class="position-relative w-100 px-3 scroller">
 
-                            <div class="bg-white light-shadow rounded my-3 p-2 w-100 suggestion">
+                            <!-- <div class="bg-white light-shadow rounded my-3 p-2 w-100 suggestion">
                               <div class="d-flex justify-content-between">
                                 <h4>#FFFFFF</h4>
                                 <p class="small mb-0">10 Available(s)</p>
@@ -126,6 +127,7 @@ include '../PHP/Inc/head.php';
                                 <h5 class="text-muted mb-0">PB50 - Placar</h5>
                                 <p class="text-primary mb-0">10000 FR</p>
                               </div>
+
                               <div class="alt px-2 py-1 small my-3 text-white rounded">
                                 <h6 class="my-1 p-0 text-primary">Alternative</h6>
                                 <div class="d-flex justify-content-between">
@@ -137,6 +139,17 @@ include '../PHP/Inc/head.php';
                                   <p class="mb-0">(4 pour 1)</p>
                                 </div>
                               </div>
+                              <div class="select-color">
+                                <div class="">
+                                  <label class="my-3">Selectionne une couleur</label>
+                                  <select class="select-custom form-control small form-control-sm">
+                                    <option value="x">Red</option>
+                                    <option value="x">Blue</option>
+                                    <option value="x">Green</option>
+                                  </select>
+                                  <button class="btn btn-success btn-block btn-sm mt-3 ajouterProduct" value="x">Ajouter</button>
+                                </div>
+                              </div>
                             </div>
                             <div class="bg-white light-shadow rounded my-3 p-2 w-100 suggestion">
                               <div class="d-flex justify-content-between">
@@ -157,41 +170,20 @@ include '../PHP/Inc/head.php';
                                 <h5 class="text-muted mb-0">PB50 - Placar</h5>
                                 <p class="text-primary mb-0">10000 FR</p>
                               </div>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
                     </fieldset>
                     <p class="small px-3 pt-2">List Article</p>
-                    <div class="order-form-product-added position-relative">
-                      <!-- <fieldset class="form-group px-3 material-input mb-1 row">
-                        <div class="col-3">
-                          <input type="text" name="id-facebook" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-2" value="12 Paire (Etagere)" disabled required>
-                        </div>
-                        <div class="col-3">
-                          <select class="custom-select w-100" name="color">
-                            <option value="">Red</option>
-                          </select>
-                        </div>
-                        <div class="col-3">
-                          <div class="input-group input-group-number">
-                            <button type="button" class="remto input-group-addon btn rounded-0 btn-danger text-white">-</button>
-                            <input type="number" name="id-facebook" min="0" max="15" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-2" value="10" disabled required>
-                            <button type="button" class="addto input-group-addon btn rounded-0 btn-primary text-white">+</button>
-                          </div>
-                        </div>
-                        <div class="col-3">
-                          <input type="text" name="id-facebook" min="0" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-2" value="10000" disabled required>
-                        </div>
-                      </fieldset> -->
+                    <div class="order-form-product-added position-relative py-3">
                     </div>
                   </div>
                 </div>
                 <div class="modal-footer border-0 justify-content-between">
                   <button type="button" name="addProduct" class="btn btn-info change-step next">Suivant</button>
-                  <div class="d-none">
+                  <div class="moreOpt d-none">
                     <button type="submit" name="makeOrder" class="btn btn-success mr-1 ">Ajouter</button>
-                    <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                   </div>
                 </div>
               </form>
