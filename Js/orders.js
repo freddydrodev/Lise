@@ -249,7 +249,6 @@ $('.second-step input').focus(function(){
 })
 
 $('.form-order').submit(function (e) {
-  e.preventDefault();
   var selectedArticle = $('.selected-item').length;
 
   if (selectedArticle <= 0) {
@@ -261,10 +260,7 @@ $('.form-order').submit(function (e) {
 
     //show msg
     bootstrapNotify('Aucun article selectionne', 'danger');
-  } else {
-
   }
-  return false;
 });
 
 $('#addCommandeModal').modal('show');
