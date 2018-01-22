@@ -23,6 +23,7 @@ var currentElement = null;
 var selectOpt = [];
 var $scroler = $('.sugestion-wrapper .scroller');
 var $getProd = $('.getProduct');
+var $getCust = $('input[name="name-client"]');
 
 // autocomple ajax products
 $getProd.keyup(function () {
@@ -99,11 +100,12 @@ $(document).on('click', '.suggestion', function () {
           '<div class="col"> '+
             '<h5 class="px-3 mb-0">#' + data.prodID +
               ' <small> ' + data.prodName + ' (' + data.catName + ')</small> '+
+              '<input type="hidden" name="prod-id[]" value="' + data.prodID + '" readonly>'+
             '</h5> '+
           '</div> '+
           '<div class="col-3"> '+
             '<div class="px-3 mb-2 text-right"> '+
-              '<button type="button" class="btn btn-danger delSelProd" data-id=" ' + data.prodID + '"> '+
+              '<button type="button" class="btn btn-danger delSelProd" data-id="' + data.prodID + '"> '+
                   '<span class="flaticon-delete"></span> '+
                 '</button> '+
               '</div> '+
@@ -116,9 +118,9 @@ $(document).on('click', '.suggestion', function () {
             '<div class="col-4"> '+
               '<input '+
                 'type="text" '+
-                'name="color-name[]" '+
-                'class="form-control text-center bg-white px-2" value=" ' + data.colors[i].colorName + '" ' + ' readonly required> '+
-              '<input type="hidden" name="color-id[]" value=" ' + data.colors[i].colorID + '" readonly> '+
+                'name="color-name[' + data.prodID + '][]" '+
+                'class="form-control text-center bg-white px-2" value="' + data.colors[i].colorName + '" ' + ' readonly required> '+
+              '<input type="hidden" name="color[' + data.prodID + '][]" value="' + data.colors[i].colorID + '" readonly> '+
             '</div> '+
             '<div class="col-4"> '+
               '<div class="input-group input-group-number rounded text-truncate"> '+
@@ -128,9 +130,9 @@ $(document).on('click', '.suggestion', function () {
                 '-</button> '+
                 '<input '+
                   'type="number" '+
-                  'name="quantity-color[]" '+
+                  'name="color[' + data.prodID + '][' + data.colors[i].colorID + '][quantity]" '+
                   'min="0" '+
-                  'max=" ' + data.colors[i].colorQty + '" '+
+                  'max="' + data.colors[i].colorQty + '" '+
                   'class="form-control qty-order text-center bg-white px-1" value="0" '+
                   'readonly required> '+
                 '<button type="button" '+
@@ -142,14 +144,52 @@ $(document).on('click', '.suggestion', function () {
             '<div class="col-4"> '+
               '<input '+
                 'type="text" '+
-                'name="price-prod[]" '+
+                'name="color[' + data.prodID + '][' + data.colors[i].colorID + '][price]" '+
                 'min="0" '+
                 'class="form-control text-center px-2" '+
-                'value=" ' + data.prodPrice + '" '+
-                'max=" ' + data.prodPrice + '" required> '+
+                'value="' + data.prodPrice + '" '+
+                'max="' + data.prodPrice + '" required> '+
             '</div> '+
           '</fieldset> ';
         }
+
+        // '<fieldset class="form-group px-3 material-input mb-1 row"> '+
+        //   '<div class="col-4"> '+
+        //     '<input '+
+        //       'type="text" '+
+        //       'name="color-name[]" '+
+        //       'class="form-control text-center bg-white px-2" value="' + data.colors[i].colorName + '" ' + ' readonly required> '+
+        //     '<input type="hidden" name="color-id-' + data.prodID + '[]" value="' + data.colors[i].colorID + '" readonly> '+
+        //   '</div> '+
+        //   '<div class="col-4"> '+
+        //     '<div class="input-group input-group-number rounded text-truncate"> '+
+        //       '<button type="button" '+
+        //         'class="remto input-group-addon btn rounded-0 btn-danger'+
+        //         ' text-white"> '+
+        //       '-</button> '+
+        //       '<input '+
+        //         'type="number" '+
+        //         'name="quantity-color-' + data.prodID + '-' + data.colors[i].colorID + '[]" '+
+        //         'min="0" '+
+        //         'max="' + data.colors[i].colorQty + '" '+
+        //         'class="form-control qty-order text-center bg-white px-1" value="0" '+
+        //         'readonly required> '+
+        //       '<button type="button" '+
+        //         'class="addto input-group-addon btn rounded-0 btn-primary '+
+        //         'text-white"> '+
+        //       '+</button> '+
+        //     '</div> '+
+        //   '</div> '+
+        //   '<div class="col-4"> '+
+        //     '<input '+
+        //       'type="text" '+
+        //       'name="price-prod-' + data.prodID + '-' + data.colors[i].colorID + '[]" '+
+        //       'min="0" '+
+        //       'class="form-control text-center px-2" '+
+        //       'value="' + data.prodPrice + '" '+
+        //       'max="' + data.prodPrice + '" required> '+
+        //   '</div> '+
+        // '</fieldset> ';
 
         $('.order-form-product-added').append('<div class="selected-item rounded light-shadow bg-white mx-3 py-2 mb-2"> '+ opts +'</div> ');
 
@@ -246,10 +286,35 @@ $('.second-step input').focus(function(){
     $('.change-step').text('Precedant');
     $('.moreOpt').removeClass('d-none');
   }
-})
+});
+
+//suggeste people
+$getCust.keyup(function () {
+  var s = $(this).val();
+
+  $.ajax({
+    type: 'POST',
+    url: '../PHP/Script/_orderCheckUsers.php',
+    data: { q: s },
+    success: function (data) {
+      if (data) {
+        data.forEach(function(el){
+          console.log(el);
+        });
+      }
+    },
+
+    error: function(err){
+      console.log(err.responseText);
+    },
+
+    dataType: 'json',
+  });
+});
 
 $('.form-order').submit(function (e) {
   var selectedArticle = $('.selected-item').length;
+  var qty = 0;
 
   if (selectedArticle <= 0) {
 
@@ -260,6 +325,19 @@ $('.form-order').submit(function (e) {
 
     //show msg
     bootstrapNotify('Aucun article selectionne', 'danger');
+    return false;
+  }else {
+    var $q = $('.qty-order');
+    console.log($q);
+    for (var i = 0; i < $q.length; i++) {
+
+      qty += $($q[i]).val();
+    }
+
+    if(qty < 1){
+      bootstrapNotify('Aucun produit selectionne', 'danger');
+      return false;
+    }
   }
 });
 

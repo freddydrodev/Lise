@@ -26,9 +26,9 @@ include '../PHP/Inc/head.php';
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Nom Client</label>
 
-                      <input type="text" name="name-client" placeholder="EX: Lise Belle Kuame" class="form-control border-0 rounded-0 px-0" required>
+                      <input type="text" name="name-client" placeholder="EX: Lise Belle Kuame" class="form-control border-0 rounded-0 px-0">
                       <span class="under w-100 d-block position-relative"></span>
-                      <div class="sugestion-wrapper client position-relative">
+                      <div class="sugestion-wrapper active articles position-relative">
                         <div class="position-absolute w-100">
                           <div class="position-relative w-100 px-3 scroller">
 
@@ -51,6 +51,17 @@ include '../PHP/Inc/head.php';
                                 <div class="d-flex justify-content-between">
                                   <p class="mb-0">Tshirt - VETEMENT</p>
                                   <p class="mb-0">(4 pour 1)</p>
+                                </div>
+                              </div>
+                              <div class="select-color">
+                                <div class="">
+                                  <label class="my-3">Selectionne une couleur</label>
+                                  <select class="select-custom form-control small form-control-sm">
+                                    <option value="x">Red</option>
+                                    <option value="x">Blue</option>
+                                    <option value="x">Green</option>
+                                  </select>
+                                  <button class="btn btn-success btn-block btn-sm mt-3 ajouterProduct" value="x">Ajouter</button>
                                 </div>
                               </div>
                             </div>
@@ -80,7 +91,7 @@ include '../PHP/Inc/head.php';
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Identifiant Facebook</label>
-                      <input type="text" name="id-facebook" min="0" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-0" required>
+                      <input type="text" name="id-facebook" min="0" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-0">
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
@@ -90,17 +101,17 @@ include '../PHP/Inc/head.php';
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Numero</label>
-                      <input type="text" name="phone" placeholder="EX: +22501234567" class="form-control border-0 rounded-0 px-0" required>
+                      <input type="text" name="phone" placeholder="EX: +22501234567" class="form-control border-0 rounded-0 px-0">
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Lieu De Livraison</label>
-                      <input type="text" name="location" placeholder="EX: Riviera Faya" class="form-control border-0 rounded-0 px-0" required>
+                      <input type="text" name="location" placeholder="EX: Riviera Faya" class="form-control border-0 rounded-0 px-0">
                       <span class="under w-100 d-block position-relative"></span>
                     </fieldset>
                     <fieldset class="form-group px-3 material-input mb-1">
                       <label class="small">Livreur</label>
-                      <select class="form-control custom-select" name="livreur" required>
+                      <select class="form-control custom-select" name="livreur">
                         <?php
                         $liv = $db->query('SELECT fullname, id FROM users WHERE usertype = 3 ORDER BY fullname');
                         while ($l = $liv->fetch()) { ?>
