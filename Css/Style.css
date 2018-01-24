@@ -302,10 +302,10 @@ button:hover{
   top: 0;
   left: 15px;
 }
-.sugestion-wrapper .scroller {
+.scroller {
   height: 0;
 }
-.sugestion-wrapper .scroller.active {
+.scroller.active {
   height: 300px;
 }
 .sugestion-wrapper > div {

@@ -41,7 +41,7 @@ if(isset($_POST['makeOrder'])){
           bootstrapNotify('Erreur Facebook: Seul les lettres, tirets, apostrof et les espaces sont autorises (entre 5 et 100 charcateres)');
       }
 
-      if(!preg_match("/^[a-z0-9àâçéèêëîïôûùüÿñæœ \-\']{5,100}$/i", $location)) {
+      if(!preg_match("/^[a-z0-9àâçéèêëîïôûùüÿñæœ\, \-\']{5,100}$/i", $location)) {
           $correct = false;
           bootstrapNotify('Erreur Location: Seul les lettres, nombres, tirets, apostrof et les espaces sont autorises (entre 5 et 100 charcateres)');
       }
@@ -60,44 +60,59 @@ if(isset($_POST['makeOrder'])){
       }
 
       if($correct){
-        $add = $db->prepare('INSERT INTO users(fullname, facebookID, email, phone, location, usertype, createdAt) VALUES(?,?,?,?,?,4,NOW())');
-        if($add->execute(array(ucwords($client), $facebook, $email, $phone, $location))){
-          $ID = $db->lastInsertId();
+        //check if the user already exist or it has been added as new
+        echo ($_POST['suggested']);
+        if(isset($_POST['suggested']) && !empty($_POST['suggested'])){
+          $sug = trim(htmlspecialchars($_POST['suggested']));
+          if($sug === "null"){
+            $add = $db->prepare('UPDATE users SET fullname = ?, facebookID = ?, email = ?, phone = ?, location = ? WHERE id = ?');
+            $el = array(ucwords($client), $facebook, $email, $phone, $location, $sug);
+          }
+          else {
+            $add = $db->prepare('INSERT INTO users(fullname, facebookID, email, phone, location, usertype, createdAt) VALUES(?,?,?,?,?,4,NOW())');
+            $el = array(ucwords($client), $facebook, $email, $phone, $location);
+          }
 
-          //create order
-          $OID = generateRandomString(6);
-          $mkOrder = $db->prepare('INSERT INTO orders(ID, createdAt, customerID, employeeID, livreurID, state) VALUES(?,NOW(),?,?,?, "0")');
-          if($mkOrder->execute(array($OID, $ID, $_SESSION['id'], $livreur))){
-            //insert product in order list
-            $ok = true;
+          if($add->execute($el)){
+            $ID = (int)$sug > 0 ? $sug : $db->lastInsertId();
 
-            foreach ($_POST['prod-id'] as $key => $prod) {
-              print_r($_POST['color'][$prod]) ;
-              foreach ($_POST['color'][$prod] as $colID => $col) {
-                if($colID != 0){
-                  if($col['quantity'] > 0){
-                    $ol = $db->prepare('INSERT INTO product_ordered(productID, orderID, colorID, quantity, paid) VALUES (?,?,?,?,?)');
-                    if($ol->execute(array($prod, $OID, $colID, $col['quantity'], $col['price']))){
-                    }
-                    else {
-                      $ok = false;
+            //create order
+            $OID = generateRandomString(6);
+            $mkOrder = $db->prepare('INSERT INTO orders(ID, createdAt, customerID, employeeID, livreurID, state) VALUES(?,NOW(),?,?,?, "0")');
+            if($mkOrder->execute(array($OID, $ID, $_SESSION['id'], $livreur))){
+              //insert product in order list
+              $ok = true;
+
+              foreach ($_POST['prod-id'] as $key => $prod) {
+                print_r($_POST['color'][$prod]) ;
+                foreach ($_POST['color'][$prod] as $colID => $col) {
+                  if($colID != 0){
+                    if($col['quantity'] > 0){
+                      $ol = $db->prepare('INSERT INTO product_ordered(productID, orderID, colorID, quantity, paid) VALUES (?,?,?,?,?)');
+                      if($ol->execute(array($prod, $OID, $colID, $col['quantity'], $col['price']))){
+                      }
+                      else {
+                        $ok = false;
+                      }
                     }
                   }
                 }
               }
-            }
-            if($ok){
-              bootstrapNotify('Commande Insere', 'success');
-            }
-            else {
-              bootstrapNotify('Erreur Inconnue: Insertion article');
-            }
+              if($ok){
+                bootstrapNotify('Commande Insere', 'success');
+              }
+              else {
+                bootstrapNotify('Erreur Inconnue: Insertion article');
+              }
 
+            } else {
+              bootstrapNotify('Erreur Inconnue: creation Commande');
+            }
           } else {
-            bootstrapNotify('Erreur Inconnue: creation Commande');
+            bootstrapNotify('Erreur Inconnue: Ajoue Client');
           }
         } else {
-          bootstrapNotify('Erreur Inconnue');
+          bootstrapNotify('Erreur Suggestion Manquant');
         }
       }
     }

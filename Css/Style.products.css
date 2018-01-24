@@ -145,3 +145,6 @@ h2{
 .product-ordered-list{
   height: 150px;
 }
+.suggested-people-wrapper{
+  z-index: 100;
+}
