@@ -48,7 +48,7 @@ include '../PHP/Inc/head.php';
 </div>
 
 <!-- Produits title -->
-<div  id="productsList">
+<div  id="salesList">
   <div class="row mb-4 title">
     <div class="col">
       <div class="d-flex justify-content-between p-3 align-items-center rounded-3">
@@ -59,62 +59,117 @@ include '../PHP/Inc/head.php';
     </div>
   </div>
   <!-- Produits list -->
-  <div class="row" id="products-list">
-    <div class="col">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col" class="border-top-0 border-bottom-0 text-center">
-              <button class="sort bg-none border-0 rounded-30 btn btn-block" data-sort="ID">
-                Article ID
-              </button>
-            </th>
-            <th scope="col" class="border-top-0 border-bottom-0 text-center">
-              <button class="sort bg-none border-0 rounded-30 btn btn-block" data-sort="name">
-                Articles
-              </button>
-            </th>
-            <th scope="col" class="border-top-0 border-bottom-0 text-center">
-              <button class="sort bg-none border-0 rounded-30 btn btn-block" data-sort="price">
-                Payer
-              </button>
-            </th>
-            <th scope="col" class="border-top-0 border-bottom-0 text-center">
-              <button class="sort bg-none border-0 rounded-30 btn btn-block" data-sort="quantity">
-                Clients
-              </button>
-            </th>
-            <th scope="col" class="border-top-0 border-bottom-0 text-center">
-              <button class="sort bg-none border-0 rounded-30 btn btn-block" data-sort="decrement">
-                Agents
-              </button>
-            </th>
-            <th scope="col" class="border-top-0 border-bottom-0 text-center">
-              <button class="sort bg-none border-0 rounded-30 btn btn-block" data-sort="color">
-                Quantites
-              </button>
-            </th>
-            <th scope="col" class="border-top-0 border-bottom-0 text-center">
-              <button class="sort bg-none border-0 rounded-30 btn btn-block" data-sort="color">
-                Date
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody class="list text-center light-shadow">
+
+    <table class="table table-bordered light-shadow table-sm">
+      <thead class="bg-white">
+        <tr>
+          <th scope="col" class="text-center">
+            <button class="sort bg-transparent rounded-30 btn btn-block" data-sort="name">
+              Reference
+            </button>
+          </th>
+          <th scope="col" class="text-center">
+            <button class="sort bg-transparent rounded-30 btn btn-block" data-sort="name">
+              Client
+            </button>
+          </th>
+          <th scope="col" class="text-center">
+            <button class="sort bg-transparent rounded-30 btn btn-block" data-sort="name">
+              Articles
+            </button>
+          </th>
+          <th scope="col" class="text-center">
+            <button class="sort bg-transparent rounded-30 btn btn-block" data-sort="category">
+              Lieu
+            </button>
+          </th>
+          <th scope="col" class="text-center">
+            <button class="sort bg-transparent rounded-30 btn btn-block" data-sort="category">
+              Date
+            </button>
+          </th>
+          <th scope="col" class="text-center">
+            <button class="bg-transparent rounded-30 btn btn-block">
+              Faite Par
+            </button>
+          </th>
+          <th scope="col" class="text-center">
+            <button class="bg-transparent rounded-30 btn btn-block">
+              Livreur
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="list text-center">
+        <?php $livraisons = $db->prepare('
+        SELECT orders.ID, orders.createdAt, cust.fullname AS custName, cust.phone, cust.location, emp.fullname AS empName, livr.fullname AS livrName, livr.ID as livrID FROM orders INNER JOIN users AS cust ON cust.ID = orders.customerID INNER JOIN users AS emp ON emp.ID = orders.employeeID INNER JOIN users AS livr ON livr.ID = orders.livreurID WHERE orders.state = "1" ORDER BY orders.createdAt DESC ');
+        $livraisons->execute();
+
+        while ($livraison = $livraisons->fetch()) { ?>
           <tr class="mb-3 bg-white border-bottom-1">
-            <th scope="row" class="ID border-top-0 align-middle">#FB03H</th>
-            <td class="name border-top-0 align-middle">12 paires <span class="badge badge-pill badge-info font-weight-normal">etagere</span></td>
-            <td class="price border-top-0 align-middle">10.000</td>
-            <td class="quantity border-top-0 align-middle">100</td>
-            <td class="decrement border-top-0 align-middle">1.5</td>
-            <td class="color border-top-0 align-middle">Rouge</td>
-            <td class="color border-top-0 align-middle">Rouge</td>
+            <td class="align-middle">
+              <svg class="barcode" jsbarcode-value="<?php echo $livraison['ID'] ?>" jsbarcode-height="20" jsbarcode-displayValue="false" jsbarcode-width="1"></svg>
+              <p><strong>#<?php echo $livraison['ID'] ?></strong></p>
+            </td>
+            <td class="align-middle"><?php echo $livraison['custName'] ?>
+              <br>
+              <strong class="text-muted small">(<?php echo $livraison['phone'] ?>)</strong></td>
+            <td class="align-middle bg-light">
+              <?php
+              $ordersArticles = $db->prepare('
+                SELECT products.name,products.ID, categories.name AS cat, product_ordered.paid, product_ordered.quantity, color.color
+                FROM product_ordered
+                INNER JOIN color ON color.ID = product_ordered.colorID
+                INNER JOIN products ON products.ID = product_ordered.productID
+                LEFT JOIN categories ON categories.ID = products.category
+                WHERE product_ordered.orderID = ? ORDER BY products.name');
+              $ordersArticles->execute(array($livraison['ID']));
+              $total = 0;
+              while ($article = $ordersArticles->fetch()) {
+                $total += (double)$article['quantity'] * (double)$article['paid'];
+                ?>
+                <div class="row small text-left">
+                  <div class="col-6">
+                    <p class="mb-1"><strong>#<?php echo $article['ID'] ?></strong></p>
+                    <p class="mb-1"><?php echo $article['name'] ?> <?php echo $article['cat'] ?> <?php echo $article['color'] == 'pas de couleur' ? '' : '('.$article['color'].')' ?></p>
+                  </div>
+                  <div class="col">
+                    <p class="mb-1"><small>x</small><?php echo $article['quantity'] ?></p>
+                  </div>
+                  <div class="col">
+                    <p class="mb-1"> <strong class=""><?php echo $article['paid'] ?> Fr</strong></p>
+                  </div>
+                </div>
+              <?php } ?>
+              <div class="row small text-left bg-white text-primary">
+                <div class="col-6">
+                  <p class="mb-1 py-2"><strong>Total</strong></p>
+                </div>
+                <div class="col">
+                  <p class="mb-1 py-2"></p>
+                </div>
+                <div class="col">
+                  <p class="mb-1 py-2"><strong><?php echo $total ?> Fr</strong></p>
+                </div>
+              </div>
+            </td>
+            <td class="align-middle"><?php echo $livraison['location'] ?></td>
+            <td class="align-middle date-order-<?php echo $livraison['ID'] ?>">21 Dec 2017
+            </td>
+            <script type="text/javascript">
+              $(".date-order-<?php echo $livraison['ID'] ?>").text(moment("<?php echo $livraison['createdAt'] ?>").format("ddd Do MMM YYYY"));
+            </script>
+            <td class="align-middle"><?php echo $livraison['empName'] ?></td>
+            <td class="align-middle">
+              <a href="../Livreur?id=<?php echo $livraison['livrID'] ?>" class="text-dark">
+                <?php echo $livraison['livrName'] ?>
+              </a>
+            </td>
           </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+        <?php } ?>
+
+      </tbody>
+    </table>
 </div>
 
 

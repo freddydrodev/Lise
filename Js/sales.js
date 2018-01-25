@@ -48,3 +48,5 @@ var chart = new Chart(ctx, {
       }
     }
 });
+
+JsBarcode('.barcode').init();

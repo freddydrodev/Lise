@@ -7,14 +7,15 @@ $('button[name="delemp"]').click(function(){
   var $this = $(this);
   var val = $this.val();
 
-  alertify.confirm("Voulez-vous vraiment Supprimer cet employee",
+  alertify.confirm("Voulez-vous vraiment Supprimer cet employee?",
   function () {
     $.ajax({
       type: 'POST',
       url: '../PHP/Script/deleteUser.php',
       data: { deluser: val },
       success: function (data) {
-
+        bootstrapNotify(data.text, data.type);
+        
         if(data.type === 'success'){
           $this.parents('tr').fadeOut();
         }

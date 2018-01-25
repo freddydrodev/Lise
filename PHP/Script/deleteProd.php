@@ -1,13 +1,13 @@
 <?php
 require '../Inc/_db.php';
 
-if(isset($_POST['deluser'])){
+if(isset($_POST['delProd'])){
   include '../Inc/func.php';
 
-  $uid = trim(htmlspecialchars($_POST['deluser']));
+  $pid = trim(htmlspecialchars($_POST['delProd']));
 
-  $del = $db->prepare('DELETE FROM products WHERE id = ?');
-  if ($del->execute(array($uid))) {
+  $del = $db->prepare('DELETE FROM products WHERE ID = ?');
+  if ($del->execute(array($pid))) {
     $ar = array('type' => 'success', 'text' => 'Success! Produit supprime');
   }
   else {

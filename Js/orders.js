@@ -336,8 +336,6 @@ $('.form-order').submit(function (e) {
   }
 });
 
-$('#addCommandeModal').modal('show');
-
 $('#addCommandeModal').on('hide.bs.modal', function (e) {
   $.ajax({
     type: 'POST',
@@ -347,4 +345,66 @@ $('#addCommandeModal').on('hide.bs.modal', function (e) {
   bootstrapNotify('Commande annule', 'danger');
   $('.scroller').empty();
   $('.scroller').removeClass('active');
-})
+});
+
+$('button[name="delOrd"]').click(function(){
+  // confirm dialog
+  var $this = $(this);
+  var val = $this.val();
+
+  alertify.confirm("Voulez-vous vraiment Supprimer cette Commande?",
+  function () {
+    $.ajax({
+      type: 'POST',
+      url: '../PHP/Script/deleteOrder.php',
+      data: { delOrd: val },
+      success: function (data) {
+        bootstrapNotify(data.text, data.type);
+
+        if(data.type === 'success'){
+          $this.parents('tr').fadeOut();
+        }
+      },
+      error: function (err) {
+        console.log(err.responseText);
+      },
+      dataType: "json"
+    });
+
+  },
+  function() {
+    console.log('canceled');
+  });
+  return false;
+});
+
+$('button[name="valOrd"]').click(function(){
+  // confirm dialog
+  var $this = $(this);
+  var val = $this.val();
+
+  alertify.confirm("Voulez-vous vraiment Valider cette Commande?",
+  function () {
+    $.ajax({
+      type: 'POST',
+      url: '../PHP/Script/valOrder.php',
+      data: { valOrd: val },
+      success: function (data) {
+        bootstrapNotify(data.text, data.type);
+
+        if(data.type === 'success'){
+          $this.parents('tr').fadeOut();
+        }
+      },
+      error: function (err) {
+        console.log(err.responseText);
+      },
+      dataType: "json"
+    });
+
+  },
+  function() {
+    console.log('canceled');
+  });
+  return false;
+});

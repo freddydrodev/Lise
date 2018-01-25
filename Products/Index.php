@@ -151,8 +151,12 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             <!-- end items in category list -->
           </div>
           <?php if ($showCategory['ID'] != 1): ?>
-            <a href="#" class="card-link btn btn-primary"><span class="flaticon-edit-1"></span></a>
-            <a href="<?php echo $_ind ?>PHP/Script/removeCategory.php?catID=<?php echo $showCategory['ID'] ?>" class="card-link btn btn-danger ml-2"><span class="flaticon-delete"></span></a>
+            <button class="btn btn-primary">
+              <span class="flaticon-edit-1"></span>
+            </button>
+            <button name="delCat" value="<?php echo $showCategory['ID'] ?>" class="btn btn-danger ml-2">
+              <span class="flaticon-delete"></span>
+            </button>
           <?php endif; ?>
         </div>
       </div>
@@ -343,12 +347,12 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             ?>
             <td class="quantity border-top-0 align-middle">100</td>
             <td class="border-top-0 align-middle">
-              <a href="#" class="btn btn-primary">
+              <button class="btn btn-primary">
                 <span class="flaticon-edit-1"></span>
-              </a>
-              <a href="#" class="btn btn-danger ml-2">
+              </button>
+              <button name="delProd" value="<?php echo $getProduct['ID'] ?>" class="btn btn-danger ml-2">
                 <span class="flaticon-delete"></span>
-              </a>
+              </button>
             </td>
           </tr>
         <?php } ?>
