@@ -3,7 +3,7 @@ $page = 'Ventes';
 $ind = true;
 include '../PHP/Inc/head.php';
 ?>
-<nav aria-label="breadcrumb" role="navigation">
+<!-- <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active" aria-current="page">Ventes</li>
   </ol>
@@ -45,14 +45,14 @@ include '../PHP/Inc/head.php';
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Produits title -->
 <div  id="salesList">
   <div class="row title">
     <div class="col position-relative">
       <div class="d-flex justify-content-between p-3 align-items-center rounded-3">
-        <h2 class="text-uppercase m-0">Clients</h2>
+        <h2 class="text-uppercase m-0">Ventes</h2>
         <button type="button" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch" class="search-toogle btn btn-info"><span class="flaticon-magnifying-glass-1"></span></button>
       </div>
       <div class="collapse position-absolute h-100 light-shadow" id="search">
