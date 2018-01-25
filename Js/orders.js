@@ -17,7 +17,6 @@ scrollEl.forEach(function (el) {
 var ps = new PerfectScrollbar('.order-form-product-added', { suppressScrollX: true });
 
 // AJAX POP EVOLUTION
-var currentElement = null;
 var $scroler = $('.sugestion-wrapper .scroller');
 var $getProd = $('.getProduct');
 var $getCust = $('input[name="name-client"]');
@@ -344,6 +343,7 @@ $('#addCommandeModal').on('hide.bs.modal', function (e) {
     type: 'POST',
     url: '../PHP/Script/_clearProcess.php',
   });
+
   bootstrapNotify('Commande annule', 'danger');
   $('.scroller').empty();
   $('.scroller').removeClass('active');

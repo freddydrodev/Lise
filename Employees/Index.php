@@ -141,12 +141,12 @@ $_ut = array(2 => 'Caissiere', 3 => 'Livreur');
               <td class="sex border-top-0 align-middle"><?php echo $_sex[$livreur['sex']] ?></td>
               <td class="type border-top-0 align-middle"><?php echo $_ut[$livreur['usertype']] ?></td>
               <td class="border-top-0 align-middle">
-                <a href="#" class="btn btn-primary">
+                <button class="btn btn-primary">
                   <span class="flaticon-edit-1"></span>
-                </a>
-                <a href="#" class="btn btn-danger ml-2">
+                </button>
+                <button name="delemp" value="<?php echo $livreur['id'] ?>" class="btn btn-danger ml-2">
                   <span class="flaticon-delete"></span>
-                </a>
+                </button>
               </td>
             </tr>
           <?php } ?>
