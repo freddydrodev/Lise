@@ -50,3 +50,8 @@ var chart = new Chart(ctx, {
 });
 
 JsBarcode('.barcode').init();
+
+var userList = new List('salesList',
+{ valueNames:
+  ['ref', 'client', 'article', 'location', 'date', 'madeBy', 'delivrer'],
+});

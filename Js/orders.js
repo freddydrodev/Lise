@@ -2,7 +2,7 @@
 JsBarcode('.barcode').init();
 
 //orders search
-var userList = new List('orders-list',
+var userList = new List('order-list',
 { valueNames:
   ['ref', 'client', 'article', 'location', 'date', 'madeBy', 'delivrer'],
 });
