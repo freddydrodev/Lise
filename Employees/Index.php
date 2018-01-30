@@ -83,6 +83,59 @@ $_ut = array(2 => 'Caissiere', 3 => 'Livreur');
           </div>
         </div>
 
+        <!-- update information popu -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="editEmployee">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-0 border-0">
+              <div class="modal-header border-0 py-2">
+                <h5 class="modal-title position-relative legend px-3"><span class="legend-text">Modifier Employee</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="" action="./" method="post">
+                  <?php include '../PHP/Script/updateEmployee.php'; ?>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Nom</label>
+                    <input type="text" name="fn" placeholder="EX: Kuame Kore" class="form-control border-0 rounded-0 px-0" required>
+                    <input type="hidden" name="id">
+                    <span class="under w-100 d-block position-relative"></span>
+                  </fieldset>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Pseudo</label>
+                    <input type="text" name="un" placeholder="EX: KKre" class="form-control border-0 rounded-0 px-0" required>
+                    <span class="under w-100 d-block position-relative"></span>
+                  </fieldset>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Numero</label>
+                    <input type="text" name="ph" placeholder="EX: +22501234567" class="form-control border-0 rounded-0 px-0" required>
+                    <span class="under w-100 d-block position-relative"></span>
+                  </fieldset>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Sex</label>
+                    <select class="custom-select form-control" name="sx" required>
+                      <option value="H">Homme</option>
+                      <option value="F">Femme</option>
+                    </select>
+                  </fieldset>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Type D'employee</label>
+                    <select class="custom-select form-control" name="ut" required>
+                      <option value="2">Caissiere</option>
+                      <option value="3">Livreur</option>
+                    </select>
+                  </fieldset>
+                  <div class="modal-footer border-0">
+                    <button type="submit" name="editEmployee" class="btn btn-primary">Modifier Employee</button>
+                    <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
         <!-- end insert category modal -->
       </div>
     </div>
@@ -141,7 +194,17 @@ $_ut = array(2 => 'Caissiere', 3 => 'Livreur');
               <td class="sex border-top-0 align-middle"><?php echo $_sex[$livreur['sex']] ?></td>
               <td class="type border-top-0 align-middle"><?php echo $_ut[$livreur['usertype']] ?></td>
               <td class="border-top-0 align-middle">
-                <button class="btn btn-primary">
+                <button
+                class="btn btn-primary"
+                type="button"
+                data-toggle="modal"
+                data-target="#editEmployee"
+                data-id="<?php echo $livreur['id'] ?>"
+                data-fullname="<?php echo $livreur['fullname'] ?>"
+                data-phone="<?php echo $livreur['phone'] ?>"
+                data-username="<?php echo $livreur['username'] ?>"
+                data-sex="<?php echo $livreur['sex'] ?>"
+                data-role="<?php echo $livreur['usertype'] ?>">
                   <span class="flaticon-edit-1"></span>
                 </button>
                 <button name="delemp" value="<?php echo $livreur['id'] ?>" class="btn btn-danger ml-2">
