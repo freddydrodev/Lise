@@ -1,8 +1,9 @@
 <?php
-if(isset($_POST['addCategory'])){
+if(isset($_POST['editCategory'])){
   include $_ind . 'PHP/Inc/func.php';
 
-  $cat = htmlspecialchars(trim($_POST['category']));
+  $cat = htmlspecialchars(trim($_POST['name']));
+  $id = htmlspecialchars(trim($_POST['id']));
   $correct = true;
 
   if(!preg_match('/^[a-z0-9àâçéèêëîïôûùüÿñæœ \-]*$/i', $cat)) {
@@ -18,9 +19,9 @@ if(isset($_POST['addCategory'])){
   }
 
   if($correct){
-    $add = $db->prepare('INSERT INTO categories (name, createdAt) VALUES(?, NOW())');
-    if($add->execute(array($cat))){
-      bootstrapNotify('Success! Categorie ajoute', 'success');
+    $add = $db->prepare('UPDATE categories SET name = ? WHERE id = ? AND id != 1');
+    if($add->execute(array($cat, $id))){
+      bootstrapNotify('Success! Categorie Modifie', 'success');
     }
     else {
       bootstrapNotify();

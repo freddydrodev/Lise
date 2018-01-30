@@ -61,7 +61,7 @@ $('button[name="delCat"]').click(function(){
       data: { delCat: val },
       success: function (data) {
         bootstrapNotify(data.text, data.type);
-        
+
         if(data.type === 'success'){
           $this.parents('.slick-slide.col').fadeOut();
         }
@@ -77,4 +77,20 @@ $('button[name="delCat"]').click(function(){
     console.log('canceled');
   });
   return false;
+});
+
+// update employee information
+$('#editCategory').on('show.bs.modal', function (event) {
+  var $button = $(event.relatedTarget); // Button that triggered the modal
+
+  var _data = {
+    id: $button.data('id'),
+    name: $button.data('name'),
+  };
+
+  var $modal = $(this);
+
+  for (key in _data) {
+    $modal.find('input[name="' + key + '"]').val(_data[key]);
+  }
 });

@@ -3,6 +3,7 @@ $page = 'Produits';
 $ind = true;
 include '../PHP/Inc/head.php';
 include $_ind . 'PHP/Script/addCategory.php';
+include $_ind . 'PHP/Script/editCategory.php';
 include $_ind . 'PHP/Script/addProduct.php';
 
 // show categories list
@@ -102,6 +103,35 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
         </div>
       </div>
 
+      <!-- update category -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="editCategory">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content rounded-0 border-0">
+            <div class="modal-header border-0 py-2">
+              <h5 class="modal-title position-relative legend px-3"><span class="legend-text">Ajouter Categorie</span></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="" action="./" method="post">
+                <fieldset class="form-group px-3 material-input mb-1">
+                  <label class="small">Nom de la Categorie</label>
+                  <input type="hidden" name="id">
+                  <input type="text" name="name" placeholder="EX: Etagere, Electronique, Ordinateur, Vetement, ..." class="form-control border-0 rounded-0 px-0" required>
+                  <span class="under w-100 d-block position-relative"></span>
+                </fieldset>
+                <div class="modal-footer border-0">
+                  <button type="submit" name="editCategory" class="btn btn-primary">Modifier</button>
+                  <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
       <!-- end insert category modal -->
     </div>
   </div>
@@ -151,7 +181,13 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             <!-- end items in category list -->
           </div>
           <?php if ($showCategory['ID'] != 1): ?>
-            <button class="btn btn-primary">
+            <button
+            class="btn btn-primary"
+            type="button"
+            data-toggle="modal"
+            data-target="#editCategory"
+            data-id="<?php echo $showCategory['ID'] ?>"
+            data-name="<?php echo $showCategory['name'] ?>">
               <span class="flaticon-edit-1"></span>
             </button>
             <button name="delCat" value="<?php echo $showCategory['ID'] ?>" class="btn btn-danger ml-2">
