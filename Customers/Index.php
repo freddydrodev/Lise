@@ -4,6 +4,65 @@ $ind = true;
 include '../PHP/Inc/head.php';
 $_sex = array('' => '<small class="text-muted ">(Non Defini)</small>', 'H' => 'Homme', 'F' => 'Femme');
 ?>
+<div class="modal fade" tabindex="-1" role="dialog" id="updateClients">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-0 border-0">
+      <div class="modal-header border-0 py-2">
+        <h5 class="modal-title position-relative legend px-3"><span class="legend-text">Modifier Information Client</span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="" action="./" method="post">
+          <?php include '../PHP/Script/updateClient.php'; ?>
+          <fieldset class="form-group px-3 material-input mb-1">
+            <label class="small">Nom Client</label>
+            <input type="hidden" name="id" value="">
+            <input type="text" name="fn" placeholder="EX: Lise Belle Kuame" class="form-control border-0 rounded-0 px-0" autocomplete="off" required>
+            <span class="under w-100 d-block position-relative"></span>
+            <div class="suggested-people-wrapper articles position-relative">
+              <div class="position-absolute w-100">
+                <div class="position-relative w-100 scroller"></div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="form-group px-3 material-input mb-1">
+            <label class="small">Identifiant Facebook</label>
+            <input type="text" name="fb" placeholder="EX: Belise Style" class="form-control border-0 rounded-0 px-0" required>
+            <span class="under w-100 d-block position-relative"></span>
+          </fieldset>
+          <fieldset class="form-group px-3 material-input mb-1">
+            <label class="small">Address Electronic</label>
+            <input type="email" name="em" placeholder="EX: belisestyle@yahoo.fr" class="form-control border-0 rounded-0 px-0">
+            <span class="under w-100 d-block position-relative"></span>
+          </fieldset>
+          <fieldset class="form-group px-3 material-input mb-1">
+            <label class="small">Numero</label>
+            <input type="text" name="ph" placeholder="EX: +22501234567" class="form-control border-0 rounded-0 px-0" required>
+            <span class="under w-100 d-block position-relative"></span>
+          </fieldset>
+          <fieldset class="form-group px-3 material-input mb-1">
+            <label class="small">Lieu De Residence</label>
+            <input type="text" name="ln" placeholder="EX: Riviera Faya" class="form-control border-0 rounded-0 px-0" required>
+            <span class="under w-100 d-block position-relative"></span>
+          </fieldset>
+          <fieldset class="form-group px-3 material-input mb-1">
+            <label class="small">Sexe</label>
+            <select class="form-control custom-select" name="sx" required>
+              <option value="F">Femme</option>
+              <option value="H">Homme</option>
+            </select>
+          </fieldset>
+          <div class="modal-footer border-0">
+            <button type="submit" name="clientUpdate" class="btn btn-primary">Modifier</button>
+            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="customer-list">
 
   <div class="row title">
@@ -76,7 +135,18 @@ $_sex = array('' => '<small class="text-muted ">(Non Defini)</small>', 'H' => 'H
               <td class="sex border-top-0 align-middle"><?php echo $_sex[$cust['sex']] ?></td>
               <td class="location border-top-0 align-middle"><?php echo strlen($cust['location']) > 0 ? $cust['location'] : '<small class="text-muted ">(Non Defini)</small>' ?></td>
               <td class="border-top-0 align-middle">
-                <button class="btn btn-primary">
+                <button
+                class="btn btn-primary"
+                type="button"
+                data-toggle="modal"
+                data-target="#updateClients"
+                data-ID="<?php echo $cust['id'] ?>"
+                data-fullname="<?php echo $cust['fullname'] ?>"
+                data-phone="<?php echo $cust['phone'] ?>"
+                data-facebook="<?php echo $cust['facebookID'] ?>"
+                data-email="<?php echo $cust['email'] ?>"
+                data-sex="<?php echo $cust['sex'] ?>"
+                data-location="<?php echo $cust['location'] ?>">
                   <span class="flaticon-edit-1"></span>
                 </button>
                 <button name="deluser" value="<?php echo $cust['id'] ?>" class="btn btn-danger ml-2">

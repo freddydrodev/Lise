@@ -34,7 +34,7 @@ include '../PHP/Inc/head.php';
               </div>
               <div class="modal-body">
                 <?php include '../PHP/Script/makeOrder.php'; ?>
-                <form class="form-order" action="./indexOld.php" method="post">
+                <form class="form-order" action="./" method="post">
                   <div class="position-relative step-wrapper">
                     <div class="second-step position-absolute order-form-step w-100">
                       <fieldset class="form-group px-3 material-input mb-1">
@@ -64,7 +64,7 @@ include '../PHP/Inc/head.php';
                         <span class="under w-100 d-block position-relative"></span>
                       </fieldset>
                       <fieldset class="form-group px-3 material-input mb-1">
-                        <label class="small">Lieu De Livraison</label>
+                        <label class="small">Lieu De Residence</label>
                         <input type="text" name="location" placeholder="EX: Riviera Faya" class="form-control border-0 rounded-0 px-0" required>
                         <span class="under w-100 d-block position-relative"></span>
                       </fieldset>

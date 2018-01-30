@@ -1,13 +1,7 @@
 <?php
 if(isset($_POST['makeOrder'])){
   include $_ind . 'PHP/Inc/func.php';
-  // print_r($_POST['color']['H1OA9']);
-
-?>
-<script type="text/javascript">
-  console.log(<?php echo json_encode($_POST) ?>);
-</script>
-<?php
+  
   $existingUser = isset($_POST['existingUser']) && !empty($_POST['existingUser']) ? strtolower(trim(htmlspecialchars($_POST['existingUser']))) : false;
   $client = strtolower(trim(htmlspecialchars($_POST['name-client'])));
   $facebook = trim(htmlspecialchars($_POST['id-facebook']));
