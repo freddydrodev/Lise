@@ -204,14 +204,27 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
 <!-- Produits title -->
 <div class="mt-5" id="productsList">
   <div class="row mb-4 title">
-    <div class="col">
+    <div class="col position-relative">
       <div class="d-flex justify-content-between p-3 align-items-center rounded-3">
-        <h2 class="text-uppercase m-0">Produits <br/>
-          <!-- <small class="text-muted text-capitalize">Afficher: <i>20 Articles</i> </small> -->
-        </h2>
-        <!-- start add product modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Produit</button>
+        <h2 class="text-uppercase m-0">Employee <br/></h2>
+        <!-- insert category modal start -->
 
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Produit</button>
+          <button type="button" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch" class="search-toogle btn btn-info">
+            <span class="flaticon-magnifying-glass-1"></span>
+          </button>
+        </div>
+        <!-- search -->
+        <div class="collapse position-absolute h-100 light-shadow" id="search">
+          <div class="input-group h-100">
+            <input type="search" name="search" placeholder="Recherchez dans clients..." class="search border-0 form-control px-4">
+            <button type="reset" class="input-group-addon bg-white border-0 text-muted px-4" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch">
+              <span class="flaticon-cancel"></span>
+            </button>
+          </div>
+        </div>
+        <!-- popup -->
         <div class="modal fade" tabindex="-1" role="dialog" id="addProductModal">
           <div class="modal-dialog" role="document">
             <div class="modal-content rounded-0 border-0">
@@ -308,18 +321,66 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             </div>
           </div>
         </div>
-        <!-- end add Product modal -->
-        <!-- <div class="">
-          <div class="input-group search-products">
-            <input class="search form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Rechercher un produits" />
-            <span class="input-group-addon bg-primary text-white rounded-0 border-0"><i class="flaticon-magnifying-glass-1"></i></span>
+
+        <!-- update information popu -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="editProduct">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-0 border-0">
+              <div class="modal-header border-0 py-2">
+                <h5 class="modal-title position-relative legend px-3"><span class="legend-text">Modifier Employee</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="" action="./" method="post">
+                  <?php include '../PHP/Script/updateEmployee.php'; ?>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Nom</label>
+                    <input type="text" name="fn" placeholder="EX: Kuame Kore" class="form-control border-0 rounded-0 px-0" required>
+                    <input type="hidden" name="id">
+                    <span class="under w-100 d-block position-relative"></span>
+                  </fieldset>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Pseudo</label>
+                    <input type="text" name="un" placeholder="EX: KKre" class="form-control border-0 rounded-0 px-0" required>
+                    <span class="under w-100 d-block position-relative"></span>
+                  </fieldset>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Numero</label>
+                    <input type="text" name="ph" placeholder="EX: +22501234567" class="form-control border-0 rounded-0 px-0" required>
+                    <span class="under w-100 d-block position-relative"></span>
+                  </fieldset>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Sex</label>
+                    <select class="custom-select form-control" name="sx" required>
+                      <option value="H">Homme</option>
+                      <option value="F">Femme</option>
+                    </select>
+                  </fieldset>
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Type D'employee</label>
+                    <select class="custom-select form-control" name="ut" required>
+                      <option value="2">Caissiere</option>
+                      <option value="3">Livreur</option>
+                    </select>
+                  </fieldset>
+                  <div class="modal-footer border-0">
+                    <button type="submit" name="editEmployee" class="btn btn-primary">Modifier Employee</button>
+                    <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
           </div>
-        </div> -->
+        </div>
+        <!-- end insert category modal -->
       </div>
     </div>
   </div>
   <!-- Produits list -->
-  <div class="row" id="products-list">
+  <div class="row">
     <div class="col">
       <table class="table">
         <thead>

@@ -1,3 +1,7 @@
+var options = { valueNames: ['name', 'ID', 'category', 'price', 'quantity'] };
+
+var userList = new List('productsList', options);
+
 //perfectscroll
 var scrollEl = document.querySelectorAll('#categories-list .card-text');
 
