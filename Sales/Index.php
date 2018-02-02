@@ -107,6 +107,11 @@ include '../PHP/Inc/head.php';
                 Livreur
               </button>
             </th>
+            <th scope="col" class="text-center">
+              <button class="bg-transparent rounded-30 btn btn-block" data-sort="delivrer">
+                Option
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody class="list text-center">
@@ -173,6 +178,11 @@ include '../PHP/Inc/head.php';
                 <a href="../Livreur?id=<?php echo $livraison['livrID'] ?>" class="text-dark">
                   <?php echo $livraison['livrName'] ?>
                 </a>
+              </td>
+              <td class="align-middle">
+                <button name="delSal" value="<?php echo $livraison['ID'] ?>" class="btn btn-danger ml-2">
+                  <span class="flaticon-delete"></span>
+                </button>
               </td>
             </tr>
           <?php } ?>

@@ -75,7 +75,7 @@ include '../PHP/Inc/head.php';
             FROM orders
             INNER JOIN users AS cust ON cust.ID = orders.customerID
             INNER JOIN users AS livr ON livr.ID = orders.livreurID
-            WHERE livr.ID = ?
+            WHERE livr.ID = ? AND state = "0"
             ORDER BY orders.createdAt DESC ');
             $livraisons->execute(array($_GET['id']));
 

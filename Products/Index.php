@@ -11,7 +11,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
 
 ?>
 
-<nav aria-label="breadcrumb" role="navigation">
+<!-- <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active" aria-current="page">Produits</li>
   </ol>
@@ -65,7 +65,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Categories title -->
 <div class="row title">
@@ -73,7 +73,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
     <div class="d-flex justify-content-between p-3 align-items-center rounded-3">
       <h2 class="text-uppercase m-0">Categories</h2>
       <!-- insert category modal start -->
-
+      <?php if ($_SESSION['id'] == 1): ?>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategoryModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Categorie</button>
 
       <div class="modal fade" tabindex="-1" role="dialog" id="addCategoryModal">
@@ -131,7 +131,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
           </div>
         </div>
       </div>
-
+      <?php endif; ?>
       <!-- end insert category modal -->
     </div>
   </div>
@@ -180,7 +180,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             <?php endif; ?>
             <!-- end items in category list -->
           </div>
-          <?php if ($showCategory['ID'] != 1): ?>
+          <?php if ($showCategory['ID'] != 1 && $_SESSION['id'] == 1): ?>
             <button
             class="btn btn-primary"
             type="button"
@@ -210,7 +210,9 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
         <!-- insert category modal start -->
 
         <div class="btn-group" role="group" aria-label="Basic example">
+          <?php if ($_SESSION['id'] == 1): ?>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Produit</button>
+          <?php endif; ?>
           <button type="button" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch" class="search-toogle btn btn-info">
             <span class="flaticon-magnifying-glass-1"></span>
           </button>
@@ -225,6 +227,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
           </div>
         </div>
         <!-- popup -->
+        <?php if ($_SESSION['id'] == 1): ?>
         <div class="modal fade" tabindex="-1" role="dialog" id="addProductModal">
           <div class="modal-dialog" role="document">
             <div class="modal-content rounded-0 border-0">
@@ -327,46 +330,61 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
           <div class="modal-dialog" role="document">
             <div class="modal-content rounded-0 border-0">
               <div class="modal-header border-0 py-2">
-                <h5 class="modal-title position-relative legend px-3"><span class="legend-text">Modifier Employee</span></h5>
+                <h5 class="modal-title position-relative legend px-3"><span class="legend-text">Modifier Produit</span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <form class="" action="./" method="post">
-                  <?php include '../PHP/Script/updateEmployee.php'; ?>
+                <form class="" action="./" method="post" enctype="multipart/form-data">
+                  <fieldset class="form-group px-3 material-input mb-1">
+                    <label class="small">Image</label>
+                    <div class="input-group">
+                      <label class="input-group-addon bg-primary text-white" for="imgProd">
+                        <span class="flaticon-box"></span>
+                      </label>
+                      <input type="file" name="pic" class="form-control" id="imgProd" accept="image/*" required>
+                    </div>
+                  </fieldset>
                   <fieldset class="form-group px-3 material-input mb-1">
                     <label class="small">Nom</label>
-                    <input type="text" name="fn" placeholder="EX: Kuame Kore" class="form-control border-0 rounded-0 px-0" required>
-                    <input type="hidden" name="id">
+                    <input type="text" name="name" placeholder="EX:  T-shirt Nike, Chaussure AD, ..." class="form-control border-0 rounded-0 px-0" required>
                     <span class="under w-100 d-block position-relative"></span>
                   </fieldset>
                   <fieldset class="form-group px-3 material-input mb-1">
-                    <label class="small">Pseudo</label>
-                    <input type="text" name="un" placeholder="EX: KKre" class="form-control border-0 rounded-0 px-0" required>
+                    <label class="small">Prix</label>
+                    <input type="number" name="price" min="0" placeholder="EX: 10000, 500000, ..." class="form-control border-0 rounded-0 px-0" required>
                     <span class="under w-100 d-block position-relative"></span>
                   </fieldset>
-                  <fieldset class="form-group px-3 material-input mb-1">
-                    <label class="small">Numero</label>
-                    <input type="text" name="ph" placeholder="EX: +22501234567" class="form-control border-0 rounded-0 px-0" required>
-                    <span class="under w-100 d-block position-relative"></span>
+
+                  <div class="row px-3">
+                    <fieldset class="form-group px-3 material-input mb-1 col">
+                      <label class="small">Couleur</label>
+                    </fieldset>
+                    <fieldset class="form-group px-3 material-input mb-1 col">
+                      <label class="small">Quantite</label>
+                    </fieldset>
+                    <div class="listExistingColor">
+                    </div>
+                  </div>
+                  <fieldset class="form-group px-3 pt-3 material-input mb-1 col">
+                    <button type="button" class="btn btn-success btn-block addMoreQuantity" data-toggle="tooltip" data-placement="bottom" title="Ajouter Nouvelle Couleur et Quantite">
+                      <span class="flaticon-cross small-icon"></span>
+                    </button>
                   </fieldset>
-                  <fieldset class="form-group px-3 material-input mb-1">
-                    <label class="small">Sex</label>
-                    <select class="custom-select form-control" name="sx" required>
-                      <option value="H">Homme</option>
-                      <option value="F">Femme</option>
+                  <fieldset class="form-group px-3 material-input mb-1 col">
+                    <label class="small">Categorie</label>
+                    <select class="form-control custom-select" name="category" required>
+                      <?php
+                      $selectCategories = $db->query('SELECT * FROM Categories ORDER BY name');
+                      while($selectCategory = $selectCategories->fetch()){ ?>
+                        <option value="<?php echo $selectCategory['ID'] ?>"><?php echo $selectCategory['name'] ?></option>
+                      <?php } ?>
                     </select>
                   </fieldset>
-                  <fieldset class="form-group px-3 material-input mb-1">
-                    <label class="small">Type D'employee</label>
-                    <select class="custom-select form-control" name="ut" required>
-                      <option value="2">Caissiere</option>
-                      <option value="3">Livreur</option>
-                    </select>
-                  </fieldset>
+                  <!-- list of alternatif product -->
                   <div class="modal-footer border-0">
-                    <button type="submit" name="editEmployee" class="btn btn-primary">Modifier Employee</button>
+                    <button type="submit" name="editProduct" class="btn btn-primary">Modifier</button>
                     <button type="reset" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                   </div>
                 </form>
@@ -375,6 +393,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             </div>
           </div>
         </div>
+        <?php endif; ?>
         <!-- end insert category modal -->
       </div>
     </div>
@@ -415,11 +434,13 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                 Quantite
               </button>
             </th>
+            <?php if ($_SESSION['id'] == 1): ?>
             <th scope="col" class="border-top-0 border-bottom-0 text-center">
               <button class="bg-none border-0 rounded-30 btn btn-block">
                 Options
               </button>
             </th>
+          <?php endif; ?>
           </tr>
         </thead>
         <tbody class="list text-center light-shadow">
@@ -439,18 +460,25 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             ?>
             <td class="category border-top-0 align-middle"><?php echo $catGet['name'] ?></td>
             <td class="price border-top-0 align-middle"><?php echo $getProduct['price'] ?>fr</td>
-            <?php
-
-            ?>
             <td class="quantity border-top-0 align-middle">100</td>
+            <?php if ($_SESSION['id'] == 1): ?>
             <td class="border-top-0 align-middle">
-              <button class="btn btn-primary">
+              <button
+              class="btn btn-primary"
+              type="button"
+              data-toggle="modal"
+              data-target="#editProduct"
+              data-id="<?php echo $getProduct['ID'] ?>"
+              data-name="<?php echo $getProduct['name'] ?>"
+              data-category="<?php echo $getProduct['category'] ?>"
+              data-price="<?php echo $getProduct['price'] ?>">
                 <span class="flaticon-edit-1"></span>
               </button>
               <button name="delProd" value="<?php echo $getProduct['ID'] ?>" class="btn btn-danger ml-2">
                 <span class="flaticon-delete"></span>
               </button>
             </td>
+          <?php endif; ?>
           </tr>
         <?php } ?>
           <!-- end item list -->
