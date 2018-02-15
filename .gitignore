@@ -1,4 +1,4 @@
-Articles/*.jpg
+*.jpg
 .idea/
 test_scr.html
 test.html
