@@ -33,8 +33,9 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `name` varchar(100) NOT NULL,
   `createdAt` datetime NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
+INSERT INTO `categories` (`name`, `createdAt`) VALUES ('Sans Categorie', NOW());
 -- --------------------------------------------------------
 
 --
@@ -45,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `color` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `color` varchar(30) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `paid` int(11) NOT NULL,
   `createdAt` datetime NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -167,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `usertype` int(1) NOT NULL,
   `createdAt` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
 -- --------------------------------------------------------
 
@@ -179,7 +180,9 @@ CREATE TABLE IF NOT EXISTS `usertype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+INSERT INTO `usertype` (`type`) VALUES('Administrateur')('Caissiere')('Livreur')('Client');
 
 --
 -- Constraints for dumped tables
