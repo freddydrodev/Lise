@@ -182,7 +182,10 @@ CREATE TABLE IF NOT EXISTS `usertype` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
-INSERT INTO `usertype` (`type`) VALUES('Administrateur')('Caissiere')('Livreur')('Client');
+INSERT INTO `usertype` (`type`) VALUES('Administrateur');
+INSERT INTO `usertype` (`type`) VALUES('Caissiere');
+INSERT INTO `usertype` (`type`) VALUES('Livreur');
+INSERT INTO `usertype` (`type`) VALUES('Client');
 
 --
 -- Constraints for dumped tables
