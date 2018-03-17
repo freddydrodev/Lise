@@ -30,7 +30,7 @@ if(isset($_POST['register'])){
   }
 
   if($correct){
-    $add = $db->prepare('INSERT INTO users(fullname, username, password, usertype, createdAt) VALUES(?,?,?, 1,NOW())');
+    $add = $db->prepare('INSERT INTO users(id, fullname, username, password, usertype, createdAt) VALUES(1,?,?,?, 1,NOW())');
     if($add->execute(array(ucwords($fn), $un, sha1($ps)))){
         $_SESSION['id'] = $db->lastInsertId();
         $add->closeCursor();
@@ -38,8 +38,8 @@ if(isset($_POST['register'])){
     }
     else {
       bootstrapNotify();
+      $add->closeCursor();
     }
-    $add->closeCursor();
   }
   else {
     $sent = true;

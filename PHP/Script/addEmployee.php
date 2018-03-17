@@ -10,14 +10,14 @@ if(isset($_POST['addEmployee'])){
   $pass = generateRandomString(10);
   $correct = true;
 
-  if(!preg_match('/^[a-zàâçéèêëîïôûùüÿñæœ \-]{5,100}$/i', $name)) {
+  if(!preg_match('/^[a-zA-Zàâçéèêëîïôûùüÿñæœ \-]{5,100}$/i', $name)) {
       $correct = false;
       bootstrapNotify('Erreur Nom: Seul les lettres, tirets et les espaces sont autorises (entre 5 et 100 charcateres)');
   }
 
-  if(!preg_match('/^[a-z0-9àâçéèêëîïôûùüÿñæœ]{6,32}$/i', $pseudo)) {
+  if(!preg_match('/^[a-zA-Z0-9àâçéèêëîïôûùüÿñæœ]{5,32}$/i', $pseudo)) {
       $correct = false;
-      bootstrapNotify('Erreur Pseudo: Seul les lettres et les nombres sont autorises (entre 6 et 32 characteres)');
+      bootstrapNotify('Erreur Pseudo: Seul les lettres et les nombres sont autorises (entre 5 et 32 characteres)');
   }
   if(!preg_match('/^(\+[1-9]{1}[0-9]{0,2})?[0-9]{6,10}$/', $phone)) {
       $correct = false;

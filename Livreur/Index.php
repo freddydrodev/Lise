@@ -20,9 +20,7 @@ include '../PHP/Inc/head.php';
 <div class="row" id="livraison-list">
   <div class="col">
     <ul class="nav nav-pills my-3" id="pills-tab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link" id="pills-caissiere-tab" data-toggle="pill" href="#pills-caissiere" role="tab" aria-controls="pills-caissiere" aria-selected="false">Caissieres</a>
-      </li>
+      
       <li class="nav-item">
         <a class="nav-link active" id="pills-new-tab" data-toggle="pill" href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="true">En Attente</a>
       </li>

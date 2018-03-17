@@ -206,7 +206,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
   <div class="row mb-4 title">
     <div class="col position-relative">
       <div class="d-flex justify-content-between p-3 align-items-center rounded-3">
-        <h2 class="text-uppercase m-0">Employee <br/></h2>
+        <h2 class="text-uppercase m-0">Produits <br/></h2>
         <!-- insert category modal start -->
 
         <div class="btn-group" role="group" aria-label="Basic example">
@@ -220,7 +220,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
         <!-- search -->
         <div class="collapse position-absolute h-100 light-shadow" id="search">
           <div class="input-group h-100">
-            <input type="search" name="search" placeholder="Recherchez dans clients..." class="search border-0 form-control px-4">
+            <input type="search" name="search" placeholder="Recherchez dans Produits..." class="search border-0 form-control px-4">
             <button type="reset" class="input-group-addon bg-white border-0 text-muted px-4" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch">
               <span class="flaticon-cancel"></span>
             </button>
@@ -448,7 +448,11 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
           <?php //get the products
           $getProducts = $db->prepare('SELECT * FROM products ORDER BY createdAt DESC');
           $getProducts->execute();
-          while ($getProduct = $getProducts->fetch()) { ?>
+          while ($getProduct = $getProducts->fetch()) { 
+            $qtyProdList = $db->prepare('SELECT SUM(quantity) AS qty FROM quantity WHERE productID = ?');
+                $qtyProdList->execute(array($getProduct['ID']));
+                $_qtyProdList = $qtyProdList->fetch();
+            ?>
           <tr class="mb-3 bg-white border-bottom-1">
             <td class="border-top-0 articleImg align-middle"><img src="../Media/Images/Articles/Article_<?php echo $getProduct['ID'] ?>.jpg" alt="Article Img" class="w-100"></td>
             <th scope="row" class="ID border-top-0 align-middle">#<?php echo $getProduct['ID'] ?></th>
@@ -460,7 +464,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             ?>
             <td class="category border-top-0 align-middle"><?php echo $catGet['name'] ?></td>
             <td class="price border-top-0 align-middle"><?php echo $getProduct['price'] ?>fr</td>
-            <td class="quantity border-top-0 align-middle">100</td>
+            <td class="quantity border-top-0 align-middle"><?php echo $_qtyProdList['qty'] ?></td>
             <?php if ($_SESSION['id'] == 1): ?>
             <td class="border-top-0 align-middle">
               <button
