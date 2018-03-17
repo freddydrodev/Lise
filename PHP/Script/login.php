@@ -9,7 +9,7 @@ if (isset($_POST['login'])) {
     $check->execute(array($un, sha1($ps)));
     if($user = $check->fetch()){
         $_SESSION['id'] = $user['id'];
-        header('location: Products/');
+        header('location: products/');
     }
     else {
       bootstrapNotify('Erreur: Aucun compte ne correspond aux donnees entrees');

@@ -33,48 +33,48 @@
     </ul>
   </div>
 </div>
-    <script src="<?php echo $_ind; ?>Js/jquery-3.2.1.min.js"></script>
-    <script src="<?php echo $_ind; ?>Js/popper.js"></script>
-    <script src="<?php echo $_ind; ?>Js/bootstrap.min.js"></script>
-    <script src="<?php echo $_ind; ?>Js/list.min.js"></script>
-    <script src="<?php echo $_ind; ?>Js/slick.min.js"></script>
-    <script src="<?php echo $_ind; ?>Js/alertify.js"></script>
-    <script src="<?php echo $_ind; ?>Js/bootstrap-notify.min.js"></script>
-    <script src="<?php echo $_ind; ?>Js/perfect-scrollbar.min.js"></script>
-    <script src="<?php echo $_ind; ?>Js/Chart.min.js"></script>
-    <script src="<?php echo $_ind; ?>Js/JsBarcode.all.min.js"></script>
-    <script src="<?php echo $_ind; ?>Js/print.min.js"></script>
+    <script src="<?php echo $_ind; ?>js/jquery-3.2.1.min.js"></script>
+    <script src="<?php echo $_ind; ?>js/popper.js"></script>
+    <script src="<?php echo $_ind; ?>js/bootstrap.min.js"></script>
+    <script src="<?php echo $_ind; ?>js/list.min.js"></script>
+    <script src="<?php echo $_ind; ?>js/slick.min.js"></script>
+    <script src="<?php echo $_ind; ?>js/alertify.js"></script>
+    <script src="<?php echo $_ind; ?>js/bootstrap-notify.min.js"></script>
+    <script src="<?php echo $_ind; ?>js/perfect-scrollbar.min.js"></script>
+    <script src="<?php echo $_ind; ?>js/chart.min.js"></script>
+    <script src="<?php echo $_ind; ?>js/jsbarcode.all.min.js"></script>
+    <script src="<?php echo $_ind; ?>js/print.min.js"></script>
     <script type="text/javascript">
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
     });
     </script>
 
-    <script src="<?php echo $_ind; ?>Js/main.js"></script>
-    <script src="<?php echo $_ind; ?>Js/Templatize.js"></script>
+    <script src="<?php echo $_ind; ?>js/main.js"></script>
+    <script src="<?php echo $_ind; ?>js/templatize.js"></script>
     
     <?php if ($page === 'Clients'): ?>
-    <script src="<?php echo $_ind; ?>Js/clients.js"></script>
+    <script src="<?php echo $_ind; ?>js/clients.js"></script>
     <?php endif; ?>
 
     <?php if ($page === 'Employees'): ?>
-    <script src="<?php echo $_ind; ?>Js/employees.js"></script>
+    <script src="<?php echo $_ind; ?>js/employees.js"></script>
     <?php endif; ?>
 
     <?php if ($page === 'Livreur'): ?>
-    <script src="<?php echo $_ind; ?>Js/delivrer.js"></script>
+    <script src="<?php echo $_ind; ?>js/delivrer.js"></script>
     <?php endif; ?>
 
     <?php if ($page === 'Commandes'): ?>
-    <script src="<?php echo $_ind; ?>Js/orders.js"></script>
+    <script src="<?php echo $_ind; ?>js/orders.js"></script>
     <?php endif; ?>
 
     <?php if ($page === 'Produits'): ?>
-    <script src="<?php echo $_ind; ?>Js/products.js"></script>
+    <script src="<?php echo $_ind; ?>js/products.js"></script>
     <?php endif; ?>
 
     <?php if ($page === 'Ventes'): ?>
-    <script src="<?php echo $_ind; ?>Js/sales.js"></script>
+    <script src="<?php echo $_ind; ?>js/sales.js"></script>
     <?php endif; ?>
 
 

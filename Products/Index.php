@@ -2,9 +2,9 @@
 $page = 'Produits';
 $ind = true;
 include '../PHP/Inc/head.php';
-include $_ind . 'PHP/Script/addCategory.php';
-include $_ind . 'PHP/Script/editCategory.php';
-include $_ind . 'PHP/Script/addProduct.php';
+include $_ind . 'PHP/Script/addcategory.php';
+include $_ind . 'PHP/Script/editcategory.php';
+include $_ind . 'PHP/Script/addproduct.php';
 
 // show categories list
 $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');

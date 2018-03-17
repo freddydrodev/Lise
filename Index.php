@@ -1,7 +1,7 @@
 <?php
 $log = true;
 $page = 'Connexion';
-include 'PHP/Inc/head.php';
+include './PHP/Inc/head.php';
 ?>
 
     <div class="fixed-top w-100 h-100">
@@ -16,7 +16,7 @@ include 'PHP/Inc/head.php';
         <form class="log-form pb-3  bg-white" action="./" method="post">
           <h3 class="mb-3 p-3">Connexion</h3>
           <div class="msg">
-            <?php include $_ind . 'PHP/Script/Login.php'; ?>
+            <?php include $_ind . 'PHP/Script/login.php'; ?>
           </div>
           <fieldset class="form-group px-3">
             <label for="username">Pseudo</label>

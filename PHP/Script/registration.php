@@ -34,7 +34,7 @@ if(isset($_POST['register'])){
     if($add->execute(array(ucwords($fn), $un, sha1($ps)))){
         $_SESSION['id'] = $db->lastInsertId();
         $add->closeCursor();
-        header('location: ../Products/');
+        header('location: ../products/');
     }
     else {
       bootstrapNotify();

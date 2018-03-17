@@ -1,6 +1,6 @@
 <?php
 try {
-    $db = new PDO('mysql:host=localhost;dbname=bellisestyle', 'root', '');
+    $db = new PDO('mysql:host=mysql.hostinger.com;dbname=u289277422_belis', 'u289277422_fred', 'K@ikelarose77');
 } catch (Exception $e) {
     Die('Erreur : ' . $e->getMessage());
 }
@@ -11,7 +11,7 @@ if (!isset($log) && !isset($_SESSION['id'])) {
   header('location: ../');
 }
 if (isset($log) && isset($_SESSION['id'])) {
-  header('location:' . $_ind . 'Products/');
+  header('location:' . $_ind . 'products/');
 }
 
 //check if the created session exist it define if first admin has been added
@@ -29,11 +29,11 @@ if(isset($page)){
 
   if($page === 'Connexion'){
     if(!$_SESSION['created']){
-      $users = $db->prepare('SELECT COUNT(id) AS nbr FROM users');
+      $users = $db->prepare('SELECT COUNT(id) AS nbr FROM users where usertype = 1');
       $users->execute();
       $user = $users->fetch();
       if($user['nbr'] == 0){
-        header('location: Registration/');
+        header('location: registration/');
       }
       else {
         $_SESSION['created'] = true;
