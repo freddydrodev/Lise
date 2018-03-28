@@ -11,10 +11,8 @@ if(isset($_POST['delCat'])){
 
     $del = $db->prepare('DELETE FROM categories WHERE ID = ? AND ID != 1');
     if ($del->execute(array($pid))) {
-
       $ar = array('type' => 'success', 'text' => 'Success! Categorie supprime');
     } else {
-
       $ar = array('type' => 'danger', 'text' => 'Erreur! Categorie non-supprime');
     }
 

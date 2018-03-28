@@ -23,7 +23,7 @@ include '../PHP/Inc/head.php';
             </button>
           </div>
         </div>
-        <div class="modal fade" tabindex="-1" role="dialog" id="addCommandeModal">
+        <div class="modal fade p-0" tabindex="-1" role="dialog" id="addCommandeModal">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content rounded-0 border-0">
               <div class="modal-header border-0 py-2">
@@ -33,7 +33,7 @@ include '../PHP/Inc/head.php';
                 </button>
               </div>
               <div class="modal-body">
-                <?php include '../PHP/Script/makeOrder.php'; ?>
+                <?php include '../PHP/Script/makeorder.php'; ?>
                 <form class="form-order" action="./" method="post">
                   <div class="position-relative step-wrapper">
                     <div class="second-step position-absolute order-form-step w-100">
@@ -151,7 +151,10 @@ include '../PHP/Inc/head.php';
                     </div>
                   </div>
                   <div class="modal-footer border-0 justify-content-between">
-                    <button type="button" name="addProduct" class="btn btn-info change-step next">Suivant</button>
+                    <div>
+                      <button type="button" name="addProduct" class="btn btn-info change-step next">Suivant</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
                     <div class="moreOpt d-none">
                       <button type="submit" name="makeOrder" class="btn btn-success mr-1 ">Ajouter</button>
                     </div>
@@ -276,7 +279,7 @@ include '../PHP/Inc/head.php';
           </script>
           <td class="madeBy align-middle"><?php echo $livraison['empName'] ?></td>
           <td class="delivrer align-middle">
-            <a href="../Livreur?id=<?php echo $livraison['livrID'] ?>" class="text-dark">
+            <a href="../livreur?id=<?php echo $livraison['livrID'] ?>" class="text-dark">
               <?php echo $livraison['livrName'] ?>
             </a>
           </td>

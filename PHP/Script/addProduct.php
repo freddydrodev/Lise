@@ -175,7 +175,7 @@ if(isset($_POST['addProduct'])){
             }
           }
 
-          $n = 'article_' . $ID . '.jpg';
+          $n = 'Article_' . $ID . '.jpg';
           if (move_uploaded_file($_FILES["pic"]["tmp_name"], $target_dir . $n)) {
           }
           else {

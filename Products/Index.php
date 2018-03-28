@@ -7,65 +7,9 @@ include $_ind . 'PHP/Script/editcategory.php';
 include $_ind . 'PHP/Script/addproduct.php';
 
 // show categories list
-$showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
+$showCategories = $db->query('SELECT * FROM categories ORDER BY createdAt');
 
 ?>
-
-<!-- <nav aria-label="breadcrumb" role="navigation">
-  <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active" aria-current="page">Produits</li>
-  </ol>
-</nav>
-<div class="row resume">
-  <div class="col-md-6 col-lg-3 mb-4">
-    <div class="p-3 d-flex bg-white text-truncate light-shadow">
-      <h3 class="mr-3 text-primary">100</h3>
-      <div class="w-100">
-        <h5>Produits</h5>
-        <p class="text-muted">Libre</p>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-3 mb-4">
-    <div class="p-3 d-flex bg-white text-truncate light-shadow">
-      <h3 class="mr-3 text-warning">50</h3>
-      <div class="w-100">
-        <h5>Categories</h5>
-        <p class="text-muted">Total</p>
-        <div class="progress">
-          <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-3 mb-4">
-    <div class="p-3 d-flex bg-white text-truncate light-shadow">
-      <h3 class="mr-3 text-danger">50</h3>
-      <div class="w-100">
-        <h5>Commandes</h5>
-        <p class="text-muted">Total</p>
-        <div class="progress">
-          <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-3 mb-4">
-    <div class="p-3 d-flex bg-white text-truncate light-shadow">
-      <h3 class="mr-3 text-success">500k</h3>
-      <div class="w-100">
-        <h5>Ventes</h5>
-        <p class="text-muted">Total</p>
-        <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 <!-- Categories title -->
 <div class="row title">
@@ -73,10 +17,10 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
     <div class="d-flex justify-content-between p-3 align-items-center rounded-3">
       <h2 class="text-uppercase m-0">Categories</h2>
       <!-- insert category modal start -->
-      <?php if ($_SESSION['id'] == 1): ?>
+      <?php if ($_SESSION['admin']): ?>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategoryModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Categorie</button>
 
-      <div class="modal fade" tabindex="-1" role="dialog" id="addCategoryModal">
+      <div class="modal fade p-0" tabindex="-1" role="dialog" id="addCategoryModal">
         <div class="modal-dialog" role="document">
           <div class="modal-content rounded-0 border-0">
             <div class="modal-header border-0 py-2">
@@ -104,7 +48,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
       </div>
 
       <!-- update category -->
-      <div class="modal fade" tabindex="-1" role="dialog" id="editCategory">
+      <div class="modal fade p-0" tabindex="-1" role="dialog" id="editCategory">
         <div class="modal-dialog" role="document">
           <div class="modal-content rounded-0 border-0">
             <div class="modal-header border-0 py-2">
@@ -180,7 +124,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             <?php endif; ?>
             <!-- end items in category list -->
           </div>
-          <?php if ($showCategory['ID'] != 1 && $_SESSION['id'] == 1): ?>
+          <?php if ($showCategory['ID'] != 1 && $_SESSION['admin']): ?>
             <button
             class="btn btn-primary"
             type="button"
@@ -210,7 +154,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
         <!-- insert category modal start -->
 
         <div class="btn-group" role="group" aria-label="Basic example">
-          <?php if ($_SESSION['id'] == 1): ?>
+          <?php if ($_SESSION['admin']): ?>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductModal"><span class="flaticon-mathematical-addition-sign small-icon"></span>Ajouter Produit</button>
           <?php endif; ?>
           <button type="button" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="collapseSearch" class="search-toogle btn btn-info">
@@ -227,8 +171,8 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
           </div>
         </div>
         <!-- popup -->
-        <?php if ($_SESSION['id'] == 1): ?>
-        <div class="modal fade" tabindex="-1" role="dialog" id="addProductModal">
+        <?php if ($_SESSION['admin'] == 1): ?>
+        <div class="modal fade p-0" tabindex="-1" role="dialog" id="addProductModal">
           <div class="modal-dialog" role="document">
             <div class="modal-content rounded-0 border-0">
               <div class="modal-header border-0 py-2">
@@ -279,7 +223,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                     <label class="small">Categorie</label>
                     <select class="form-control custom-select" name="category" required>
                       <?php
-                      $selectCategories = $db->query('SELECT * FROM Categories ORDER BY name');
+                      $selectCategories = $db->query('SELECT * FROM categories ORDER BY name');
                       while($selectCategory = $selectCategories->fetch()){ ?>
                         <option value="<?php echo $selectCategory['ID'] ?>"<?php if ($selectCategory['name'] == 'Uncategorized'): ?> selected <?php endif; ?>><?php echo $selectCategory['name'] ?></option>
                       <?php } ?>
@@ -326,7 +270,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
         </div>
 
         <!-- update information popu -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="editProduct">
+        <div class="modal fade p-0" tabindex="-1" role="dialog" id="editProduct">
           <div class="modal-dialog" role="document">
             <div class="modal-content rounded-0 border-0">
               <div class="modal-header border-0 py-2">
@@ -376,7 +320,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                     <label class="small">Categorie</label>
                     <select class="form-control custom-select" name="category" required>
                       <?php
-                      $selectCategories = $db->query('SELECT * FROM Categories ORDER BY name');
+                      $selectCategories = $db->query('SELECT * FROM categories ORDER BY name');
                       while($selectCategory = $selectCategories->fetch()){ ?>
                         <option value="<?php echo $selectCategory['ID'] ?>"><?php echo $selectCategory['name'] ?></option>
                       <?php } ?>
@@ -434,7 +378,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
                 Quantite
               </button>
             </th>
-            <?php if ($_SESSION['id'] == 1): ?>
+            <?php if ($_SESSION['admin'] == 1): ?>
             <th scope="col" class="border-top-0 border-bottom-0 text-center">
               <button class="bg-none border-0 rounded-30 btn btn-block">
                 Options
@@ -465,7 +409,7 @@ $showCategories = $db->query('SELECT * FROM Categories ORDER BY createdAt');
             <td class="category border-top-0 align-middle"><?php echo $catGet['name'] ?></td>
             <td class="price border-top-0 align-middle"><?php echo $getProduct['price'] ?>fr</td>
             <td class="quantity border-top-0 align-middle"><?php echo $_qtyProdList['qty'] ?></td>
-            <?php if ($_SESSION['id'] == 1): ?>
+            <?php if ($_SESSION['admin']): ?>
             <td class="border-top-0 align-middle">
               <button
               class="btn btn-primary"

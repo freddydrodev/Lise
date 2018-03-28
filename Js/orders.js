@@ -30,7 +30,7 @@ $getProd.keyup(function () {
   // console.log(unAvailable);
   $.ajax({
     type: 'POST',
-    url: '../PHP/Script/_orderCheckProducts.php',
+    url: '../PHP/Script/_ordercheckproducts.php',
     data: { s: s },
     success: function (data) {
       if (data) {
@@ -41,7 +41,7 @@ $getProd.keyup(function () {
             $.ajax({
               type: 'POST',
 
-              url: '../PHP/Script/_inProcess.php',
+              url: '../PHP/Script/_inprocess.php',
 
               data: { ID: el.ID, type: 'get' },
 
@@ -97,7 +97,7 @@ $(document).on('click', '.suggestion', function () {
 
   $.ajax({
     type: 'POST',
-    url: '../PHP/Script/_orderGetProduct.php',
+    url: '../PHP/Script/_ordergetproduct.php',
     data: { s: ID },
     success: function (data) {
       if (data) {
@@ -164,7 +164,7 @@ $(document).on('click', '.suggestion', function () {
         //Add as unAvailable
         $.ajax({
           type: 'POST',
-          url: '../PHP/Script/_inProcess.php',
+          url: '../PHP/Script/_inprocess.php',
           data: { ID: data.prodID, type: 'add' },
           success: function (data) {
             bootstrapNotify(data.txt, data.type);
@@ -218,7 +218,7 @@ $(document).on('click', '.delSelProd', function(){
     function(){
       $.ajax({
         type: 'POST',
-        url: '../PHP/Script/_inProcess.php',
+        url: '../PHP/Script/_inprocess.php',
         data: { ID: dataID, type: 'delete' },
         success: function (data) {
           bootstrapNotify(data.txt, data.type);
@@ -263,7 +263,7 @@ $getCust.keyup(function () {
   $wrapperPeople.addClass('active');;
   $.ajax({
     type: 'POST',
-    url: '../PHP/Script/_orderCheckUsers.php',
+    url: '../PHP/Script/_ordercheckusers.php',
     data: { q: s },
     success: function (data) {
       if (data) {
@@ -339,7 +339,7 @@ $('.form-order').submit(function (e) {
 $('#addCommandeModal').on('hide.bs.modal', function (e) {
   $.ajax({
     type: 'POST',
-    url: '../PHP/Script/_clearProcess.php',
+    url: '../PHP/Script/_clearprocess.php',
   });
 
   bootstrapNotify('Commande annule', 'danger');
@@ -356,7 +356,7 @@ $('button[name="delOrd"]').click(function(){
   function () {
     $.ajax({
       type: 'POST',
-      url: '../PHP/Script/deleteOrder.php',
+      url: '../PHP/Script/deleteorder.php',
       data: { delOrd: val },
       success: function (data) {
         bootstrapNotify(data.text, data.type);
@@ -387,7 +387,7 @@ $('button[name="valOrd"]').click(function(){
   function () {
     $.ajax({
       type: 'POST',
-      url: '../PHP/Script/valOrder.php',
+      url: '../PHP/Script/valorder.php',
       data: { valOrd: val },
       success: function (data) {
         bootstrapNotify(data.text, data.type);

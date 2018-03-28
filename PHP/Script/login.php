@@ -1,6 +1,6 @@
 <?php
 include $_ind . 'PHP/Inc/func.php';
-
+$sent = false;
 if (isset($_POST['login'])) {
     $un = htmlspecialchars(trim($_POST['username']));
     $ps = htmlspecialchars(trim($_POST['password']));
@@ -12,6 +12,7 @@ if (isset($_POST['login'])) {
         header('location: products/');
     }
     else {
+        $sent = true;
       bootstrapNotify('Erreur: Aucun compte ne correspond aux donnees entrees');
     }
 }

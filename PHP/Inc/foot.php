@@ -33,16 +33,12 @@
     </ul>
   </div>
 </div>
-    <script src="<?php echo $_ind; ?>js/jquery-3.2.1.min.js"></script>
-    <script src="<?php echo $_ind; ?>js/popper.js"></script>
-    <script src="<?php echo $_ind; ?>js/bootstrap.min.js"></script>
-    <script src="<?php echo $_ind; ?>js/list.min.js"></script>
-    <script src="<?php echo $_ind; ?>js/slick.min.js"></script>
-    <script src="<?php echo $_ind; ?>js/alertify.js"></script>
-    <script src="<?php echo $_ind; ?>js/bootstrap-notify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.11.0/alertify.min.js"></script>
     <script src="<?php echo $_ind; ?>js/perfect-scrollbar.min.js"></script>
-    <script src="<?php echo $_ind; ?>js/chart.min.js"></script>
-    <script src="<?php echo $_ind; ?>js/jsbarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.8.0/JsBarcode.all.min.js"></script>
     <script src="<?php echo $_ind; ?>js/print.min.js"></script>
     <script type="text/javascript">
     $(function () {

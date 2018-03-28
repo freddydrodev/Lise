@@ -4,7 +4,7 @@ $ind = true;
 include '../PHP/Inc/head.php';
 $_sex = array('' => '<small class="text-muted ">(Non Defini)</small>', 'H' => 'Homme', 'F' => 'Femme');
 ?>
-<div class="modal fade" tabindex="-1" role="dialog" id="updateClients">
+<div class="modal fade p-0" tabindex="-1" role="dialog" id="updateClients">
   <div class="modal-dialog" role="document">
     <div class="modal-content rounded-0 border-0">
       <div class="modal-header border-0 py-2">
@@ -149,7 +149,7 @@ $_sex = array('' => '<small class="text-muted ">(Non Defini)</small>', 'H' => 'H
                 data-location="<?php echo $cust['location'] ?>">
                   <span class="flaticon-edit-1"></span>
                 </button>
-                <?php if ($_SESSION['id'] == 1): ?>
+                <?php if ($_SESSION['admin']): ?>
                 <button name="deluser" value="<?php echo $cust['id'] ?>" class="btn btn-danger ml-2">
                   <span class="flaticon-delete"></span>
                 </button>

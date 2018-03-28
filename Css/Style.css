@@ -28,8 +28,6 @@ body{
   background-color: #F5F7FA;
   font-size: 15px;
   font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
-  color:
 }
 .modal{
   /* z-index: 1010; */
@@ -229,11 +227,14 @@ button:hover{
   background-color: #EF1541;
   border-color: #FF2A55;
 }
-
+.page-wrapper, #page-content {
+  min-height: 100%;
+  height: 100%;
+}
 #page-content{
   padding-top: 80px;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .material-input .under:before, .material-input .under:after{
   content: '';

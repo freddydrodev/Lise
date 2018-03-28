@@ -11,7 +11,7 @@ $('button[name="delemp"]').click(function(){
   function () {
     $.ajax({
       type: 'POST',
-      url: '../PHP/Script/deleteUser.php',
+      url: '../PHP/Script/deleteuser.php',
       data: { deluser: val },
       success: function (data) {
         bootstrapNotify(data.text, data.type);

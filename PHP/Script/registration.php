@@ -4,10 +4,10 @@ include $_ind . 'PHP/Inc/func.php';
 // bootstrapNotify('fredius', 'success');
 $sent = false;
 if(isset($_POST['register'])){
-  $fn = $_POST['fullname'];
-  $un = $_POST['username'];
-  $ps = $_POST['password'];
-  $cn = $_POST['r-password'];
+  $fn = trim($_POST['fullname']);
+  $un = trim($_POST['username']);
+  $ps = trim($_POST['password']);
+  $cn = trim($_POST['r-password']);
   $correct = true;
 
   if(!preg_match('/^[a-zA-Z ]{5,100}$/', $fn)) {
@@ -30,7 +30,7 @@ if(isset($_POST['register'])){
   }
 
   if($correct){
-    $add = $db->prepare('INSERT INTO users(id, fullname, username, password, usertype, createdAt) VALUES(1,?,?,?, 1,NOW())');
+    $add = $db->prepare('INSERT INTO users(fullname, username, password, usertype, createdAt) VALUES(?,?,?, 1,NOW())');
     if($add->execute(array(ucwords($fn), $un, sha1($ps)))){
         $_SESSION['id'] = $db->lastInsertId();
         $add->closeCursor();

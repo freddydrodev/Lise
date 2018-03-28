@@ -14,29 +14,31 @@ if (isset($log) && isset($_SESSION['id'])) {
   header('location:' . $_ind . 'products/');
 }
 
-//check if the created session exist it define if first admin has been added
-if(isset($_SESSION['created'])){
-  $_SESSION['created'] = $_SESSION['created'] ? true : false;// define if the system has some user
-}
-else {
-  $_SESSION['created'] = false;
-}
+$_SESSION['admin'] = isset($_SESSION['admin']) ? $_SESSION['admin'] : false;
 
 if(isset($page)){
-  if($_SESSION['created'] && $page == 'Inscription'){
-    header('location: ../');
+  $users = $db->prepare('SELECT * FROM users where usertype = 1');
+  $users->execute();
+  $count = $users->rowCount();
+
+  if($page === 'Inscription' && $count > 0){
+    header('location: ./');
   }
 
-  if($page === 'Connexion'){
-    if(!$_SESSION['created']){
-      $users = $db->prepare('SELECT COUNT(id) AS nbr FROM users where usertype = 1');
-      $users->execute();
-      $user = $users->fetch();
-      if($user['nbr'] == 0){
-        header('location: registration/');
+  if($page !== 'Inscription' && $count <= 0){
+      if($page !== 'Connexion') {
+        header('location: ../logout');        
+        echo $count;
+      } else {
+        header('location: ./registration');
       }
-      else {
-        $_SESSION['created'] = true;
+  }
+
+  if($count > 0) {
+    if(isset($_SESSION['id'])) {
+      $admin = $users->fetch();
+      if($_SESSION['id'] === $admin['id'] && $_SESSION['admin'] !== true) {
+        $_SESSION['admin'] = true;
       }
     }
   }

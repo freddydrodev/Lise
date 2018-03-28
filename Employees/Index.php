@@ -31,7 +31,7 @@ $_ut = array(2 => 'Caissiere', 3 => 'Livreur');
           </div>
         </div>
         <!-- popup -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="addCategoryModal">
+        <div class="modal fade p-0" tabindex="-1" role="dialog" id="addCategoryModal">
           <div class="modal-dialog" role="document">
             <div class="modal-content rounded-0 border-0">
               <div class="modal-header border-0 py-2">
@@ -42,7 +42,7 @@ $_ut = array(2 => 'Caissiere', 3 => 'Livreur');
               </div>
               <div class="modal-body">
                 <form class="" action="./" method="post">
-                  <?php include '../PHP/Script/addEmployee.php'; ?>
+                  <?php include '../PHP/Script/addemployee.php'; ?>
                   <fieldset class="form-group px-3 material-input mb-1">
                     <label class="small">Nom</label>
                     <input type="text" name="name" placeholder="EX: Kuame Kore" class="form-control border-0 rounded-0 px-0" required>
@@ -84,7 +84,7 @@ $_ut = array(2 => 'Caissiere', 3 => 'Livreur');
         </div>
 
         <!-- update information popu -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="editEmployee">
+        <div class="modal fade p-0" tabindex="-1" role="dialog" id="editEmployee">
           <div class="modal-dialog" role="document">
             <div class="modal-content rounded-0 border-0">
               <div class="modal-header border-0 py-2">
@@ -95,7 +95,7 @@ $_ut = array(2 => 'Caissiere', 3 => 'Livreur');
               </div>
               <div class="modal-body">
                 <form class="" action="./" method="post">
-                  <?php include '../PHP/Script/updateEmployee.php'; ?>
+                  <?php include '../PHP/Script/updateemployee.php'; ?>
                   <fieldset class="form-group px-3 material-input mb-1">
                     <label class="small">Nom</label>
                     <input type="text" name="fn" placeholder="EX: Kuame Kore" class="form-control border-0 rounded-0 px-0" required>

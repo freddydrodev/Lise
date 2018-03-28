@@ -30,7 +30,7 @@ $('button[name="delProd"]').click(function(){
   function () {
     $.ajax({
       type: 'POST',
-      url: '../PHP/Script/deleteProd.php',
+      url: '../PHP/Script/deleteprod.php',
       data: { delProd: val },
       success: function (data) {
         bootstrapNotify(data.text, data.type);
@@ -61,7 +61,7 @@ $('button[name="delCat"]').click(function(){
   function () {
     $.ajax({
       type: 'POST',
-      url: '../PHP/Script/deleteCat.php',
+      url: '../PHP/Script/deletecat.php',
       data: { delCat: val },
       success: function (data) {
         bootstrapNotify(data.text, data.type);
@@ -115,7 +115,7 @@ $('#editProduct').on('show.bs.modal', function (event) {
 
   $.ajax({
     type: 'POST',
-    url: '../PHP/Script/_getQty.php',
+    url: '../PHP/Script/_getqty.php',
     data: { id: _data.id },
     success: function (data) {
       for (var i = 0; i < data.length; i++) {
@@ -176,7 +176,7 @@ $(document).on('click', '.input-group-number button', function () {
 
   $.ajax({
     type: 'POST',
-    url: '../PHP/Script/_updateColorQty.php',
+    url: '../PHP/Script/_updatecolorqty.php',
     data: { qty: $qty.val(), pid: _pid, cid: _cid },
     success: function (data) {
       // bootstrapNotify(data.text, data.type);
